@@ -1,0 +1,10 @@
+<div class="delete-student-container">
+    <h2>Supprimer l'étudiant</h2>
+    <p>Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
+    <button (click)="deleteStudent()" class="btn btn-danger">Confirmer la suppression</button>
+  
+    <!-- Message de succès ou d'erreur -->
+    <div *ngIf="message" class="alert" [ngClass]="{'alert-success': isSuccess, 'alert-danger': !isSuccess}">
+      {{ message }}
+    </div>
+  </div>
