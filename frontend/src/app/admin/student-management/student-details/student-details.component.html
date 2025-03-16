@@ -1,0 +1,7 @@
+<div *ngIf="student">
+    <h2>Détails de l'étudiant</h2>
+    <p><strong>ID :</strong> {{ student.id }}</p>
+    <p><strong>Nom :</strong> {{ student.nom }}</p>
+    <p><strong>Email :</strong> {{ student.email }}</p>
+    <a [routerLink]="['/students']">Retour à la liste</a>
+  </div>

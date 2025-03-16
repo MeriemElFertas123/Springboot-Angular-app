@@ -1,0 +1,185 @@
+<div class="div-container">
+  <aside class="sidebar"> 
+    <h2 class="sidebar-title">GESTION DES STAGES</h2>
+    <nav class="nav-links">
+      <a class="nav-item" routerLink="/espace-etudiant">
+        <i class="icon">🏚️</i>
+        <span class="text">Accueil</span>
+      </a>
+      <a class="nav-item" routerLink="/dashboard"> 
+        <i class="icon">🏠</i>
+        <span class="text">Dashboard</span>
+      </a>
+      <a class="nav-item" routerLink="/rapports"> 
+        <span class="text">Rapports</span>
+      </a>
+      <a class="nav-item" routerLink="/students/list"> 
+        <span class="text">Gestion des étudiants</span>
+      </a>
+      <a class="nav-item" routerLink="/enseignant-management"> 
+        <i class="icon">👨‍🏫</i>
+        <span class="text">Gestion des enseignants</span>
+      </a>
+      <a class="nav-item" routerLink="/archive"> 
+        <i class="icon">📂</i>
+        <span class="text">Archivage des rapports</span>
+      </a>
+      <a class="nav-item" routerLink="/chat">
+        <i class="icon">💬</i>
+        <span class="text">Chat</span>
+      </a>
+      <a class="nav-item" routerLink="/parametrage"> 
+        <i class="icon">⚙️</i>
+        <span class="text">Paramétrage</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="edit-student-container">
+      <h2>Modifier l'étudiant</h2>
+      <form (ngSubmit)="onSubmit()" #studentForm="ngForm">
+        <div class="form-group">
+          <label for="nom">Nom </label>
+          <input
+            type="text"
+            id="nom"
+            name="nom"
+            [(ngModel)]="etudiant.nom"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input
+            type="text"
+            id="prenom"
+            name="prenom"
+            [(ngModel)]="etudiant.prenom"
+            required
+            class="form-control"
+          />
+        </div>
+  
+    
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="etudiant.email"
+            required
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="pswrd">Mot de passe</label>
+          <input
+            type="password"
+            id="pswrd"
+            name="pswrd"
+            [(ngModel)]="etudiant.password"
+            required
+            class="form-control"
+          />
+        </div>
+
+        
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            [(ngModel)]="etudiant.telephone"
+            required
+            class="form-control"
+          />
+        </div>
+    
+
+        <div class="form-group">
+          <label for="gender">Genre</label>
+          <select
+            id="gender"
+            name="gender"
+            [(ngModel)]="etudiant.genre"
+            required
+            class="form-control"
+          >
+            <option value="HOMME">Masculin</option>
+            <option value="FEMME">Féminin</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="filiere">Filiere</label>
+          <select
+            id="filiere"
+            name="filiere"
+            [(ngModel)]="etudiant.filiere"
+            required
+            class="form-control"
+          >
+            <option value="INFO">Informatique</option>
+            <option value="INDUS">Industriel</option>
+            <option value="SEII">Système Embarqué</option>
+            <option value="MECA">Mécanique</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="filiere">Année Etude</label>
+          <select
+            id="filiere"
+            name="filiere"
+            [(ngModel)]="etudiant.anneeEtude"
+            required
+            class="form-control"
+          >
+            <option value="PREMIEREANNEE">Première Année</option>
+            <option value="DEUXIEMEANNEE">Deuxième Année</option>
+            <option value="TROISIEMEANNEE">Troisième Année Embarqué</option>
+          </select>
+        </div>
+    
+        <!-- 
+        <div class="form-group">
+          <label for="gender">Genre</label>
+          <select
+            id="gender"
+            name="gender"
+            [(ngModel)]="etudiant.gender"
+            required
+            class="form-control"
+          >
+            <option value="HOMME">Masculin</option>
+            <option value="FEMME">Féminin</option>
+          </select>
+        </div>
+        -->
+        
+     <!--
+        <div class="form-group">
+          <label for="imageUrl">URL de l'image</label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            [(ngModel)]="student.imageUrl"
+            class="form-control"
+          />
+        </div>-->
+    
+        <button type="submit" class="btn btn-primary" [disabled]="!studentForm.form.valid">
+          Enregistrer
+        </button>
+    
+        <a routerLink="/students/list" class="btn btn-secondary">Annuler</a>
+      </form>
+    </div>
+  </main>
+</div>

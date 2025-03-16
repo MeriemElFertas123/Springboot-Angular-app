@@ -1,0 +1,135 @@
+<div class="conteneur">
+  <aside class="sidebar">
+    <h2 class="sidebar-title">GESTION DES STAGES</h2>
+    <nav class="nav-links">
+      <a class="nav-item"  routerLink="/espace-professeur">
+        <i class="icon">🏚️</i>
+        <span class="text">Acceuil</span>
+      </a>
+      <a class="nav-item"  routerLink="/rapports-stage">
+        <i class="icon">📄</i>
+        <span class="text">Les rapports de stage</span>
+      </a>
+      <a class="nav-item" routerLink="/mes-etudiants">
+        <i class="icon">🧑🏼‍💻</i>
+        <span class="text" >Etudiants</span>
+      </a>
+    </nav>
+  </aside>
+  <main class="m-3">
+    <div class="row"> 
+      @if(listDepotsRapport.length!=0){
+       @for (depotRapport of listDepotsRapport; track $index) {
+         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+         <div class="card h-100 " >
+           <div class="card-body d-flex flex-column">
+             <h5 class="card-title">{{depotRapport.titre}}</h5>
+             <!-- le flex pour que la description s'étire pour remplir l'espace et éviter les décalages -->
+             <p class="card-text flex-grow-1">{{depotRapport.description}}</p>
+             <hr>
+             <div class="icon-container">
+               <i class="fa-solid fa-eye"></i>
+               <i class="fa-solid fa-user" [routerLink]="['/details-etudiant',depotRapport.id]"></i>
+               @if(depotRapport.evaluation==null || depotRapport.evaluation==undefined){
+                <i class="fa-solid fa-plus" (click)="openModalAddEval(depotRapport.id)"></i>
+               }@else {
+                <i class="fa-solid fa-comment" (click)="voirEvaluationOpenModal(depotRapport.id)"></i>
+               }
+               <i class="fa-solid fa-download"></i>
+             </div>
+             <p class="card-text date-soumission mt-auto"><small class="text-muted">Date de soumission: {{depotRapport.submissionDate | date :'dd/MM/yyyy : hh:mm'}}</small></p>
+         
+             @if (idDepotToEditStatut!==depotRapport.id) {
+              <p > <span [ngStyle]="{'backgroundColor' : getColorSelonStatut(depotRapport.statut)}" style="color: #fff;padding: 4px;" class="rounded">{{depotRapport.statut}}</span> <i class="fa-solid fa-pen m-3" (click)="editStatut(depotRapport.id,depotRapport.statut)"></i></p>
+             }@else {
+              <div class="my-3 radioEditStatut d-flex justify-content-start align-items-center">
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="depotRapport.selectedRadio">
+                  <mat-radio-button value="V" id="radioV">Validé</mat-radio-button>
+                  <mat-radio-button value="NV" id="radioNV">Rejeté</mat-radio-button>
+                </mat-radio-group>
+                <div class="icons-radio">
+                  @if (depotRapport.selectedRadio) {
+                    <i class="fa-solid fa-check fa-check-ok"  (click)="saveNewStatus(depotRapport)" ></i>
+                    <i class="fa-solid fa-trash fa-trash-ok" (click)="resetRadioCheck(depotRapport)"></i>
+                  }@else{
+                    <i class="fa-solid fa-check " id="disabled-check"></i>
+                    <i class="fa-solid fa-trash"  id="disabled-trash"></i>
+                  }
+                  
+                  <i class="fa-solid fa-xmark" (click)="idDepotToEditStatut=-1"></i>
+                </div>
+               </div>
+             }
+             
+           </div>
+         </div>
+       </div>
+       }
+      }@else {
+       <p>Aucun Dépot de Rapports Trouvé</p>
+      }
+     
+     </div>
+  </main>
+</div>
+
+
+
+<div class="modal" tabindex="-1" #voirevaluationmodal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Evaluation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        @if(evaluationDepotSelectionne === undefined || evaluationDepotSelectionne===null){
+          <p>No Evaluation Yet !!</p>
+        }@else {
+          <table class="table brdered my-4">
+            <tbody>
+              <tr>
+                <td>Note</td>
+                <td>{{evaluationDepotSelectionne.note}}</td>
+              </tr>
+              <tr>
+                <td>Comment</td>
+                <td>{{evaluationDepotSelectionne.comment}}</td>
+              </tr>
+            </tbody>
+          </table>
+        }
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Close</button>      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" tabindex="-1" #addevaluationmodal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Evaluation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModalAddEval()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formAddEvaluation">
+          <div class="m-3">
+            <input type="number" class="form-control" placeholder="Donnez une note" formControlName="note">
+          </div>
+          <div class="m-3">
+            <textarea class="form-control" placeholder="Donnez un commentaire ..." formControlName="comment"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModalAddEval()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="saveEvaluation()">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

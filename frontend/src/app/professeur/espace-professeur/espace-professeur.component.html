@@ -1,0 +1,114 @@
+<div class="dashboard-container">
+  <aside class="sidebar">
+    <h2 class="sidebar-title">GESTION DES STAGES</h2>
+    <nav class="nav-links">
+      <a class="nav-item"  routerLink="/espace-professeur">
+        <i class="icon">🏚️</i>
+        <span class="text">Acceuil</span>
+      </a>
+      <a class="nav-item"  routerLink="/rapports-stage">
+        <i class="icon">📄</i>
+        <span class="text">Les rapports de stage</span>
+      </a>
+      <a class="nav-item" routerLink="/mes-etudiants">
+        <i class="icon">🧑🏼‍💻</i>
+        <span class="text" >Etudiants</span>
+      </a>
+    </nav>
+  </aside>
+  <main class="m-3">
+    <header class="top-bar">
+      <div class="search-container  mt-5">
+        <input type="text" placeholder="Search for datas & reports..." class="search-input">
+        <button class="search-btn">🔍</button>
+      </div>
+      <div class="user-profile" (click)="toggleDropdown()">
+        <span class="user-name">Salim Alioua</span>
+        <div class="user-avatar">👤</div>
+      </div>
+      <div class="dropdown-menu" [class.show]="isDropdownOpen">
+        <div class="dropdown-header">
+          <div class="user-avatar-large">👤</div>
+          <div class="user-info">Salim Alioua</div>
+          <div class="user-email">salim.aliouauit.ac.ma</div>
+        </div>
+        <div class="dropdown-item">
+          <i class="icon">📷</i>
+          <span>Modifier la photo</span>
+        </div>
+        <div class="dropdown-item">
+          <i class="icon">🔒</i>
+          <span>Changer le mot de passe</span>
+        </div>
+        <div class="dropdown-item">
+          <i class="icon">🚪</i>
+          <span>Déconnexion</span>
+        </div>
+      </div>
+    </header>
+  
+    <section class="welcome-section">
+      <div class="welcome-message">Hi Salim ! Welcome Back</div>
+      <button class="add-stage-btn">+ AJOUTER UN Etudiant</button>
+    </section>
+  
+  
+    <div class="mt-5">
+      <!-- @if (listEtudiantsEncadre.length!=0) {
+        <table class="table">
+          <thead>
+            <tr >
+              <td class="p-3">id</td>
+              <td  class="p-3" >Nom</td>
+              <td  class="p-3" >Prenom</td>
+              <td  class="p-3" >Email</td>
+              <td  class="p-3" >Filière</td>
+              <td  class="p-3" >Année d'Etude</td>
+            </tr>
+          </thead>
+          <tbody>
+            @for (student of listEtudiantsEncadre; track $index) {
+              <tr>
+                <td  class="p-4 " >{{student.id}}</td>
+                <td  class="p-4" >{{student.prenom}}</td>
+                <td  class="p-4" >{{student.nom}}</td>
+                <td  class="p-4" >{{student.email}}</td>
+                <td  class="p-4" >{{student.filiere}}</td>
+                <td  class="p-4" >{{student.anneeEtude}}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }@else {
+        <p>No Student Added Yet</p>
+      } -->
+  
+    @if(listEtudiantsEncadre.length!=0){
+      <div class="row">
+        @for (student of listEtudiantsEncadre; track $index) {
+          <div class="col-2 photo-container  d-flex justify-content-center align-item-center m-5 py-5">
+            <img [src]="student.imageUrl" class="card-img-top rounded-circle">
+            <div class="card-overlay">
+              <div class="card p-3">
+                <h5 class="card-title text-center">{{student.prenom}} {{student.nom}}</h5>
+                <table class="table table-bordered">
+                  <tr>
+                    <td class="p-3">Filière</td>
+                    <td class="p-3">{{student.filiere}} - {{student.anneeEtude}}</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3">Email</td>
+                    <td class="p-3">{{student.email}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }@else {
+      <p>Aucun étudiant ajouté pour le moment</p>
+    }
+  </div>
+  </main>
+</div>
