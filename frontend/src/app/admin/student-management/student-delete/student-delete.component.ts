@@ -8,6 +8,7 @@ import { StudentService } from '../../../service/student.service';
 
 @Component({
   selector: 'app-student-delete',
+  standalone:true,
   imports: [NgIf],
   templateUrl: './student-delete.component.html',
   styleUrl: './student-delete.component.css'

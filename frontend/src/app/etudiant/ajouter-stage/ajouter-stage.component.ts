@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-ajouter-stage',
+  standalone:true,
   imports: [FormsModule,CommonModule,RouterLink],
   templateUrl: './ajouter-stage.component.html',
   styleUrl: './ajouter-stage.component.css'

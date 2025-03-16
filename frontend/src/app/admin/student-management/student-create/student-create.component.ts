@@ -12,6 +12,7 @@ import { AnneeEtude, FiliereEtude } from '../../../model/enums';
 
 @Component({
   selector: 'app-student-create',
+  standalone:true,
   imports: [CommonModule, FormsModule],
   templateUrl: './student-create.component.html',
   styleUrl: './student-create.component.css'
@@ -26,6 +27,10 @@ export class StudentCreateComponent {
       anneeEtude:AnneeEtude.A,
       imageUrl:'' }; // Objet pour stocker les données du formulaire
 
+      imageFile: File | null = null; // Pour stocker le fichier image sélectionné
+      message: string = '';
+      isSuccess: boolean = false;
+    
   constructor(
     private studentService: StudentService,
     private router: Router

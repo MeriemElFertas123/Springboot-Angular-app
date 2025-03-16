@@ -2,28 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { StudentService } from '../../../service/student.service';
-import { Student } from '../../../model/model'; // Importer le modèle Student
-import { AnneeEtude, FiliereEtude } from '../../../model/enums';
 import { EtudiantService } from '../../../service/etudiant.service';
-
+import { AnneeEtude, FiliereEtude } from '../../../model/enums';
 
 @Component({
   selector: 'app-student-edit',
-  imports: [CommonModule, FormsModule,RouterLink],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './student-edit.component.html',
-  styleUrl: './student-edit.component.css'
+  styleUrls: ['./student-edit.component.css']
 })
-export class StudentEditComponent implements OnInit{
+export class StudentEditComponent implements OnInit {
   etudiant: any = {
     nom: '',
     prenom: '',
     email: '',
     password: '',
     telephone: '',
-    genre:'',
-    filiere:'',
-    anneeEtude:''
+    genre: '',
+    filiere: '',
+    anneeEtude: '',
+    image: null  // Si vous avez un champ image
   };
 
   constructor(
@@ -54,7 +53,21 @@ export class StudentEditComponent implements OnInit{
   // Soumettre le formulaire de modification
   onSubmit(): void {
     if (this.etudiant.id) {
-      this.etudiantService.updateStudent(this.etudiant.id, this.etudiant).subscribe({
+      const formData: FormData = new FormData();
+      formData.append('nom', this.etudiant.nom);
+      formData.append('prenom', this.etudiant.prenom);
+      formData.append('email', this.etudiant.email);
+      formData.append('password', this.etudiant.password);
+      formData.append('telephone', this.etudiant.telephone);
+      formData.append('genre', this.etudiant.genre);
+      formData.append('filiere', this.etudiant.filiere);
+      formData.append('anneeEtude', this.etudiant.anneeEtude);
+      
+      if (this.etudiant.image) {
+        formData.append('image', this.etudiant.image, this.etudiant.image.name);
+      }
+
+      this.etudiantService.updateStudent(this.etudiant.id, formData).subscribe({
         next: () => {
           this.router.navigate(['/students/list']); // Rediriger vers la liste après la modification
         },

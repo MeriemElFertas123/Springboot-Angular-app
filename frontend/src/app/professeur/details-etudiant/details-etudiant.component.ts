@@ -7,6 +7,7 @@ import { StatutRapport } from '../../model/enums';
 
 @Component({
   selector: 'app-details-etudiant',
+  standalone:true,
   imports: [NgStyle,DatePipe],
   templateUrl: './details-etudiant.component.html',
   styleUrl: './details-etudiant.component.css'

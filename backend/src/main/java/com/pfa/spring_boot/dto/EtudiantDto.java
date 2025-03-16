@@ -19,6 +19,8 @@ public class EtudiantDto {
     private Filiere filiere;
 
     private AnneeEtude anneeEtude;
+    private byte[] image;
+
     public EtudiantDto() {
     }
 
@@ -93,4 +95,8 @@ public class EtudiantDto {
     public void setAnneeEtude(AnneeEtude anneeEtude) {
         this.anneeEtude = anneeEtude;
     }
+
+    public byte[] getImage() {return image;}
+
+    public void setImage(byte[] image) {this.image = image;}
 }

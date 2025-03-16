@@ -10,6 +10,7 @@ import {MatRadioModule} from '@angular/material/radio';
 
 @Component({
   selector: 'app-rapports-stage',
+  standalone:true,
   imports: [RouterLink,
     DatePipe,
     NgStyle,

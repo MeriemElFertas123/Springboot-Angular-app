@@ -8,6 +8,7 @@ import { AnneeEtude, FiliereEtude } from '../../../model/enums';
 
 @Component({
   selector: 'app-student-details',
+  standalone:true,
   imports: [CommonModule,RouterLink],
   templateUrl: './student-details.component.html',
   styleUrl: './student-details.component.css'

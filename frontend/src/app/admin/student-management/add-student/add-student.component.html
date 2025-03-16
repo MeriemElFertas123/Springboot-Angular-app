@@ -145,6 +145,17 @@
               <option value="TROISIEMEANNEE">Troisième Année Embarqué</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="image">Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              (change)="onFileSelected($event)"
+              required
+              class="form-control"
+            />
+          </div>
           
        <!--
           <div class="form-group">

@@ -43,6 +43,7 @@
             <table class="table">
             <thead>
                 <tr>
+                <th>Image</th>
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
@@ -55,6 +56,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let student of students">
+                <td>
+                    <!-- Afficher l'image à partir du BLOB -->
+                  <img *ngIf="student.image" [src]="'data:image/jpeg;base64,' + student.image" alt="Student Image" width="40px">
+                </td>
                 <td>{{ student.nom }}</td>
                 <td>{{ student.prenom }}</td>
                 <td>{{ student.email }}</td>

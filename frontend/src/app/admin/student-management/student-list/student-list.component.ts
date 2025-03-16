@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-student-list',
+  standalone:true,
   imports: [RouterLink,NgIf,NgFor],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -47,6 +48,23 @@ export class StudentListComponent implements OnInit{
         }
       });
 
+    }
+  }
+  // Convertir l'image BLOB en URL utilisable dans une balise <img>
+  getImageUrl(image: any): string {
+    if (typeof image === 'string') {
+      // Si l'image est déjà en base64
+      return image;
+    } else if (image instanceof Blob) {
+      // Si l'image est un Blob
+      return URL.createObjectURL(image);
+    } else if (image instanceof ArrayBuffer || Array.isArray(image)) {
+      // Si l'image est un tableau de bytes (BLOB)
+      const blob = new Blob([new Uint8Array(image)], { type: 'image/jpeg' });
+      return URL.createObjectURL(blob);
+    } else {
+      // Si l'image est dans un format non pris en charge
+      return ''; // Retourner une chaîne vide ou une image par défaut
     }
   }
 }

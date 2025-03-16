@@ -12,6 +12,9 @@ public class Etudiant {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
     private String nom;
     private String prenom;
     private String email;
@@ -23,7 +26,7 @@ public class Etudiant {
 
     @Enumerated(EnumType.STRING)
     private Filiere filiere;
-
+    @Enumerated(EnumType.STRING)
     private AnneeEtude anneeEtude;
 
 
@@ -99,4 +102,8 @@ public class Etudiant {
     public void setAnneeEtude(AnneeEtude anneeEtude) {
         this.anneeEtude = anneeEtude;
     }
+
+    public byte[] getImage() { return image;}
+
+    public void setImage(byte[] image) {this.image = image;}
 }

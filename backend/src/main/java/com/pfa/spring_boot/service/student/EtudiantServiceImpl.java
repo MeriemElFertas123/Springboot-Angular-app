@@ -27,7 +27,7 @@ public class EtudiantServiceImpl implements EtudiantService{
         etudiantDto.setPrenom(etudiant.getPrenom());
         etudiantDto.setEmail(etudiant.getEmail());
         etudiantDto.setTelephone(etudiant.getTelephone());
-
+        etudiantDto.setImage(etudiant.getImage());
         etudiantDto.setGenre(etudiant.getGenre());
         etudiantDto.setFiliere(etudiant.getFiliere());
         etudiantDto.setAnneeEtude(etudiant.getAnneeEtude());
@@ -53,6 +53,7 @@ public class EtudiantServiceImpl implements EtudiantService{
         etudiant.setGenre(dto.getGenre());
         etudiant.setFiliere(dto.getFiliere());
         etudiant.setAnneeEtude(dto.getAnneeEtude());
+        etudiant.setImage(dto.getImage());
         return etudiant;
     }
 
@@ -70,6 +71,7 @@ public class EtudiantServiceImpl implements EtudiantService{
 
         etudiant.setFiliere(payload.getFiliere());
         etudiant.setAnneeEtude(payload.getAnneeEtude());
+        etudiant.setImage(payload.getImage());
 
         Etudiant savedEtudiant = etudiantRepository.save(etudiant);
         return convertToDto(savedEtudiant);

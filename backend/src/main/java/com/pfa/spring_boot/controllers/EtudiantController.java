@@ -3,12 +3,17 @@ package com.pfa.spring_boot.controllers;
 
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
+import com.pfa.spring_boot.enums.etudiant.Filiere;
+import com.pfa.spring_boot.enums.etudiant.Genre;
 import com.pfa.spring_boot.service.student.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,13 +35,38 @@ public class EtudiantController {
     }
 
 
-    @PostMapping("create")
-    public ResponseEntity<?> createStudent(@RequestBody EtudiantDto dto) {
+    @PostMapping("/create")
+    public ResponseEntity<?> createStudent(@RequestParam("nom") String nom,
+                                           @RequestParam("prenom") String prenom,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("password") String password,
+                                           @RequestParam("telephone") String telephone,
+                                           @RequestParam("genre") String genre,
+                                           @RequestParam("filiere") String filiere,
+                                           @RequestParam("anneeEtude") String anneeEtude,
+                                           @RequestParam("image") MultipartFile image) {
+        try {
+            // Convertir l'image en byte[]
+            byte[] imageBytes = image.getBytes();
 
-        EtudiantDto student = etudiantService.createStudent(dto);
-            return new ResponseEntity<>(student, HttpStatus.OK);
+            // Créer un DTO et le remplir avec les données
+            EtudiantDto etudiantDto = new EtudiantDto();
+            etudiantDto.setNom(nom);
+            etudiantDto.setPrenom(prenom);
+            etudiantDto.setEmail(email);
+            etudiantDto.setPassword(password); // Ensure password is set
+            etudiantDto.setTelephone(telephone);
+            etudiantDto.setGenre(Genre.valueOf(genre));  // Convertir le genre
+            etudiantDto.setFiliere(Filiere.valueOf(filiere));  // Convertir la filière
+            etudiantDto.setAnneeEtude(AnneeEtude.valueOf(anneeEtude));  // Convertir l'année d'étude
+            etudiantDto.setImage(imageBytes);  // Set the image
+
+            EtudiantDto createdStudent = etudiantService.createStudent(etudiantDto);
+            return new ResponseEntity<>(createdStudent, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Erreur lors de l'enregistrement de l'image : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
+    }
 
     @PutMapping("update/{id}")
     public ResponseEntity<?> updateStudent(@RequestBody EtudiantDto dto, @PathVariable Long id) {
