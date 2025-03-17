@@ -22,11 +22,12 @@ import { StudentDeleteComponent } from './admin/student-management/student-delet
 import { StudentListComponent } from './admin/student-management/student-list/student-list.component';
 import { Component } from '@angular/core';
 import { AddStudentComponent } from './admin/student-management/add-student/add-student.component';
+import { AccueilComponent } from './accueil/accueil.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
 
-    {path:'main-home',component:MainHomeComponent},
+    {path:'main-home',component:AccueilComponent},
 
     {path:'espace-professeur',component:EspaceProfesseurComponent},
     {path:'details-etudiant/:id',component:DetailsEtudiantComponent},
