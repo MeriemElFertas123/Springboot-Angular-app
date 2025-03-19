@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { EtudiantService } from '../../../service/etudiant.service';
 import { Router } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.component";
 
 @Component({
   selector: 'app-add-student',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, SideBarAdminComponent],
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.css']
 })

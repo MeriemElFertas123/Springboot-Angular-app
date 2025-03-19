@@ -1,25 +1,7 @@
 <div class="app-container ">
-  <aside class="sidebar">
-    <h2 class="sidebar-title">GESTION DES STAGES</h2>
-    <nav class="nav-links">
-      <a class="nav-item" routerLink="/espace-etudiant">
-        <i class="icon">🏚️</i>
-        <span class="text">Accueil</span>
-      </a>
-      <a class="nav-item" routerLink="/ajouterStage">
-        <i class="icon">📝</i>
-        <span class="text">Ajouter un stage</span>
-      </a>
-      <a class="nav-item">
-        <i class="icon">📄</i>
-        <span class="text">Votre stage</span>
-      </a>
-      <a class="nav-item" routerLink="/deposerStage">
-        <i class="icon">📥</i>
-        <span class="text">Déposer le rapport</span>
-      </a>
-    </nav>
-  </aside>
+  <div class="sidebar">
+    <app-side-bar-etudiant></app-side-bar-etudiant>
+  </div>
     <main class="m-3">
       <h1 class="text-center">VOS DOCUMENTS DE STAGE</h1>
       <div class="row">

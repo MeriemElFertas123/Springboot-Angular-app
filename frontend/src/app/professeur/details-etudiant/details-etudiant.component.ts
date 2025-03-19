@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from '../../service/service.service';
-import { DepotRapportStage, Student } from '../../model/model';
+import { DepotRapportStage, Etudiant } from '../../model/model';
 import { DatePipe, NgStyle } from '@angular/common';
 import { StatutRapport } from '../../model/enums';
 
@@ -20,7 +20,7 @@ export class DetailsEtudiantComponent implements OnInit{
   service=inject(ServiceService);
 
   depotRapportStageSelectionne!:DepotRapportStage | null;
-  etudiants:Student[] | undefined=[];
+  etudiants:Etudiant[] | undefined=[];
 
   ngOnInit(): void {
       this.idDepotRapoortStageSelectionne=this.route.snapshot.paramMap.get('id')!;

@@ -1,6 +1,10 @@
 .conteneur{
-  display: flex;
   overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  display: flex;
+  width: 100vw;
+  overflow-x: hidden;
+  height: 100vh;
 }
 .card-img-top {
     height: 200px;  /* Ajuste selon le besoin */
@@ -13,46 +17,6 @@
 main{
     flex:1;
 }
-  
-  .sidebar {
-    width: 250px;
-    background-color: #CEDDDE;
-    color: #43A3DB;
-    padding: 20px;
-  }
-  
-  .sidebar-title {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-   
-  
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    text-decoration: none;
-    color: black;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    cursor: pointer;
-  }
-  
-  .nav-item:hover {
-    background-color: #9CD2D5;
-  }
-  
-  .nav-item .icon {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-  
+.sidebar{
+  background-color: #CEDDDE;
+}

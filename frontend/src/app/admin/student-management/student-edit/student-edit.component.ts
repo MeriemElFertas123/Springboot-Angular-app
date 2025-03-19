@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EtudiantService } from '../../../service/etudiant.service';
-import { AnneeEtude, FiliereEtude } from '../../../model/enums';
+import { AnneeEtude, Filiere } from '../../../model/enums';
+import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.component";
 
 @Component({
   selector: 'app-student-edit',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, SideBarAdminComponent],
   templateUrl: './student-edit.component.html',
   styleUrls: ['./student-edit.component.css']
 })

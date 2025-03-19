@@ -1,9 +1,6 @@
 .app-container {
-    margin: 0 0 0 250px; /* Supprime les marges par défaut */
-    padding: 0;
-    /* background-color: #ecf0f1;  */
-    min-height: 100vh; /* Assure que le conteneur prend toute la hauteur de l'écran */
-  
+  display: flex;
+  height: 100vh;
   }
   
   *, *:before, *:after {
@@ -133,50 +130,11 @@
 
      
 /* style pour side bar */
-
-.sidebar {
-  width: 250px;
+.sidebar{
   background-color: #CEDDDE;
-  color: #43A3DB;
+}
+main {
+  flex-grow: 1;
+  background-color: #ecf0f1;
   padding: 20px;
-  position: fixed;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-}
-
-.sidebar-title {
-  margin-bottom: 20px;
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-align: center;
-}
-
- 
-
-.nav-links {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  margin: 5px 0;
-  text-decoration: none;
-  color: black;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-  cursor: pointer;
-}
-
-.nav-item:hover {
-  background-color: #9CD2D5;
-}
-
-.nav-item .icon {
-  margin-right: 10px;
-  font-size: 1.2rem;
 }

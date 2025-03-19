@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { DepotRapportStage, Evaluation, Student } from '../model/model';
-import { AnneeEtude, FiliereEtude, StatutRapport } from '../model/enums';
+import { DepotRapportStage, Evaluation, Etudiant } from '../model/model';
+import { AnneeEtude, StatutRapport } from '../model/enums';
 import { stat } from 'fs';
+import { EtudiantService } from './etudiant.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { stat } from 'fs';
 export class ServiceService {
 
   // *****  Etudiants ******
-  etudiants:Student[]=[];
-
+  etudiants:Etudiant[]=[];
+/*
   etudiant1:Student={
     id:1,
     nom:'Aouassar',
@@ -46,7 +47,7 @@ export class ServiceService {
     filiere:FiliereEtude.INDUS,
     anneeEtude:AnneeEtude.A,
     imageUrl:"/img/Mouad.jpg"
-  }
+  }*/
 
 
   // Evaluations
@@ -64,7 +65,9 @@ export class ServiceService {
 
 
   // *****  Rapports ******
+  
   depotsRapports:DepotRapportStage[]=[];
+  /*
   depotRapport1:DepotRapportStage={
     id:1,
     titre:"Développement d'une application pour la gestion des rendez-vous",
@@ -92,10 +95,11 @@ export class ServiceService {
     statut:StatutRapport.N,
     submissionDate:new Date(2024,8,25,12,45)
   }
+*/
 
 
-
-  constructor() { 
+  constructor(private etudiantService:EtudiantService) { 
+    /*
     this.etudiants.push(this.etudiant1);
     this.etudiants.push(this.etudiant2);
     this.etudiants.push(this.etudiant3);
@@ -103,13 +107,16 @@ export class ServiceService {
 
     this.depotsRapports.push(this.depotRapport1);
     this.depotsRapports.push(this.depotRapport2);
-    this.depotsRapports.push(this.depotRapport3);
+    this.depotsRapports.push(this.depotRapport3);*/
+    this.etudiantService.getStudents().subscribe(
+      (res:Etudiant[])=>{
+        this.etudiants=res;
+      }
+    )
   }
 
 
-  getStudents():Student[]{
-    return this.etudiants;
-  }
+
 
   getRapports():DepotRapportStage[]{
     return this.depotsRapports;

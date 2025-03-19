@@ -26,7 +26,7 @@ export class StudentDeleteComponent {
     // Récupérer l'ID de l'étudiant depuis l'URL
     this.studentId = this.route.snapshot.paramMap.get('id');
   }
-
+/*
   // Méthode pour supprimer l'étudiant
   deleteStudent(): void {
     if (this.studentId) {
@@ -45,5 +45,5 @@ export class StudentDeleteComponent {
   // Méthode pour annuler et revenir à la liste des étudiants
   cancel(): void {
     this.router.navigate(['/students']);
-  }
+  }*/
 }

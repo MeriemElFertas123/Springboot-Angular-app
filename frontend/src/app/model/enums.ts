@@ -1,13 +1,4 @@
-export enum FiliereEtude{
-    INFO='Informatique',
-    INDUS='Industriel',
-    SE='Systèmes Embarqués'
-}
-export enum AnneeEtude{
-    A='Pemière année',
-    B='Deuxième année',
-    C='Troisième année'
-}
+
 
 export enum StatutRapport{
     V='Validé',
@@ -15,5 +6,23 @@ export enum StatutRapport{
     N='None'
 }
 
+//************************************ */
+export enum Genre{
+    Homme='Homme',
+    Femme='Femme'
+}
 
+export enum Filiere{
+    Informatique ='Informatique',
+    Mathematique = 'Mathematique',
+    Electronique='Electronique',
+    Industriel='Genie Industriel',
+    Mecanique='Mécanique',
+    SEII='Systèmes Embarqués et Informatique Industrielle'
+}
 
+export enum AnneeEtude {
+    Premiere = 'Première',
+    Deuxieme = 'Deuxième',
+    Troisieme = 'Troisième',
+  }

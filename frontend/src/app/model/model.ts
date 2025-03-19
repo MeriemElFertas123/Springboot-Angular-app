@@ -1,22 +1,25 @@
-import { FiliereEtude } from "./enums"
+import { Filiere, Genre } from "./enums"
 import { AnneeEtude} from "./enums"
 import { StatutRapport } from "./enums"
 
-export interface Student{
+export interface Etudiant{
     id:number,
+    image: Uint8Array | undefined; // Utilisation de Uint8Array pour les données binaires (Lob)
     nom:string,
     prenom:string,
     email:string,
-    filiere:FiliereEtude,
+    password:string,
+    telephone:string,
+    genre:Genre,
+    filiere:Filiere,
     anneeEtude:AnneeEtude,
-    imageUrl:string
 }
 
 export interface DepotRapportStage{
     id:number,
     titre:string,
     description:string,
-    etudiants:Student[], 
+    etudiants:Etudiant[], 
     evaluation:Evaluation | null,
     statut:StatutRapport,
     submissionDate:Date,

@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { SideBarEtudiantComponent } from "../side-bar-etudiant/side-bar-etudiant.component";
 
 @Component({
   selector: 'app-deposer-stage',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule, SideBarEtudiantComponent],
   templateUrl: './deposer-stage.component.html',
   styleUrl: './deposer-stage.component.css'
 })

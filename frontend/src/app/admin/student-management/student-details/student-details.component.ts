@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { StudentService } from '../../../service/student.service';
-import { Student } from '../../../model/model'; // Importer le modèle Student
-import { AnneeEtude, FiliereEtude } from '../../../model/enums';
+import { Etudiant } from '../../../model/model'; // Importer le modèle Student
+import { AnneeEtude, Filiere, Genre } from '../../../model/enums';
+import { EtudiantService } from '../../../service/etudiant.service';
 
 
 @Component({
@@ -14,25 +15,29 @@ import { AnneeEtude, FiliereEtude } from '../../../model/enums';
   styleUrl: './student-details.component.css'
 })
 export class StudentDetailsComponent implements OnInit{
-  student: Student = { 
-       id:0,
-        nom:'',
-        prenom:'',
-        email:'',
-        filiere:FiliereEtude.INFO,
-        anneeEtude:AnneeEtude.A,
-        imageUrl:''
-   }; // Initialiser avec des valeurs par défaut
+  student: Etudiant = {
+    id: 0,
+    nom: '',
+    prenom: '',
+    email: '',
+    filiere: Filiere.Informatique,
+    anneeEtude: AnneeEtude.Deuxieme,
+    image: undefined,
+    password: '',
+    telephone: '',
+    genre: Genre.Homme
+  }; // Initialiser avec des valeurs par défaut
 
   constructor(
-    private studentService: StudentService,
+    private etudiantService: EtudiantService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.studentService.getStudent(id).subscribe({
+      const idEtudiant=Number.parseInt(id);
+      this.etudiantService.getStudentById(idEtudiant).subscribe({
         next: (data) => (this.student = data),
         error: (err) => console.error('Failed to load student', err),
       });

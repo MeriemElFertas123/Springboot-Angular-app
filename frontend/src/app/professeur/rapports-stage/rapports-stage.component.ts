@@ -7,6 +7,7 @@ import { StatutRapport } from '../../model/enums';
 import { FormGroup,FormControl,ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioModule} from '@angular/material/radio';
+import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
 
 @Component({
   selector: 'app-rapports-stage',
@@ -16,7 +17,7 @@ import {MatRadioModule} from '@angular/material/radio';
     NgStyle,
     ReactiveFormsModule,
     MatRadioModule,
-    FormsModule],
+    FormsModule, SideBarProfComponent],
   templateUrl: './rapports-stage.component.html',
   styleUrl: './rapports-stage.component.css'
 })
