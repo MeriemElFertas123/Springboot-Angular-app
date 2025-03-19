@@ -115,7 +115,7 @@ export class RapportsStageComponent implements OnInit{
     const newEvaluation:Evaluation={
       id:Math.floor(Math.random()*52),
       note: Number(this.formAddEvaluation.value.note) ?? 0 ,
-      comment:this.formAddEvaluation.value.comment ?? ''
+      commentaire:this.formAddEvaluation.value.comment ?? ''
     }
 
     this.service.setEvaluation(this.idDepotRapStageToEvaluate,newEvaluation);

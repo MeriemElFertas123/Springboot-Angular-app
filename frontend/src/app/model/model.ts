@@ -29,7 +29,7 @@ export interface DepotRapportStage{
 export interface Evaluation{
     id:number,
     note:number,
-    comment:string
+    commentaire:string
 }
 
 // Meriem

@@ -39,7 +39,7 @@
     </section>
   
   
-    <div class="mt-5">
+    <div class="mt-5 d-flex justify-content-center align-items-center">
     @if(listEtudiantsEncadre.length!=0){
       <div class="row">
         @for (student of listEtudiantsEncadre; track $index) {
@@ -64,7 +64,9 @@
         }
       </div>
     }@else {
-      <p>Aucun étudiant ajouté pour le moment</p>
+      <div class="alert alert-warning w-50 my-5" role="alert">
+        Aucun étudiant ajouté pour le moment
+      </div>
     }
   </div>
   </main>

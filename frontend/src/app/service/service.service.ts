@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DepotRapportStage, Evaluation, Etudiant } from '../model/model';
-import { AnneeEtude, StatutRapport } from '../model/enums';
+import { AnneeEtude, Filiere, Genre, StatutRapport } from '../model/enums';
 import { stat } from 'fs';
 import { EtudiantService } from './etudiant.service';
 
@@ -11,55 +11,67 @@ export class ServiceService {
 
   // *****  Etudiants ******
   etudiants:Etudiant[]=[];
-/*
-  etudiant1:Student={
-    id:1,
-    nom:'Aouassar',
-    prenom:'Asmae',
-    email:'Asmae@gmail.com',
-    filiere:FiliereEtude.INFO,
-    anneeEtude:AnneeEtude.B,
-    imageUrl:"/img/Asmae.jpg"
+
+  etudiant1:Etudiant={
+    id: 1,
+    nom: 'Aouassar',
+    prenom: 'Asmae',
+    email: 'Asmae@gmail.com',
+    image: undefined,
+    password: '',
+    telephone: '',
+    genre: Genre.Femme,
+    filiere: Filiere.Electronique,
+    anneeEtude: AnneeEtude.Premiere
   }
-  etudiant2:Student={
-    id:2,
-    nom:'El Fertas',
-    prenom:'Meriem',
-    email:'Meriem@gmail.com',
-    filiere:FiliereEtude.INFO,
-    anneeEtude:AnneeEtude.B,
-    imageUrl:"/img/Meriem.jpg"
+  etudiant2:Etudiant={
+    id: 2,
+    nom: 'El Fertas',
+    prenom: 'Meriem',
+    image: undefined,
+    email: '',
+    password: '',
+    telephone: '',
+    genre: Genre.Femme,
+    filiere: Filiere.Informatique,
+    anneeEtude: AnneeEtude.Deuxieme
   }
-  etudiant3:Student={
-    id:3,
-    nom:'Boumlal',
-    prenom:'Ilham',
-    email:'Ilham@gmail.com',
-    filiere:FiliereEtude.INFO,
-    anneeEtude:AnneeEtude.B,
-    imageUrl:"/img/Ilham.jpg"
+  etudiant3:Etudiant={
+    id: 3,
+    nom: 'Boumlal',
+    prenom: 'Ilham',
+    email: 'Ilham@gmail.com',
+    image: undefined,
+    password: '',
+    telephone: '',
+    genre: Genre.Femme,
+    filiere: Filiere.Mathematique,
+    anneeEtude: AnneeEtude.Troisieme
   }
-  etudiant4:Student={
-    id:4,
-    nom:'Taoussi',
-    prenom:'Mouad',
-    email:'Mouad@gmail.com',
-    filiere:FiliereEtude.INDUS,
-    anneeEtude:AnneeEtude.A,
-    imageUrl:"/img/Mouad.jpg"
-  }*/
+  etudiant4:Etudiant={
+    id: 4,
+    nom: 'Taoussi',
+    prenom: 'Mouad',
+    email: 'Mouad@gmail.com',
+    image: undefined,
+    password: '',
+    telephone: '',
+    genre: Genre.Femme,
+    filiere: Filiere.SEII,
+    anneeEtude: AnneeEtude.Premiere
+  }
 
 
   // Evaluations
   evaluation1:Evaluation={
     id:1,
     note:18,
-    comment:'très bon travail'
+    commentaire:'très bon travail'
   }
   evaluation2:Evaluation={
     id:2,
     note:18,
-    comment:'travail terminé avec succès'
+    commentaire:'travail terminé avec succès'
   }
 
 
@@ -67,7 +79,7 @@ export class ServiceService {
   // *****  Rapports ******
   
   depotsRapports:DepotRapportStage[]=[];
-  /*
+  
   depotRapport1:DepotRapportStage={
     id:1,
     titre:"Développement d'une application pour la gestion des rendez-vous",
@@ -95,7 +107,7 @@ export class ServiceService {
     statut:StatutRapport.N,
     submissionDate:new Date(2024,8,25,12,45)
   }
-*/
+
 
 
   constructor(private etudiantService:EtudiantService) { 
@@ -104,10 +116,10 @@ export class ServiceService {
     this.etudiants.push(this.etudiant2);
     this.etudiants.push(this.etudiant3);
     this.etudiants.push(this.etudiant4);
-
+*/
     this.depotsRapports.push(this.depotRapport1);
     this.depotsRapports.push(this.depotRapport2);
-    this.depotsRapports.push(this.depotRapport3);*/
+    this.depotsRapports.push(this.depotRapport3);
     this.etudiantService.getStudents().subscribe(
       (res:Etudiant[])=>{
         this.etudiants=res;
