@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { EtudiantService } from '../../../service/etudiant.service';
 import { RouterLink ,Router} from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
+import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.component";
 
 @Component({
   selector: 'app-student-list',
   standalone:true,
-  imports: [RouterLink,NgIf,NgFor],
+  imports: [RouterLink, NgIf, NgFor, SideBarAdminComponent],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })

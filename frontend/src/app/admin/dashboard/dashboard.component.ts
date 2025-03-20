@@ -1,11 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SideBarAdminComponent } from "../side-bar-admin/side-bar-admin.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports: [NgFor,NgIf,RouterLink],
+  imports: [NgFor, NgIf, RouterLink, SideBarAdminComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

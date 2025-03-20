@@ -1,25 +1,39 @@
 package com.pfa.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import com.pfa.spring_boot.enums.professeur.Specialite;
 import jakarta.persistence.*;
+
+import java.util.Arrays;
 
 @Entity
 public class Enseignant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @JsonProperty("nom")
     private String nom;
+    @JsonProperty("prenom")
+
     private String prenom;
     private String email;
     private String password;
     private String telephone;
 
+
+
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+
+
+
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
     @Enumerated(EnumType.STRING)
+    @JsonProperty("specialite")
     private Specialite specialite;
 
     public Long getId() {
@@ -84,5 +98,26 @@ public class Enseignant {
 
     public void setSpecialite(Specialite specialite) {
         this.specialite = specialite;
+    }
+
+
+
+    public byte[] getImage() { return image;}
+
+    public void setImage(byte[] image) {this.image = image;}
+
+    @Override
+    public String toString() {
+        return "Enseignant{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", image=" + Arrays.toString(image) +
+                ", genre=" + genre +
+                ", specialite=" + specialite +
+                '}';
     }
 }

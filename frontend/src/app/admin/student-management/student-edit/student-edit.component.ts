@@ -26,6 +26,15 @@ export class StudentEditComponent implements OnInit {
     image: null  // Si vous avez un champ image
   };
 
+
+
+  imageFile: File | null = null; // Pour stocker le fichier image sélectionné
+
+  // Gérer la sélection de fichier
+  onFileSelected(event: any): void {
+    this.imageFile = event.target.files[0] as File;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private etudiantService: EtudiantService,

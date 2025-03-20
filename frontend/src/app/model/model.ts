@@ -15,6 +15,22 @@ export interface Etudiant{
     anneeEtude:AnneeEtude,
 }
 
+
+
+export interface Enseignant {
+    id: number;
+    nom: string;
+    prenom: string;
+    email: string;
+    telephone:string;
+    password:string;
+    genre:Genre;
+    specialite: string;
+    image: Uint8Array | undefined;
+    
+
+  }
+
 export interface DepotRapportStage{
     id:number,
     titre:string,
@@ -25,6 +41,8 @@ export interface DepotRapportStage{
     submissionDate:Date,
     selectedRadio?:string | null // C'est une propriété optionnelle
 }
+
+
 
 export interface Evaluation{
     id:number,

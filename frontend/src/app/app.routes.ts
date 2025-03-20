@@ -7,12 +7,10 @@ import { EspaceEtudiantComponent } from './etudiant/espace-etudiant/espace-etudi
 import { AjouterStageComponent } from './etudiant/ajouter-stage/ajouter-stage.component';
 import { DeposerStageComponent } from './etudiant/deposer-stage/deposer-stage.component';
 import { ChangePasswordComponent } from './etudiant/change-password/change-password.component';
-import { MainHomeComponent } from './main-home/main-home.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ArchiveComponent } from './admin/archive/archive.component';
 import { ChatComponent } from './admin/chat/chat.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { EnseignantManagementComponent } from './admin/enseignant-management/enseignant-management.component';
 import { ParametrageComponent } from './admin/parametrage/parametrage.component';
 import { RapportsComponent } from './admin/rapports/rapports.component';
 import { StudentCreateComponent } from './admin/student-management/student-create/student-create.component';
@@ -23,6 +21,12 @@ import { StudentListComponent } from './admin/student-management/student-list/st
 import { Component } from '@angular/core';
 import { AddStudentComponent } from './admin/student-management/add-student/add-student.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { EnseignantListComponent } from './admin/enseignant-management/enseignant-list/enseignant-list.component';
+import { EnseignantCreateComponent } from './admin/enseignant-management/enseignant-create/enseignant-create.component';
+import { EnseignantEditComponent } from './admin/enseignant-management/enseignant-edit/enseignant-edit.component';
+import { EnseignantDetailsComponent } from './admin/enseignant-management/enseignant-details/enseignant-details.component';
+import { EnseignantDeleteComponent } from './admin/enseignant-management/enseignant-delete/enseignant-delete.component';
+import { AddEnseignantComponent } from './admin/enseignant-management/add-enseignant/add-enseignant.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
@@ -43,7 +47,7 @@ export const routes: Routes = [
     { path:'archive', component:ArchiveComponent},
     { path:'chat', component:ChatComponent},
     { path:'dashboard',component:DashboardComponent},
-    { path: 'enseignant-management', component: EnseignantManagementComponent }, // Gestion des enseignants
+    // { path: 'enseignant-management', component: EnseignantManagementComponent }, // Gestion des enseignants
     { path: 'parametrage', component: ParametrageComponent }, // Paramétrage
     { path: 'rapports', component: RapportsComponent }, // Rapports partie admin
 /*
@@ -62,6 +66,21 @@ export const routes: Routes = [
         { path: 'delete/:id', component: StudentDeleteComponent },
         {path: 'add-student',component:AddStudentComponent}
     ]},
+
+
+    {
+        path:'enseignants',children: [
+            {path:'list',component:EnseignantListComponent},
+            { path: 'enseignantCreate', component: EnseignantCreateComponent }, // Création d'un étudiant
+            { path: 'edit-enseignant/:id', component: EnseignantEditComponent }, // Modification d'un étudiant
+            { path: 'details/:id', component: EnseignantDetailsComponent }, // Détails d'un étudiant
+            { path: 'delete/:id', component: EnseignantDeleteComponent },
+            {path: 'add-enseignant',component:EnseignantCreateComponent}
+        ]
+    },
+
+
+
 
     { path: '**', redirectTo: 'main-home' } ,// Redirection en cas d'URL inconnue
 

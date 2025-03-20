@@ -100,10 +100,10 @@
         </div>
         
         <div class="form-group">
-          <label for="filiere">Année Etude</label>
+          <label for="anneeEtude">Année Etude</label>
           <select
-            id="filiere"
-            name="filiere"
+            id="anneeEtude"
+            name="anneeEtude"
             [(ngModel)]="etudiant.anneeEtude"
             required
             class="form-control"
@@ -114,21 +114,9 @@
           </select>
         </div>
     
-        <!-- 
-        <div class="form-group">
-          <label for="gender">Genre</label>
-          <select
-            id="gender"
-            name="gender"
-            [(ngModel)]="etudiant.gender"
-            required
-            class="form-control"
-          >
-            <option value="HOMME">Masculin</option>
-            <option value="FEMME">Féminin</option>
-          </select>
-        </div>
-        -->
+         
+    
+    
         
      <!--
         <div class="form-group">
@@ -141,7 +129,20 @@
             class="form-control"
           />
         </div>-->
-    
+        <div class="form-group ">
+          <label for="image"  class="form-label">Image</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            (change)="onFileSelected($event)"
+            required
+            class="form-control"
+          />
+        </div>
+
+
+
         <button type="submit" class="btn btn-primary" [disabled]="!studentForm.form.valid">
           Enregistrer
         </button>

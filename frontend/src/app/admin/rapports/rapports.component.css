@@ -1,0 +1,13 @@
+.div-container{
+    display: flex;
+    height: 100vh;
+}
+main{
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.sidebar{
+    background-color: #CEDDDE;
+} 

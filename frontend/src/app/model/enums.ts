@@ -3,7 +3,7 @@
 export enum StatutRapport{
     V='Validé',
     NV='Rejeté',
-    N='None'
+    N='En cours'
 }
 
 //************************************ */
