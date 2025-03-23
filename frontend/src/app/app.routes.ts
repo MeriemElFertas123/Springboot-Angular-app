@@ -27,11 +27,13 @@ import { EnseignantEditComponent } from './admin/enseignant-management/enseignan
 import { EnseignantDetailsComponent } from './admin/enseignant-management/enseignant-details/enseignant-details.component';
 import { EnseignantDeleteComponent } from './admin/enseignant-management/enseignant-delete/enseignant-delete.component';
 import { AddEnseignantComponent } from './admin/enseignant-management/add-enseignant/add-enseignant.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
 
     {path:'main-home',component:AccueilComponent},
+    {path:'login-form',component:LoginFormComponent},
 
     {path:'espace-professeur',component:EspaceProfesseurComponent},
     {path:'details-etudiant/:id',component:DetailsEtudiantComponent},
