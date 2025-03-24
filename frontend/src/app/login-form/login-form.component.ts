@@ -1,14 +1,18 @@
 import { NgClass } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
-  imports: [NgClass],
+  imports: [NgClass,ReactiveFormsModule],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css'
 })
 export class LoginFormComponent {
+
+  httpClient=inject(HttpClient);
+  URL='http://localhost:8080/';
 
   // Show/hide password onClick of button using Javascript only
   isPasswordVisible:boolean=false;
@@ -18,31 +22,28 @@ export class LoginFormComponent {
   }
 
 
-  /*
-show() {
-  var p = document.getElementById('pwd');
-  p.setAttribute('type', 'text');
-}
+  userLogin=new FormGroup({
+    email:new FormControl(''),
+    password:new FormControl('')
+  })
 
 
-hide() {
-  var p = document.getElementById('pwd');
-  p.setAttribute('type', 'password');
-}
+  authenticate(){
+    const email=this.userLogin.get('email')?.value;
+    const password=this.userLogin.get('password')?.value;
+    const body={email,password}
+    this.httpClient.post(`${URL}api/auth`,body).subscribe(
+      (res:any)=>{
+        if(res){
+          // avoir les roles de l'utilisateur connecté
+          getRolesByEmail();
 
-var pwShown = 0;
+          // à partir du role, on peut l'étudiant/professeur/admin et le stocker dans le localStorage
 
-document.getElementById("eye").addEventListener("click", function () {
-  if (pwShown == 0) {
-      pwShown = 1;
-      show();
-  } else {
-      pwShown = 0;
-      hide();
+          // diriger l'utilisateur vers son espace selon son rôle
+        }
+      }
+    )
   }
-}, false);
-
-*/
-
 
 }
