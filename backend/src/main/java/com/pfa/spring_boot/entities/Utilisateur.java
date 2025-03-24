@@ -55,4 +55,14 @@ public class Utilisateur {
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

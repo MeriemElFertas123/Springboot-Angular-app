@@ -41,4 +41,11 @@ public class UserRole {
     public void setUtilisateurList(List<Utilisateur> utilisateurList) {
         this.utilisateurList = utilisateurList;
     }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "nom='" + nom + '\'' +
+                '}';
+    }
 }

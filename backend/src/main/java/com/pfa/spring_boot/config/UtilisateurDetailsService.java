@@ -23,7 +23,7 @@ public class UtilisateurDetailsService  implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Utilisateur utilisateur=utilisateurRepository.findByEmail(email);
-
+        System.out.println("user : : "+utilisateur);
         Set<GrantedAuthority> authorities=utilisateur.getRoles().stream().map(
                 (roles)->new SimpleGrantedAuthority(roles.getNom())
         ).collect(Collectors.toSet());
