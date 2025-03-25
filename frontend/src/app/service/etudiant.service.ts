@@ -26,6 +26,11 @@ export class EtudiantService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
+   // Récupérer un étudiant par Email
+   getStudentByEmail(email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/email/${email}`);
+  }
+
   // Mettre à jour un étudiant
   updateStudent(id: number, student: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, student);

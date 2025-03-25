@@ -13,7 +13,6 @@ import { ChatComponent } from './admin/chat/chat.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ParametrageComponent } from './admin/parametrage/parametrage.component';
 import { RapportsComponent } from './admin/rapports/rapports.component';
-import { StudentCreateComponent } from './admin/student-management/student-create/student-create.component';
 import { StudentEditComponent } from './admin/student-management/student-edit/student-edit.component';
 import { StudentDetailsComponent } from './admin/student-management/student-details/student-details.component';
 import { StudentDeleteComponent } from './admin/student-management/student-delete/student-delete.component';
@@ -31,7 +30,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
-
+// {path:'',component:AccueilComponent},
     {path:'main-home',component:AccueilComponent},
     {path:'login-form',component:LoginFormComponent},
 
@@ -62,7 +61,6 @@ export const routes: Routes = [
 
     { path:'students',children:[
         { path: 'list', component: StudentListComponent }, // Liste des étudiants
-        { path: 'studentCreate', component: StudentCreateComponent }, // Création d'un étudiant
         { path: 'edit-student/:id', component: StudentEditComponent }, // Modification d'un étudiant
         { path: 'details/:id', component: StudentDetailsComponent }, // Détails d'un étudiant
         { path: 'delete/:id', component: StudentDeleteComponent },

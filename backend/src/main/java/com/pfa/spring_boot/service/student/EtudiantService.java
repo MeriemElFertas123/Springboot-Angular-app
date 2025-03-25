@@ -10,5 +10,7 @@ public interface EtudiantService {
     public EtudiantDto createStudent(EtudiantDto payload);
     public EtudiantDto updateStudent(EtudiantDto payload,Long id);
     EtudiantDto getStudentById(Long id);
+    EtudiantDto getStudentByEmail(String email);
+
     public String deleteStudent(Long id);
 }

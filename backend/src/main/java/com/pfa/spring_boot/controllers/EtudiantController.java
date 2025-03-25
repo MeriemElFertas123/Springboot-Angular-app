@@ -2,11 +2,13 @@ package com.pfa.spring_boot.controllers;
 
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
 import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
 import com.pfa.spring_boot.enums.etudiant.Filiere;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import com.pfa.spring_boot.service.student.EtudiantService;
+import com.pfa.spring_boot.service.utilisateur.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,8 @@ import java.util.List;
 public class EtudiantController {
 
     @Autowired
-    public EtudiantService etudiantService;
+    private EtudiantService etudiantService;
+
 
     @GetMapping
     public ResponseEntity<?> getAllStudents(){
@@ -49,6 +52,7 @@ public class EtudiantController {
             // Convertir l'image en byte[]
             byte[] imageBytes = image.getBytes();
 
+
             // Créer un DTO et le remplir avec les données
             EtudiantDto etudiantDto = new EtudiantDto();
             etudiantDto.setNom(nom);
@@ -62,6 +66,8 @@ public class EtudiantController {
             etudiantDto.setImage(imageBytes);  // Set the image
 
             EtudiantDto createdStudent = etudiantService.createStudent(etudiantDto);
+
+
             return new ResponseEntity<>(createdStudent, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>("Erreur lors de l'enregistrement de l'image : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,6 +84,7 @@ public class EtudiantController {
         }
     }
 
+
     @GetMapping("{id}")
     public ResponseEntity<?> getStudentById(@PathVariable Long id) {
         try {
@@ -86,6 +93,21 @@ public class EtudiantController {
                 return new ResponseEntity<>(student, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Étudiant non trouvé avec l'ID : " + id, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erreur lors de la récupération de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getStudentByEmail(@PathVariable String email) {
+        try {
+            EtudiantDto student = etudiantService.getStudentByEmail(email);
+            if (student != null) {
+                return new ResponseEntity<>(student, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Étudiant non trouvé avec l'émail: " + email, HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("Erreur lors de la récupération de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

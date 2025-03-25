@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from '../../../service/student.service';
 
 
 
@@ -17,7 +16,6 @@ export class StudentDeleteComponent {
   studentId: string | null = null; // ID de l'étudiant à supprimer
 
   constructor(
-    private studentService: StudentService,
     private route: ActivatedRoute,
     private router: Router
   ) {}

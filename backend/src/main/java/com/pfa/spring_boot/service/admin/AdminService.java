@@ -30,7 +30,6 @@ public class AdminService {
         if(utilisateurRepository.existsByEmail(utilisateurDto.getEmail())){
             throw new RuntimeException("email "+utilisateurDto.getEmail()+" already exist");
         }
-
         Utilisateur utilisateur=this.mapper.toUtilisateurEntity(utilisateurDto);
         return this.mapper.toUtilisateurDto(this.utilisateurRepository.save(utilisateur));
     }

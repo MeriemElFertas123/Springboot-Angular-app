@@ -31,4 +31,13 @@ public class UtilisateurDto {
     public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString() {
+        return "UtilisateurDto{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

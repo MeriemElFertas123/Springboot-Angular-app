@@ -1,19 +1,35 @@
 package com.pfa.spring_boot.service.student;
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Utilisateur;
 import com.pfa.spring_boot.repositories.EtudiantRepository;
+import com.pfa.spring_boot.repositories.UtilisateurRepository;
+import com.pfa.spring_boot.service.admin.AdminService;
+import com.pfa.spring_boot.utilities.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class EtudiantServiceImpl implements EtudiantService{
 
     @Autowired
-    public EtudiantRepository etudiantRepository;
+    private EtudiantRepository etudiantRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private Mapper mapper;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
     @Override
     public List<EtudiantDto> getAllStudents() {
@@ -38,8 +54,20 @@ public class EtudiantServiceImpl implements EtudiantService{
 
     @Override
     public EtudiantDto createStudent(EtudiantDto payload){
+
+        // Sauvegarder également dans la table utilisateur
+        UtilisateurDto utilisateurDto=new UtilisateurDto();
+        utilisateurDto.setEmail(payload.getEmail());
+        utilisateurDto.setPassword(payload.getPassword());
+        Set<String> roles=new HashSet<>();
+        roles.add("ROLE_STUDENT");
+        utilisateurDto.setRoles(roles);
+        utilisateurRepository.save(this.mapper.toUtilisateurEntity(utilisateurDto));
+
+
         Etudiant etudiant = convertToEntity(payload);
         Etudiant savedEntity = etudiantRepository.save(etudiant);
+
         return convertToDto(savedEntity);
     }
     Etudiant convertToEntity(EtudiantDto dto){
@@ -81,6 +109,12 @@ public class EtudiantServiceImpl implements EtudiantService{
     public EtudiantDto getStudentById(Long id) {
         Etudiant etudiant = etudiantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Étudiant non trouvé avec l'ID : " + id));
+        return convertToDto(etudiant);
+    }
+
+    @Override
+    public EtudiantDto getStudentByEmail(String email) {
+        Etudiant etudiant=etudiantRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Étudiant non trouvé avec l'émail : "+email));
         return convertToDto(etudiant);
     }
 

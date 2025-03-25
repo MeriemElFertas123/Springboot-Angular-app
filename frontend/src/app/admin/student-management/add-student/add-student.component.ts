@@ -41,6 +41,7 @@ export class AddStudentComponent {
   ) {}
 
   onSubmit(): void {
+
     // Vérifier les champs
     if (!this.etudiant.nom || !this.etudiant.prenom || !this.etudiant.email || !this.etudiant.password || !this.etudiant.telephone || !this.etudiant.genre || !this.etudiant.filiere || !this.etudiant.anneeEtude || !this.imageFile) {
       console.error('Tous les champs doivent être remplis.');

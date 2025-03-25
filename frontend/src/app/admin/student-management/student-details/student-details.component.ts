@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { StudentService } from '../../../service/student.service';
 import { Etudiant } from '../../../model/model'; // Importer le modèle Student
 import { AnneeEtude, Filiere, Genre } from '../../../model/enums';
 import { EtudiantService } from '../../../service/etudiant.service';

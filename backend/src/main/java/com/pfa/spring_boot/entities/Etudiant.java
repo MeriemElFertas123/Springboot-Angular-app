@@ -6,6 +6,8 @@ import com.pfa.spring_boot.enums.etudiant.Filiere;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+
 @Entity
 public class Etudiant {
     @Id
@@ -106,4 +108,19 @@ public class Etudiant {
     public byte[] getImage() { return image;}
 
     public void setImage(byte[] image) {this.image = image;}
+
+    @Override
+    public String toString() {
+        return "Etudiant{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", genre=" + genre +
+                ", filiere=" + filiere +
+                ", anneeEtude=" + anneeEtude +
+                '}';
+    }
 }

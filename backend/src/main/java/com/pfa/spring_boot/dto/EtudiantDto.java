@@ -6,6 +6,8 @@ import com.pfa.spring_boot.enums.etudiant.Genre;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+import java.util.Arrays;
+
 public class EtudiantDto {
     private Long id;
     private String nom;
@@ -100,4 +102,18 @@ public class EtudiantDto {
 
     public void setImage(byte[] image) {this.image = image;}
 
+    @Override
+    public String toString() {
+        return "EtudiantDto{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", genre=" + genre +
+                ", filiere=" + filiere +
+                ", anneeEtude=" + anneeEtude +
+                '}';
+    }
 }
