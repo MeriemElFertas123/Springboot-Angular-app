@@ -27,8 +27,6 @@ export interface Enseignant {
     genre:Genre;
     specialite: string;
     image: Uint8Array | undefined;
-    
-
   }
 
 export interface DepotRapportStage{

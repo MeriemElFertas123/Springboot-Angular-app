@@ -73,9 +73,33 @@ public class EnseignantController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<?> updateEnseignant(@RequestBody EnseignantDto dto, @PathVariable Long id) {
+    public ResponseEntity<?> updateEnseignant(@PathVariable Long id,
+                                              @RequestParam("nom") String nom,
+                                              @RequestParam("prenom") String prenom,
+                                              @RequestParam("email") String email,
+                                              @RequestParam("password") String password,
+                                              @RequestParam("telephone") String telephone,
+                                              @RequestParam("genre") String genre,
+                                              @RequestParam("specialite") String specialite,
+                                              @RequestParam(value = "image",required = false) MultipartFile image
+                                              ) {
         try {
-            EnseignantDto updatedEnseignant = enseignantService.updateEnseignant(dto, id);
+
+
+            EnseignantDto enseignantDto=new EnseignantDto();
+            enseignantDto.setNom(nom);
+            enseignantDto.setPrenom(prenom);
+            enseignantDto.setEmail(email);
+            enseignantDto.setPassword(password);
+            enseignantDto.setTelephone(telephone);
+            enseignantDto.setGenre(Genre.valueOf(genre));
+            enseignantDto.setSpecialite(Specialite.valueOf(specialite));
+            if(image!=null){
+                byte[] imageBytes=image.getBytes();
+                enseignantDto.setImage(imageBytes);
+            }
+
+            EnseignantDto updatedEnseignant = enseignantService.updateEnseignant(enseignantDto, id);
             return new ResponseEntity<>(updatedEnseignant, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erreur lors de la mise à jour de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

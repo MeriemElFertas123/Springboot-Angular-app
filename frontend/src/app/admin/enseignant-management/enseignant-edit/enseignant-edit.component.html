@@ -1,1 +1,142 @@
-<p>enseignant-edit works!</p>
+<div class="div-container">
+    <div class="sidebar">
+      <app-side-bar-admin></app-side-bar-admin>
+    </div>  
+  
+    <main class="main-content">
+      <div>
+        <h2>Modifier l'enseignant</h2>
+        <img *ngIf="enseignant.image" [src]="'data:image/jpeg;base64,'+enseignant.image" alt="Enseignant Image" width="40px">
+  
+        <form (ngSubmit)="onSubmit()" #enseignantForm="ngForm">
+          <div class="form-group">
+            <label for="nom">Nom </label> 
+            <input
+              type="text"
+              id="nom"
+              name="nom"
+              required 
+              class="form-control"
+              [(ngModel)]="enseignant.nom"
+            />
+          </div>
+          <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input
+              type="text"
+              id="prenom"
+              name="prenom"
+              required
+              class="form-control"
+              [(ngModel)]="enseignant.prenom"
+            />
+          </div>
+    
+      
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="form-control"
+              [(ngModel)]="enseignant.email"
+            />
+          </div>
+  
+          <div class="form-group">
+            <label for="pswrd">Mot de passe</label>
+            <input
+              id="pswrd"
+              name="password"
+              required
+              class="form-control"
+              [(ngModel)]="enseignant.password"
+            />
+            <span>
+              <i class="fa" aria-hidden="true" type="button" id="eye"
+                 >
+              </i>
+           </span>
+          </div>
+  
+          
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              required
+              class="form-control"
+              [(ngModel)]="enseignant.telephone"
+            />
+          </div>
+      
+  
+          <div class="form-group">
+            <label for="gender">Genre</label>
+            <select
+              id="gender"
+              name="gender"
+              required
+              class="form-control"
+              [(ngModel)]="enseignant.genre"
+            >
+              <option value="HOMME">Masculin</option>
+              <option value="FEMME">Féminin</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="specialite">Spécialité</label>
+            <select
+              id="specialite"
+              name="specialite"
+              required
+              class="form-control"
+            >
+              <option value="ELECTRONIQUE">ELECTRONIQUE</option>
+              <option value="INFORMATIQUE">INFORMATIQUE</option>
+              <option value="MATHEMATIQUE">MATHEMATIQUE</option>
+              <option value="MECANIQUE">MECANIQUE</option>
+            </select>
+          </div>
+           
+      
+      
+          
+       <!--
+          <div class="form-group">
+            <label for="imageUrl">URL de l'image</label>
+            <input
+              type="text"
+              id="imageUrl"
+              name="imageUrl"
+              [(ngModel)]="student.imageUrl"
+              class="form-control"
+            />
+          </div>-->
+          <div class="form-group ">
+            <label for="image"  class="form-label">Image</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              class="form-control"
+              (change)="onFileSelected($event)"
+            />
+          </div>
+  
+  
+  
+          <button type="submit" class="btn btn-primary" >
+            Enregistrer
+          </button>
+      
+          <a routerLink="/students/list" class="btn btn-secondary">Annuler</a>
+        </form>
+      </div>
+    </main>
+  </div>

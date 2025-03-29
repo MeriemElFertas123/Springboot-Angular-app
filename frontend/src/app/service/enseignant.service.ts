@@ -7,7 +7,7 @@ import { Enseignant } from '../model/model';
   providedIn: 'root'
 })
 export class EnseignantService {
-  private apiUrl = 'http://localhost:8080/enseignant'; // Assurez-vous que cette URL est correcte
+  private apiUrl = 'http://localhost:8080/enseignant'; 
  
   constructor(private http: HttpClient) {}
 
@@ -30,7 +30,7 @@ export class EnseignantService {
     return this.http.get<any>(`${this.apiUrl}/email/${email}`);
   }
 
-  updateEnseignant(id: number, enseignant: any): Observable<any> {
+  updateEnseignant(id: number, enseignant: FormData): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, enseignant);
   }
 

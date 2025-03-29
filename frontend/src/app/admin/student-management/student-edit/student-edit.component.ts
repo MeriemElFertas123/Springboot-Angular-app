@@ -8,7 +8,7 @@ import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.compo
 
 @Component({
   selector: 'app-student-edit',
-  standalone: true,
+  standalone: true, 
   imports: [CommonModule, FormsModule, RouterLink, SideBarAdminComponent],
   templateUrl: './student-edit.component.html',
   styleUrls: ['./student-edit.component.css']
@@ -23,7 +23,7 @@ export class StudentEditComponent implements OnInit {
     genre: '',
     filiere: '',
     anneeEtude: '',
-    image: null  // Si vous avez un champ image
+    image: null  
   };
 
   hidePassword=true;

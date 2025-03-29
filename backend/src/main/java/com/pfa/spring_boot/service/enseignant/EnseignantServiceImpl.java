@@ -35,6 +35,7 @@ public class EnseignantServiceImpl implements EnseignantService{
         enseignantDto.setId(enseignant.getId());
         enseignantDto.setNom(enseignant.getNom());
         enseignantDto.setPrenom(enseignant.getPrenom());
+        enseignantDto.setPassword(enseignant.getPassword());
         enseignantDto.setEmail(enseignant.getEmail());
         enseignantDto.setTelephone(enseignant.getTelephone());
         enseignantDto.setImage(enseignant.getImage());
@@ -87,7 +88,11 @@ public class EnseignantServiceImpl implements EnseignantService{
         enseignant.setTelephone(payload.getTelephone());
         enseignant.setGenre(payload.getGenre());
         enseignant.setPassword(payload.getPassword());
-        enseignant.setImage(payload.getImage());
+        if(payload.getImage()==null){
+            enseignant.setImage(this.enseignantRepository.findById(id).get().getImage());
+        }else{
+            enseignant.setImage(payload.getImage());
+        }
 
         Enseignant savedEnseignant = enseignantRepository.save(enseignant);
         return convertToDto(savedEnseignant);
