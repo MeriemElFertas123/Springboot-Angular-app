@@ -8,6 +8,7 @@ import com.pfa.spring_boot.enums.etudiant.Genre;
 import com.pfa.spring_boot.enums.professeur.Specialite;
 import com.pfa.spring_boot.service.enseignant.EnseignantService;
 import com.pfa.spring_boot.service.student.EtudiantService;
+import com.pfa.spring_boot.service.utilisateur.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,9 @@ import java.util.List;
 
 public class EnseignantController {
     @Autowired
-    public EnseignantService enseignantService;
+    private EnseignantService enseignantService;
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @GetMapping
     public ResponseEntity<?> getAllEnseignants(){
@@ -36,9 +39,30 @@ public class EnseignantController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> createEnseignant(@RequestBody EnseignantDto enseignantDto) {
+    public ResponseEntity<?> createEnseignant(@RequestParam("nom") String nom,
+                                              @RequestParam("prenom") String prenom,
+                                              @RequestParam("email") String email,
+                                              @RequestParam("password") String password,
+                                              @RequestParam("telephone") String telephone,
+                                              @RequestParam("genre") String genre,
+                                              @RequestParam("specialite") String specialite,
+                                              @RequestParam("image") MultipartFile image
+                                              ) {
 
         try {
+            byte[] imageBytes=image.getBytes();
+
+            EnseignantDto enseignantDto=new EnseignantDto();
+            enseignantDto.setNom(nom);
+            enseignantDto.setPrenom(prenom);
+            enseignantDto.setEmail(email);
+            enseignantDto.setPassword(password);
+            enseignantDto.setTelephone(telephone);
+            enseignantDto.setGenre(Genre.valueOf(genre));
+            enseignantDto.setSpecialite(Specialite.valueOf(specialite));
+            enseignantDto.setImage(imageBytes);
+
+
             EnseignantDto createdEnseignant = enseignantService.createEnseignant(enseignantDto);
             return new ResponseEntity<>(createdEnseignant, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
@@ -74,13 +98,29 @@ public class EnseignantController {
 
 
 
+
+
     @DeleteMapping("delete/{id}")
     public ResponseEntity<?> deleteEnseignant(@PathVariable Long id) {
         try {
             String msg = enseignantService.deleteEnseignant(id);
+            utilisateurService.deleteUserById(id);
             return new ResponseEntity<>(msg, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erreur lors de la suppression de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getEnseignantByEmail(@PathVariable String email) {
+        try {
+            EnseignantDto enseignant = enseignantService.getEnseignantByEmail(email);
+            if (enseignant != null) {
+                return new ResponseEntity<>(enseignant, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Étudiant non trouvé avec l'émail: " + email, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erreur lors de la récupération de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

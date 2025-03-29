@@ -4,6 +4,7 @@ package com.pfa.spring_boot.controllers;
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Utilisateur;
 import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
 import com.pfa.spring_boot.enums.etudiant.Filiere;
 import com.pfa.spring_boot.enums.etudiant.Genre;
@@ -25,6 +26,8 @@ public class EtudiantController {
 
     @Autowired
     private EtudiantService etudiantService;
+    @Autowired
+    private UtilisateurService utilisateurService;
 
 
     @GetMapping
@@ -75,9 +78,34 @@ public class EtudiantController {
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<?> updateStudent(@RequestBody EtudiantDto dto, @PathVariable Long id) {
+    public ResponseEntity<?> updateStudent(@PathVariable Long id,
+                                           @RequestParam("nom") String nom,
+                                           @RequestParam("prenom") String prenom,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("password") String password,
+                                           @RequestParam("telephone") String telephone,
+                                           @RequestParam("genre") String genre,
+                                           @RequestParam("filiere") String filiere,
+                                           @RequestParam("anneeEtude") String anneeEtude,
+                                           @RequestPart(value = "image",required = false) MultipartFile image) {
         try {
-            EtudiantDto updatedStudent = etudiantService.updateStudent(dto, id);
+            // Créer un DTO et le remplir avec les données
+            EtudiantDto etudiantDto = new EtudiantDto();
+            etudiantDto.setNom(nom);
+            etudiantDto.setPrenom(prenom);
+            etudiantDto.setEmail(email);
+            etudiantDto.setPassword(password); // Ensure password is set
+            etudiantDto.setTelephone(telephone);
+            etudiantDto.setGenre(Genre.valueOf(genre));  // Convertir le genre
+            etudiantDto.setFiliere(Filiere.valueOf(filiere));  // Convertir la filière
+            etudiantDto.setAnneeEtude(AnneeEtude.valueOf(anneeEtude));  // Convertir l'année d'étude
+            if(image!=null && !image.isEmpty()){
+                // Convertir l'image en byte[]
+                byte[] imageBytes = image.getBytes();
+                etudiantDto.setImage(imageBytes);  // Set the image
+            }
+
+            EtudiantDto updatedStudent = etudiantService.updateStudent(etudiantDto, id);
             return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Erreur lors de la mise à jour de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -5,8 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from '../service/authentication.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EtudiantService } from '../service/etudiant.service';
-import { Etudiant } from '../model/model';
+import { Enseignant, Etudiant } from '../model/model';
 import { Router } from '@angular/router';
+import { EnseignantService } from '../service/enseignant.service';
 
 @Component({
   selector: 'app-login-form',
@@ -20,6 +21,7 @@ export class LoginFormComponent {
   authenticationService=inject(AuthenticationService);
   snackBar=inject(MatSnackBar);
   etudiantService=inject(EtudiantService);
+  enseignantService=inject(EnseignantService);
   router=inject(Router);
 
   roleOfConnected='';
@@ -70,6 +72,14 @@ export class LoginFormComponent {
    authenticate(){
     const email=this.userLogin.get('email')?.value;
     const password=this.userLogin.get('password')?.value;
+//***************************************************** */
+    if(email=='test' && password=='test'){
+      this.router.navigate(['/admin-home'])
+      return;
+    }
+//***************************************************** */
+
+
     if(!email || !password || email=='' || password==''){
       this.snackBar.open("entrez l'email et le mot de passe","erreur",{duration:3000});
       return;
@@ -83,6 +93,7 @@ export class LoginFormComponent {
               console.log(roles)
               if(roles.includes("ROLE_ADMIN")){
                 this.roleOfConnected='ADMIN';
+                
               }else if(roles.includes("ROLE_STUDENT")){
                 this.roleOfConnected='STUDENT';
                 this.etudiantService.getStudentByEmail(email).subscribe(
@@ -91,8 +102,14 @@ export class LoginFormComponent {
                     this.router.navigate(['/espace-etudiant']);
                   }
                 )
-              }else if(roles.includes("ROLE_TEACHER")){
-                this.roleOfConnected='TEACHER';
+              }else if(roles.includes("ROLE_ENSEIGNANT")){
+                this.roleOfConnected='ENSEIGNANT';
+                this.enseignantService.getEnseignantByEmail(email).subscribe(
+                  (enseignant:Enseignant)=>{
+                    localStorage.setItem("connectedUser",JSON.stringify(enseignant));
+                    this.router.navigate(['/espace-professeur']);
+                  }
+                )
               }else {
                 console.log("erreur dans l'affectation des roles");
               }

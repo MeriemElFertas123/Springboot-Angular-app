@@ -14,7 +14,7 @@ import { Genre } from '../../../model/enums';
 })
 export class EnseignantCreateComponent {
   @ViewChild('enseignantForm') enseignantForm!: NgForm; // Référence du formulaire
-  
+   
     enseignant: any = {
       nom: '',
       prenom: '',
@@ -46,6 +46,7 @@ export class EnseignantCreateComponent {
         console.error('Tous les champs doivent être remplis.');
         return;
       }
+
     
       // Créer un FormData pour envoyer les données
       const formData = new FormData();
@@ -66,7 +67,8 @@ export class EnseignantCreateComponent {
       for (let pair of formData.entries()) {
         console.log(pair[0] + ': ' + pair[1]);
       }
-      this.enseignantService.addEnseignant(this.enseignant).subscribe({
+      
+      this.enseignantService.addEnseignant(formData).subscribe({
         next: (response) => {
           this.message = 'Enseignant ajouté avec succès !';
           this.isSuccess = true;

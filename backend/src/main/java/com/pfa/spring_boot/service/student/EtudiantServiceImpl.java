@@ -41,6 +41,7 @@ public class EtudiantServiceImpl implements EtudiantService{
         etudiantDto.setId(etudiant.getId());
         etudiantDto.setNom(etudiant.getNom());
         etudiantDto.setPrenom(etudiant.getPrenom());
+        etudiantDto.setPassword(etudiant.getPassword());
         etudiantDto.setEmail(etudiant.getEmail());
         etudiantDto.setTelephone(etudiant.getTelephone());
         etudiantDto.setImage(etudiant.getImage());
@@ -99,7 +100,13 @@ public class EtudiantServiceImpl implements EtudiantService{
 
         etudiant.setFiliere(payload.getFiliere());
         etudiant.setAnneeEtude(payload.getAnneeEtude());
-        etudiant.setImage(payload.getImage());
+        if(payload.getImage()==null){
+            etudiant.setImage(this.etudiantRepository.findById(id).get().getImage());
+        }
+        else{
+            etudiant.setImage(payload.getImage());
+        }
+
 
         Etudiant savedEtudiant = etudiantRepository.save(etudiant);
         return convertToDto(savedEtudiant);
@@ -122,6 +129,17 @@ public class EtudiantServiceImpl implements EtudiantService{
     public String deleteStudent(Long id){
         Etudiant student = etudiantRepository.findById(id).orElseThrow( () -> new RuntimeException(" the data with the id : " + id + "not found"));
         etudiantRepository.delete(student);
+
+        Utilisateur userToDelete=this.utilisateurRepository.findByEmail(student.getEmail());
+
+        // 1-> Supprimer l'id de l'utilisateur de la table users_roles
+        userToDelete.getRoles().clear();
+        this.utilisateurRepository.save(userToDelete);
+
+        //2 -> supprimer l'utilisateur
+        this.utilisateurRepository.delete(this.utilisateurRepository.findByEmail(student.getEmail()));
+
+
         return "";
     }
 }

@@ -11,4 +11,6 @@ public interface EnseignantService {
     public EnseignantDto updateEnseignant(EnseignantDto payload,Long id);
     EnseignantDto getEnseignantById(Long id);
     public String deleteEnseignant(Long id);
+
+    EnseignantDto getEnseignantByEmail(String email);
 }

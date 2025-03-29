@@ -17,13 +17,17 @@ export class EnseignantService {
   }
 
  
-  addEnseignant(formData: Enseignant): Observable<any> {
+  addEnseignant(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/create`, formData);
   }
 
 
   getEnseignantById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getEnseignantByEmail(email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/email/${email}`);
   }
 
   updateEnseignant(id: number, enseignant: any): Observable<any> {

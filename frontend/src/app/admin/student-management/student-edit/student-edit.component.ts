@@ -14,7 +14,7 @@ import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.compo
   styleUrls: ['./student-edit.component.css']
 })
 export class StudentEditComponent implements OnInit {
-  etudiant: any = {
+  etudiant: any = { 
     nom: '',
     prenom: '',
     email: '',
@@ -26,6 +26,7 @@ export class StudentEditComponent implements OnInit {
     image: null  // Si vous avez un champ image
   };
 
+  hidePassword=true;
 
 
   imageFile: File | null = null; // Pour stocker le fichier image sélectionné
@@ -73,10 +74,13 @@ export class StudentEditComponent implements OnInit {
       formData.append('filiere', this.etudiant.filiere);
       formData.append('anneeEtude', this.etudiant.anneeEtude);
       
-      if (this.etudiant.image) {
-        formData.append('image', this.etudiant.image, this.etudiant.image.name);
+  
+      if(this.imageFile){
+        formData.append('image',this.imageFile)
       }
-
+      else if (this.etudiant.image) {
+        formData.append('image', this.etudiant.image);
+      }
       this.etudiantService.updateStudent(this.etudiant.id, formData).subscribe({
         next: () => {
           this.router.navigate(['/students/list']); // Rediriger vers la liste après la modification
@@ -86,5 +90,11 @@ export class StudentEditComponent implements OnInit {
         }
       });
     }
+}
+
+ 
+
+  togglePasswordVisibility(){
+    this.hidePassword=!this.hidePassword;
   }
 }

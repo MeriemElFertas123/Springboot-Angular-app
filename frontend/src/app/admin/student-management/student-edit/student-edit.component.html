@@ -1,11 +1,13 @@
 <div class="div-container">
   <div class="sidebar">
     <app-side-bar-admin></app-side-bar-admin>
-  </div> 
+  </div>  
 
   <main class="main-content">
     <div class="edit-student-container">
       <h2>Modifier l'étudiant</h2>
+      <img *ngIf="etudiant.image" [src]="'data:image/jpeg;base64,' + etudiant.image" alt="Student Image" width="40px">
+
       <form (ngSubmit)="onSubmit()" #studentForm="ngForm">
         <div class="form-group">
           <label for="nom">Nom </label>
@@ -46,13 +48,18 @@
         <div class="form-group">
           <label for="pswrd">Mot de passe</label>
           <input
-            type="password"
+            [type]="hidePassword ?'password':'text'"
             id="pswrd"
             name="pswrd"
             [(ngModel)]="etudiant.password"
             required
             class="form-control"
           />
+          <span>
+            <i class="fa" aria-hidden="true" type="button" id="eye" (click)="togglePasswordVisibility()"
+               [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'">
+            </i>
+         </span>
         </div>
 
         
@@ -136,8 +143,7 @@
             id="image"
             name="image"
             (change)="onFileSelected($event)"
-            required
-            class="form-control"
+             class="form-control"
           />
         </div>
 

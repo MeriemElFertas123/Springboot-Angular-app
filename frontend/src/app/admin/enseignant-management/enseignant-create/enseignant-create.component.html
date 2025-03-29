@@ -94,12 +94,13 @@
                   required
                   class="form-control"
                 >
+                
                   <option value="INFORMATIQUE">INFORMATIQUE</option>
                   <option value="MATHEMATIQUES">MATHEMATIQUES</option>
-                  <option value="PHYSIQUE">PHYSIQUE</option>
-                  <option value="CHIMIE">CHIMIE</option>
+                  <option value="ELECTRONIQUE">ELECTRONIQUE</option>
+                  <option value="MECANIQUE">MECANIQUE</option>
                 </select>
-              </div>
+              </div> 
     
               
               <div class="form-group">
@@ -114,7 +115,7 @@
                 />
               </div>
           
-              <button type="submit" class="btn btn-primary" [disabled]="!enseignantForm.form.valid">
+              <button type="submit" class="btn btn-primary" [disabled]="!enseignantForm.form.valid || imageFile==null">
                 Ajouter
               </button>
           

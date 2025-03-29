@@ -2,19 +2,28 @@ package com.pfa.spring_boot.service.enseignant;
 
 import com.pfa.spring_boot.dto.EnseignantDto;
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Enseignant;
 import com.pfa.spring_boot.entities.Etudiant;
 import com.pfa.spring_boot.repositories.EnseignantRepository;
 import com.pfa.spring_boot.repositories.EtudiantRepository;
+import com.pfa.spring_boot.repositories.UtilisateurRepository;
+import com.pfa.spring_boot.utilities.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 @Service
 public class EnseignantServiceImpl implements EnseignantService{
     @Autowired
     public EnseignantRepository enseignantRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+    @Autowired
+    private Mapper mapper;
 
     @Override
     public List<EnseignantDto> getAllEnseignants() {
@@ -39,6 +48,15 @@ public class EnseignantServiceImpl implements EnseignantService{
 
     @Override
     public EnseignantDto createEnseignant(EnseignantDto payload){
+
+        UtilisateurDto utilisateurDto=new UtilisateurDto();
+        utilisateurDto.setEmail(payload.getEmail());
+        utilisateurDto.setPassword(payload.getPassword());
+        Set<String> roles=new HashSet<>();
+        roles.add("ROLE_ENSEIGNANT");
+        utilisateurDto.setRoles(roles);
+        this.utilisateurRepository.save(this.mapper.toUtilisateurEntity(utilisateurDto));
+
         Enseignant enseignant= convertToEntity(payload);
         Enseignant savedEntity = enseignantRepository.save(enseignant);
         return convertToDto(savedEntity);
@@ -87,5 +105,12 @@ public class EnseignantServiceImpl implements EnseignantService{
         Enseignant enseignant = enseignantRepository.findById(id).orElseThrow( () -> new RuntimeException(" the data with the id : " + id + "not found"));
         enseignantRepository.delete(enseignant);
         return "";
+    }
+
+
+    @Override
+    public EnseignantDto getEnseignantByEmail(String email) {
+        Enseignant enseignant=enseignantRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Enseignant non trouvé avec l'émail : "+email));
+        return convertToDto(enseignant);
     }
 }

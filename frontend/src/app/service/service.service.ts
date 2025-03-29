@@ -57,7 +57,7 @@ export class ServiceService {
     password: '',
     telephone: '',
     genre: Genre.Femme,
-    filiere: Filiere.SEII,
+    filiere: Filiere.Electronique,
     anneeEtude: AnneeEtude.Premiere
   }
 
