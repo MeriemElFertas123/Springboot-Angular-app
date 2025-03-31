@@ -5,7 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.component";
 
 @Component({
-  selector: 'app-student-list',
+  selector: 'app-student-list',  
   standalone:true,
   imports: [RouterLink, NgIf, NgFor, SideBarAdminComponent],
   templateUrl: './student-list.component.html',

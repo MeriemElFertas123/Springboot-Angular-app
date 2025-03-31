@@ -6,7 +6,7 @@ import com.pfa.spring_boot.entities.Etudiant;
 import java.util.List;
 
 public interface EtudiantService {
-    public List<EtudiantDto> getAllStudents();
+    List<EtudiantDto> getAllStudents();
     public EtudiantDto createStudent(EtudiantDto payload);
     public EtudiantDto updateStudent(EtudiantDto payload,Long id);
     EtudiantDto getStudentById(Long id);

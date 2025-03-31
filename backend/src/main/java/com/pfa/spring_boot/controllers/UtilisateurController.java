@@ -33,7 +33,8 @@ public class UtilisateurController {
 
     @GetMapping("/role")
     public Set<String> getRolesByUserEmail(@RequestParam String email){
-        System.out.println("==> chercher les roles de l'utilisateur avec email : "+email);
         return this.utilisateurService.getRolesByUserEmail(email);
     }
+
+
 }

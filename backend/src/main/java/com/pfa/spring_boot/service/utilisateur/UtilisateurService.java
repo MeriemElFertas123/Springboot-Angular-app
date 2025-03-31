@@ -23,9 +23,7 @@ public class UtilisateurService {
         this.utilisateurRepository.deleteById(id);
     }
 
-    public void deleteUserByEmail(String email){
-        Utilisateur userToDelete=this.utilisateurRepository.findByEmail(email);
-        System.out.println("user to delete  ==> "+userToDelete);
-       // this.utilisateurRepository.deleteByEmail(email);
-    }
+
+
+
 }

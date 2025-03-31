@@ -5,11 +5,12 @@ import { ServiceService } from '../../service/service.service';
 import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
 import { NgFor, NgIf } from '@angular/common';
 import { EtudiantService } from '../../service/etudiant.service';
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-espace-professeur',
   standalone: true,
-  imports: [SideBarProfComponent,NgFor,NgIf],
+  imports: [SideBarProfComponent, NgFor, NgIf, UserProfileMenuComponent],
   templateUrl: './espace-professeur.component.html',
   styleUrl: './espace-professeur.component.css'
 })

@@ -25,6 +25,12 @@ export class LoginFormComponent {
   router=inject(Router);
 
   roleOfConnected='';
+  connectedUser:any={
+    id:'',
+    nom:'',
+    prenom:'',
+    espace:''
+  }
   
 
   // Show/hide password onClick of button using Javascript only
@@ -98,16 +104,28 @@ export class LoginFormComponent {
                 this.roleOfConnected='STUDENT';
                 this.etudiantService.getStudentByEmail(email).subscribe(
                   (etudiant:Etudiant)=>{
-                    localStorage.setItem("connectedUser",JSON.stringify(etudiant));
                     this.router.navigate(['/espace-etudiant']);
+                    this.etudiantService.getStudentById(etudiant.id).subscribe((etud)=>{
+                      this.connectedUser.id=etud.id;
+                      this.connectedUser.nom=etud.nom;
+                      this.connectedUser.prenom=etud.prenom;
+                      this.connectedUser.espace='etudiant';
+                      localStorage.setItem('connectedUser',JSON.stringify(this.connectedUser));
+                    })
                   }
                 )
               }else if(roles.includes("ROLE_ENSEIGNANT")){
                 this.roleOfConnected='ENSEIGNANT';
                 this.enseignantService.getEnseignantByEmail(email).subscribe(
                   (enseignant:Enseignant)=>{
-                    localStorage.setItem("connectedUser",JSON.stringify(enseignant));
                     this.router.navigate(['/espace-professeur']);
+                    this.enseignantService.getEnseignantById(enseignant.id).subscribe((enseign)=>{
+                      this.connectedUser.id=enseign.id;
+                      this.connectedUser.nom=enseign.nom;
+                      this.connectedUser.prenom=enseign.prenom;
+                      this.connectedUser.espace='enseignant';
+                      localStorage.setItem('connectedUser',JSON.stringify(this.connectedUser));
+                    })
                   }
                 )
               }else {
@@ -120,11 +138,13 @@ export class LoginFormComponent {
         else{
           this.snackBar.open("email ou mot de passe incorrect","erreur",{duration:3000});
         }
+
       }
     )
 
   
     console.log("role of connected one : "+this.roleOfConnected)
+
    }
 
 }
