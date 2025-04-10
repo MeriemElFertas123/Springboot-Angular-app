@@ -4,8 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import com.pfa.spring_boot.enums.professeur.Specialite;
 import jakarta.persistence.*;
+import org.springframework.aop.target.LazyInitTargetSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Enseignant {
@@ -22,11 +26,9 @@ public class Enseignant {
     private String telephone;
 
 
-
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
-
 
 
     @Enumerated(EnumType.STRING)
@@ -35,6 +37,19 @@ public class Enseignant {
     @Enumerated(EnumType.STRING)
     @JsonProperty("specialite")
     private Specialite specialite;
+
+
+    // Relation One-to-Many vers la table de jointure Encadrement
+    // Un enseignant peut avoir plusieurs relations d'encadrement avec des étudiants
+    @OneToMany(mappedBy = "enseignant",// Champ dans Encadrement qui référence cet Enseignant
+            cascade = CascadeType.ALL,// Opérations (save, delete) propagées aux Encadrements liés
+            orphanRemoval = true// Supprime les Encadrements sans parent
+    )
+    private List<Encadrement> encadrements=new ArrayList<>();
+
+
+
+
 
     public Long getId() {
         return id;
@@ -105,6 +120,14 @@ public class Enseignant {
     public byte[] getImage() { return image;}
 
     public void setImage(byte[] image) {this.image = image;}
+
+    public List<Encadrement> getEncadrements() {
+        return encadrements;
+    }
+
+    public void setEncadrements(List<Encadrement> encadrements) {
+        this.encadrements = encadrements;
+    }
 
     @Override
     public String toString() {

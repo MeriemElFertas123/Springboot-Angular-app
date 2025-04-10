@@ -6,7 +6,9 @@ import com.pfa.spring_boot.enums.etudiant.Filiere;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class Etudiant {
@@ -29,6 +31,16 @@ public class Etudiant {
     private Filiere filiere;
     @Enumerated(EnumType.STRING)
     private AnneeEtude anneeEtude;
+
+
+    // Relation One-to-Many vers la table de jointure Encadrement
+    // Un étudiant peut être encadré par plusieurs enseignants
+    @OneToMany(mappedBy = "etudiant",// Champ dans Encadrement qui référence cet Etudiant
+            cascade = CascadeType.ALL,// Opérations propagées aux Encadrements liés
+            orphanRemoval = true
+    )
+    private List<Encadrement> encadrements=new ArrayList<>();
+
 
 
 
@@ -107,6 +119,14 @@ public class Etudiant {
     public byte[] getImage() { return image;}
 
     public void setImage(byte[] image) {this.image = image;}
+
+    public List<Encadrement> getEncadrements() {
+        return encadrements;
+    }
+
+    public void setEncadrements(List<Encadrement> encadrements) {
+        this.encadrements = encadrements;
+    }
 
     @Override
     public String toString() {
