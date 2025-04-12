@@ -27,6 +27,7 @@ import { EnseignantDetailsComponent } from './admin/enseignant-management/enseig
 import { EnseignantDeleteComponent } from './admin/enseignant-management/enseignant-delete/enseignant-delete.component';
 import { AddEnseignantComponent } from './admin/enseignant-management/add-enseignant/add-enseignant.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { ChatEtudiantComponent } from './chat-etudiant/chat-etudiant.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
@@ -80,6 +81,7 @@ export const routes: Routes = [
     },
 
     {path:'login-form', component:LoginFormComponent},
+    {path:'chat-etudiant', component:ChatEtudiantComponent},
 
 
 
