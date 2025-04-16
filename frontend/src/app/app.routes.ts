@@ -28,6 +28,8 @@ import { EnseignantDeleteComponent } from './admin/enseignant-management/enseign
 import { AddEnseignantComponent } from './admin/enseignant-management/add-enseignant/add-enseignant.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ChatEtudiantComponent } from './chat-etudiant/chat-etudiant.component';
+import { ChatEtudiantsComponent } from './chat-etudiants/chat-etudiants.component';
+import { ChatEnseignantsComponent } from './chat-enseignants/chat-enseignants.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
@@ -82,6 +84,8 @@ export const routes: Routes = [
 
     {path:'login-form', component:LoginFormComponent},
     {path:'chat-etudiant', component:ChatEtudiantComponent},
+    {path:'chat-etudiants',component:ChatEtudiantsComponent},
+    {path:'chat-enseignants',component:ChatEnseignantsComponent},
 
 
 
