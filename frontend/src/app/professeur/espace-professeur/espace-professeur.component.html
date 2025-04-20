@@ -1,4 +1,4 @@
-<app-user-profile-menu></app-user-profile-menu>
+<!-- <app-user-profile-menu></app-user-profile-menu> -->
 <div class="dashboard-container">
  <div class="sidebar">
   <app-side-bar-prof></app-side-bar-prof>
@@ -10,7 +10,7 @@
         <button class="search-btn">🔍</button>
       </div>
       <div class="user-profile" (click)="toggleDropdown()">
-        <span class="user-name">Salim Alioua</span>
+        <span class="user-name">Asmae Aouassar</span>
         <div class="user-avatar">
           <img [src]="profilePicture" alt="Photo de profil" class="profile-image" />
         </div>
@@ -20,8 +20,8 @@
           <div class="user-avatar-large">
             <img [src]="profilePicture" class="profile-image" />
           </div>
-          <div class="user-info">Salim Alioua</div>
-          <div class="user-email">salim.aliouauit.ac.ma</div>
+          <div class="user-info">Asmae Aouassar</div>
+          <div class="user-email">asmae.aouassar.usmba.ac.ma</div>
         </div>
         <a class="dropdown-item" (click)="triggerFileInput()">
           <i class="icon">📷</i>
@@ -40,14 +40,14 @@
       </div>
     </header>
 
-    <section class="welcome-section">
-      <div class="welcome-message">Hi Salim ! Welcome Back</div>
+    <!-- <section class="welcome-section">
+      <div class="welcome-message">Hi Asmae ! Welcome Back</div>
       <button class="add-stage-btn" (click)="navigateToAjouterStage()">+ AJOUTER UN ETUDIANT</button>
-    </section>
+    </section> -->
 
     <div class="row ">
       <div *ngFor="let etudiant of listEtudiantsEncadre" class="col d-flex justify-content-center align-items-center ">
-       <div class="image-card m-5">
+       <div class="image-card  m-5">
         <img *ngIf="etudiant.image" [src]="'data:image/jpeg;base64,' + etudiant.image" alt="Student Image" class="img-fluid floating-image">
         <div class="info-div">
           <table class="table">

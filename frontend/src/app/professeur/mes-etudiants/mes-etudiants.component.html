@@ -6,7 +6,7 @@
         <div class="row d-flex justify-content-center">
             @if(mesEtudiants.length!=0){
                 @for (etud of mesEtudiants; track $index) {
-                    <div class="card col-lg-3 col-md-4 col-sm-6 m-4" >
+                    <div class="card col-lg-3 col-md-4 col-sm-6 m-4 " >
                         <img [src]="'data:image/jpeg;base64,'+etud.image" class="card-img-top mt-2" [alt]="etud.nom" >
                         <div class="card-body">
                           <h5 class="card-title">{{etud.prenom}} {{etud.nom}}</h5>

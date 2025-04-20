@@ -6,7 +6,7 @@
   overflow-x: hidden;
   height: 100vh;
 }
-
+ 
 
 
 .top-bar {
@@ -189,10 +189,10 @@ main{
 
 /* Styler les cartes des étudiants encadrés */
 .image-card{
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 150px;
   background-color: rgba(200, 213, 230, 0.427);
-  padding: 50px;
+  padding: 20px;
   border-radius: 50%;
   position: relative;
 }

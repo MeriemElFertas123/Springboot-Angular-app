@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Etudiant } from '../../model/model';
 import { ServiceService } from '../../service/service.service';
@@ -16,8 +16,8 @@ import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-m
 })
 export class EspaceProfesseurComponent {
 
+
   isDropdownOpen = false;
-  
 
 
   //********************************** 
@@ -28,6 +28,7 @@ export class EspaceProfesseurComponent {
         this.listEtudiantsEncadre=res;
       }
     );
+    console.log("constructor : EspaceProfesseurComponent");
   }
 
 

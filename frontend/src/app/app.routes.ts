@@ -30,6 +30,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { ChatEtudiantComponent } from './chat-etudiant/chat-etudiant.component';
 import { ChatEtudiantsComponent } from './chat-etudiants/chat-etudiants.component';
 import { ChatEnseignantsComponent } from './chat-enseignants/chat-enseignants.component';
+import { ChatHomeComponent } from './chat-home/chat-home.component';
 
 export const routes: Routes = [
     {path:'',redirectTo:'/main-home',pathMatch:'full'},
@@ -86,6 +87,7 @@ export const routes: Routes = [
     {path:'chat-etudiant', component:ChatEtudiantComponent},
     {path:'chat-etudiants',component:ChatEtudiantsComponent},
     {path:'chat-enseignants',component:ChatEnseignantsComponent},
+    {path:'chat-home',component:ChatHomeComponent},
 
 
 

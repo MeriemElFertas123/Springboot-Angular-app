@@ -72,14 +72,14 @@ export class ButtonChatComponent {
                   this.roleOfConnected='STUDENT';
                   this.etudiantService.getStudentByEmail(email).subscribe(
                     (etudiant:Etudiant)=>{
-                      this.router.navigate(['/chat-etudiants']);
+                      this.router.navigate(['/chat-home']);
                     }
                   )
                 }else if(roles.includes("ROLE_ENSEIGNANT")){
                   this.roleOfConnected='ENSEIGNANT';
                   this.enseignantService.getEnseignantByEmail(email).subscribe(
                     (enseignant:Enseignant)=>{
-                      this.router.navigate(['/chat-enseignants']);
+                      this.router.navigate(['/chat-home']);
                     }
                   )
                 }else {

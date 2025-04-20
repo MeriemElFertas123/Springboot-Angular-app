@@ -15,7 +15,10 @@ export class UserProfileMenuComponent implements OnInit {
   constructor(private router:Router,
               private etudiantService:EtudiantService,
               private enseignantService : EnseignantService
-            ){}
+            ){
+
+              console.log("constructor : UserProfileMenuComponent")
+            }
   imageUser='';
   emailUser='';
 
@@ -27,6 +30,8 @@ export class UserProfileMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ngOnInit : UserProfileMenuComponent")
+    
     const connectedUser=localStorage.getItem('connectedUser');
     if(connectedUser){
       this.connectedUser=JSON.parse(connectedUser);
