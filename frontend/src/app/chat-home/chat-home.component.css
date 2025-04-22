@@ -381,22 +381,9 @@ button.accent {
     }
 }
 
-
-
-.app-container{
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    display: flex;
-    width: 100vw;
-    overflow-x: hidden;
-    height: 100vh;
-}
-main{
-    flex: 1;
-}
-
-
-/* style pour side bar */
-.sidebar {
-    background-color: #CEDDDE;
+#backtohome{
+    position: absolute;
+    top:10px;
+    left: 10px;
+    font-weight: 900;
 }
