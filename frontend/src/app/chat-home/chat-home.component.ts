@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { WebsocketService } from '../service/websocket.service';
@@ -8,7 +8,7 @@ import { SideBarEtudiantComponent } from "../etudiant/side-bar-etudiant/side-bar
 
 @Component({
   selector: 'app-chat-home',
-  imports: [FormsModule, NgFor, NgIf, NgClass, SideBarEtudiantComponent],
+  imports: [FormsModule, NgFor, NgIf, NgClass, RouterLink],
   templateUrl: './chat-home.component.html',
   styleUrl: './chat-home.component.css'
 })
