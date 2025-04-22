@@ -1,3 +1,4 @@
+import { TypeStage } from "../type-stage.enum";
 import { Filiere, Genre } from "./enums"
 import { AnneeEtude} from "./enums"
 import { StatutRapport } from "./enums"
@@ -50,12 +51,13 @@ export interface Evaluation{
     commentaire:string
 }
 
-// Meriem
-/*
-export interface Student {
-  id: string; // L'ID est de type string
-  name: string;
-  email: string;
+export interface Stage{
+    id?: number;
+    nomEntreprise:string,
+    adresseEntreprise:string,
+    numEncadrant:string,
+    nomEncadrant:string,
+    intituleSujet:string,
+     descriptionSujet:string,
+    typeStage:TypeStage;
 }
-
-*/

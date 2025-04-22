@@ -3,7 +3,6 @@ import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.compo
 import { FormsModule, NgForm } from '@angular/forms';
 import { EnseignantService } from '../../../service/enseignant.service';
 import { Router } from '@angular/router';
-import { Enseignant } from '../../../model/model';
 import { Genre } from '../../../model/enums';
 
 @Component({

@@ -26,3 +26,8 @@ export enum AnneeEtude {
     Deuxieme = 'Deuxième',
     Troisieme = 'Troisième',
   }
+  export enum TypeStage {
+    INITIATION = 'INITIATION',
+    PFA = 'PFA',
+    PFE= 'PFE'
+  }

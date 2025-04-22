@@ -1,0 +1,112 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+h1{
+  text-align: center;
+}
+
+.sidebar {
+  background-color: #CEDDDE;
+  width: 250px; /* Ajustez selon la largeur de votre sidebar */
+  flex-shrink: 0;
+}
+
+main {
+  flex-grow: 1;
+  background-color: #ecf0f1;
+  padding: 20px;
+  overflow-y: auto; /* Permet le défilement si le contenu est trop long */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.form-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-form {
+  background: #CEDDDE;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px); /* Ajustez selon vos besoins */
+  overflow-y: auto;
+}
+
+.form-columns {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #e8eeef;
+  box-sizing: border-box;
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #27C7D4;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #1fa9b5;
+}
+
+@media (max-width: 768px) {
+  .form-columns {
+      flex-direction: column;
+  }
+  
+  .sidebar {
+      width: 200px;
+  }
+}

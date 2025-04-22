@@ -1,0 +1,217 @@
+/* Styles généraux */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  background-color: #CEDDDE;
+  width: 250px;
+  flex-shrink: 0;
+}
+h1{
+  text-align: center;
+}
+main {
+  flex-grow: 1;
+  background-color: #ecf0f1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Formulaire spécifique */
+.stage-form {
+  background: #CEDDDE;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.form-columns {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.number {
+  background-color: #27C7D4;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+/* Éléments de formulaire */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #e8eeef;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+select.form-control {
+  height: 46px;
+}
+
+/* Bouton */
+.form-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  width: 200px;
+}
+
+.btn-primary {
+  background-color: #27C7D4;
+  color: white;
+  
+}
+
+.btn-primary:hover {
+  background-color: #1fa9b5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-columns {
+      flex-direction: column;
+  }
+  
+  .sidebar {
+      width: 200px;
+  }
+  
+  .form-section {
+      padding: 10px;
+  }
+  /* Ajoutez ces styles à votre CSS existant */
+
+.compact-form {
+  padding: 15px;
+  max-width: 900px; /* Réduire la largeur maximale */
+  margin: 0 auto;
+}
+
+.compact-form .form-columns {
+  gap: 15px;
+}
+
+.compact-form .form-section {
+  padding: 12px;
+}
+
+.compact-form .form-group {
+  margin-bottom: 15px;
+}
+
+.compact-form label {
+  font-size: 0.9em;
+  margin-bottom: 6px;
+}
+
+.compact-form .form-control {
+  padding: 10px;
+  font-size: 0.9em;
+}
+
+.compact-form .section-header h3 {
+  font-size: 1.1em;
+}
+
+.compact-form .number {
+  height: 25px;
+  width: 25px;
+  font-size: 0.7em;
+}
+
+.compact-textarea {
+  min-height: 80px !important;
+}
+
+.compact-btn {
+  padding: 10px 25px !important;
+  font-size: 0.9em !important;
+}
+
+/* Ajustements responsive */
+@media (max-width: 768px) {
+  .compact-form {
+      padding: 10px;
+  }
+  
+  .compact-form .form-columns {
+      flex-direction: column;
+      gap: 10px;
+  }
+  
+  .compact-form .form-section {
+      padding: 10px;
+  }
+}
+}

@@ -1,74 +1,110 @@
+/* Styles de base */
 .app-container {
-    background-color: #fff; /* Couleur de fond de l'écran entier */
-    min-height: 100vh; /* Assure que le conteneur prend toute la hauteur de l'écran */
-    display: flex;
-    overflow-x: hidden;
-  }
-  .depot-container {
-      max-width: 500px;
-      margin: 20px auto;
-      padding: 20px;
-     
-      background-color: #ecf0f1;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: black;
-    }
-    
-    .form-group {
-      
-      margin-bottom: 30px;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #384047;
-    }
-    
-    input[type="file"] {
-      width: 95%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #e8eeef;
-      color: #8a97a0;
-    }
-    
-    button {
-      margin-bottom: 30px;
-      width: 100%;
-      padding: 15px;
-      background-color: #27C7D4;
-      color: white;
-      border: none;
-      border-radius: 15px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    
-    button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
-    
-    button:hover:not(:disabled) {
-      background-color: #A7E0E0;
-    }
-    
-    .error-message {
-      color: #ff0000;
-      font-size: 14px;
-    }
+  display: flex;
+  min-height: 100vh;
+}
 
+/* Styles pour les options */
+.option-choice {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
 
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
 
+.btn {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Éditeur de template */
+.template-editor {
+  margin-top: 15px;
+}
+
+.template-editor textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.btn-generate {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-generate:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Styles du formulaire */
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.8em;
+}
      
 /* style pour side bar */
 main{
@@ -76,4 +112,74 @@ main{
 }
 .sidebar{
   background-color: #CEDDDE;
+}
+/* Éditeur */
+.template-editor-container {
+  margin-top: 20px;
+}
+
+.template-structure {
+  background: #f5f7fa;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.structure-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.structure-list li {
+  margin-bottom: 8px;
+}
+
+/* Upload de fichiers */
+.file-upload-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.file-input {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+}
+
+.file-button {
+  background: #3f51b5;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.file-name {
+  color: #666;
+}
+
+/* Boutons */
+.btn-option {
+  transition: all 0.3s ease;
+  border: 2px solid #ddd;
+}
+
+.btn-option.active {
+  background: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
+}
+
+.btn-generate {
+  background: #4caf50;
+  color: white;
 }
