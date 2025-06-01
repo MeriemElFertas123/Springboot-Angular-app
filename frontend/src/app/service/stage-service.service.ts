@@ -28,4 +28,23 @@ export class StageServiceService {
   deleteStage(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  // Nouvelle méthode pour ajouter un stage avec un fichier
+  addStageWithReport(formData: FormData): Observable<Stage> {
+    return this.http.post<Stage>(this.apiUrl, formData);
+  }
+
+  // Méthode pour télécharger le rapport d'un stage
+  downloadStageReport(stageId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${stageId}/rapport`, {
+      responseType: 'blob'
+    });
+  }
+  updateStageWithRapport(formData: FormData, id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}/with-rapport`, formData);
+  }
+  downloadRapport(stageId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${stageId}/rapport`, {
+      responseType: 'blob'
+    });
+  }
 }

@@ -7,12 +7,14 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-liste-stage',
-  imports: [SideBarEtudiantComponent,CommonModule,RouterLink],
+  standalone: true, // Ajouté pour correspondre au style du composant AddStageComponent
+  imports: [SideBarEtudiantComponent, CommonModule, RouterLink],
   templateUrl: './liste-stage.component.html',
   styleUrl: './liste-stage.component.css'
 })
 export class ListeStageComponent {
   stages: Stage[] = [];
+  isDownloading: boolean = false;
 
   constructor(private stageService: StageServiceService) {}
 
@@ -51,7 +53,38 @@ export class ListeStageComponent {
     });
   }
   
-  
-  
-
+  // Nouvelle méthode pour télécharger le rapport
+  downloadRapport(stageId: number): void {
+    this.isDownloading = true;
+    
+    this.stageService.downloadStageReport(stageId).subscribe({
+      next: (blob: Blob) => {
+        // Trouver le stage correspondant
+        const stage = this.stages.find(s => s.id === stageId);
+        
+        if (stage && stage.nomFichierRapport) {
+          // Créer un objet URL pour le blob
+          const url = window.URL.createObjectURL(blob);
+          
+          // Créer un élément a temporaire pour déclencher le téléchargement
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = stage.nomFichierRapport;
+          document.body.appendChild(a);
+          a.click();
+          
+          // Nettoyer
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+        }
+        
+        this.isDownloading = false;
+      },
+      error: (err) => {
+        console.error('Erreur lors du téléchargement du rapport:', err);
+        alert('Impossible de télécharger le rapport.');
+        this.isDownloading = false;
+      }
+    });
+  }
 }

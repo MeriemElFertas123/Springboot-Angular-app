@@ -26,6 +26,8 @@ import { EnseignantDetailsComponent } from './admin/enseignant-management/enseig
 import { EnseignantDeleteComponent } from './admin/enseignant-management/enseignant-delete/enseignant-delete.component';
 //import { AddEnseignantComponent } from './admin/enseignant-management/enseignant-create/add-enseignant.component';
 
+
+
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ChatEtudiantComponent } from './chat-etudiant/chat-etudiant.component';
 import { ChatEtudiantsComponent } from './chat-etudiants/chat-etudiants.component';

@@ -50,34 +50,7 @@
       </div>
       
 
-      <!-- Attestation -->
-      <div *ngIf="!useTemplate" class="form-group">
-        <label for="attestation">Attestation de stage (PDF uniquement)</label>
-        <input type="file" id="attestation" accept=".pdf" 
-               (change)="onFileChange($event, 'attestation')" required>
-        <div *ngIf="selectedFiles.attestation">
-          Fichier sélectionné : {{ selectedFiles.attestation.name }}
-        </div>
-        <small *ngIf="depotForm.get('attestation')?.invalid && depotForm.get('attestation')?.touched" 
-               class="error-message">
-          Veuillez sélectionner un fichier PDF valide.
-        </small>
-      </div>
-
-      <!-- Fiche d'appréciation -->
-      <div *ngIf="!useTemplate" class="form-group">
-        <label for="ficheAppreciation">Fiche d'appréciation (PDF uniquement)</label>
-        <input type="file" id="ficheAppreciation" accept=".pdf" 
-               (change)="onFileChange($event, 'ficheAppreciation')" required>
-        <div *ngIf="selectedFiles.ficheAppreciation">
-          Fichier sélectionné : {{ selectedFiles.ficheAppreciation.name }}
-        </div>
-        <small *ngIf="depotForm.get('ficheAppreciation')?.invalid && depotForm.get('ficheAppreciation')?.touched" 
-               class="error-message">
-          Veuillez sélectionner un fichier PDF valide.
-        </small>
-      </div>
-
+    
       <!-- Bouton de soumission -->
       <div *ngIf="!useTemplate" class="text-center mt-4">
         <button type="submit" class="btn btn-primary" [disabled]="depotForm.invalid || (!useTemplate && !selectedFiles.rapport)">
