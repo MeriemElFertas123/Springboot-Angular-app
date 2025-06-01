@@ -1,80 +1,156 @@
 <div class="app-container">
   <div class="sidebar">
-      <app-side-bar-etudiant></app-side-bar-etudiant>
+    <app-side-bar-etudiant></app-side-bar-etudiant>
   </div>
-  <main class="pt-4 form-container">
-      <h1>Ajouter un Stage</h1>
+  
+  <main class="main-content">
+    <h1 class="page-title">Ajouter un Stage</h1>
 
-      <form #stageForm="ngForm" (ngSubmit)="onSubmit(stageForm)" class="stage-form compact-form">
-          <div class="form-columns">
-              <div class="form-column">
-                  <div class="form-section">
-                      <div class="section-header">
-                          <span class="number">1</span>
-                          <h3>Informations Entreprise</h3>
-                      </div>
-                      
-                      <div class="form-group">
-                          <label for="nomEntreprise">Nom entreprise</label>
-                          <input type="text" id="nomEntreprise" name="nomEntreprise" 
-                                 [(ngModel)]="stage.nomEntreprise" class="form-control" required>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="adresse">Adresse</label>
-                          <input type="text" id="adresse" name="adresse" 
-                                 [(ngModel)]="stage.adresseEntreprise" class="form-control" required>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="numTel">Téléphone</label>
-                          <input type="tel" id="numTel" name="numTel" 
-                                 [(ngModel)]="stage.numEncadrant" class="form-control" required>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="form-column">
-                  <div class="form-section">
-                      <div class="section-header">
-                          <span class="number">2</span>
-                          <h3>Détails Stage</h3>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="nomEncadrant">Encadrant</label>
-                          <input type="text" id="nomEncadrant" name="nomEncadrant" 
-                                 [(ngModel)]="stage.nomEncadrant" class="form-control" required>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="intituleSujet">Sujet</label>
-                          <input type="text" id="intituleSujet" name="intituleSujet" 
-                                 [(ngModel)]="stage.intituleSujet" class="form-control" required>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="description">Description</label>
-                          <textarea id="description" name="description" 
-                                    [(ngModel)]="stage.descriptionSujet" class="form-control compact-textarea" required></textarea>
-                      </div>
-
-                      <div class="form-group">
-                          <label for="typeStage">Type</label>
-                          <select id="typeStage" name="typeStage" 
-                                  [(ngModel)]="stage.typeStage" class="form-control" required>
-                              <option value="INITIATION">Initiation</option>
-                              <option value="PFA">PFA</option>
-                              <option value="PFE">PFE</option>
-                          </select>
-                      </div>
-                  </div>
-              </div>
+    <form #stageForm="ngForm" (ngSubmit)="onSubmit(stageForm)" class="unified-form">
+      <div class="form-sections-container">
+        <!-- Section Informations Entreprise -->
+        <div class="form-section">
+          <div class="section-header">
+            <h2><span class="section-number">1</span> Informations Entreprise</h2>
           </div>
 
-          <div class="form-actions">
-              <button type="submit" class="btn btn-primary compact-btn">Ajouter</button>
+          <div class="form-group">
+            <label for="nomEntreprise">Nom entreprise</label>
+            <input type="text" id="nomEntreprise" name="nomEntreprise"
+              [(ngModel)]="stage.nomEntreprise" class="form-control" required>
           </div>
-      </form>
+
+          <div class="form-group">
+            <label for="adresse">Adresse</label>
+            <input type="text" id="adresse" name="adresse"
+              [(ngModel)]="stage.adresseEntreprise" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="numTel">Téléphone</label>
+            <input type="tel" id="numTel" name="numTel"
+              [(ngModel)]="stage.numEncadrant" class="form-control" required>
+          </div>
+        </div>
+
+        <!-- Section Détails Stage -->
+        <div class="form-section">
+          <div class="section-header">
+            <h2><span class="section-number">2</span> Détails Stage</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="nomEncadrant">Encadrant</label>
+            <input type="text" id="nomEncadrant" name="nomEncadrant"
+              [(ngModel)]="stage.nomEncadrant" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="intituleSujet">Sujet</label>
+            <input type="text" id="intituleSujet" name="intituleSujet"
+              [(ngModel)]="stage.intituleSujet" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description"
+              [(ngModel)]="stage.descriptionSujet" class="form-control" required></textarea>
+          </div>
+        </div>
+
+        <!-- Section Type et Documents -->
+        <div class="form-section">
+          <div class="section-header">
+            <h2><span class="section-number">3</span> Type et Documents</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="typeStage">Type de stage</label>
+            <select id="typeStage" name="typeStage"
+              [(ngModel)]="stage.typeStage" class="form-control" required>
+              <option value="INITIATION">Initiation</option>
+              <option value="PFA">PFA</option>
+              <option value="PFE">PFE</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="dateDepot">Date de dépôt</label>
+            <input type="date" id="dateDepot" name="dateDepot"
+              [(ngModel)]="stage.dateDepot" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="domaine">Domaine</label>
+            <select id="domaine" name="domaine" [(ngModel)]="stage.domaine" class="form-control" required>
+              <option value="">-- Choisir un domaine --</option>
+              <option value="Développement">Développement</option>
+              <option value="Réseaux">Réseaux</option>
+              <option value="Sécurité">Sécurité</option>
+              <option value="Data Science">Data Science</option>
+              <option value="Cloud">Cloud</option>
+            </select>
+          </div>
+
+          <!-- Section Rapport intégrée -->
+          <div class="document-upload-section">
+            <h3 class="upload-title">Rapport de stage</h3>
+            
+            <div class="upload-options">
+              <div class="option-choice">
+                <div class="btn-group">
+                  <button type="button" class="option-btn" 
+                          [class.active]="!useTemplate"
+                          (click)="toggleTemplateOption(false)">
+                    <i class="upload-icon">📤</i>
+                    <span>Importer mon rapport (PDF)</span>
+                  </button>
+                  
+                  <button type="button" class="option-btn" 
+                          [class.active]="useTemplate"
+                          (click)="toggleTemplateOption(true)">
+                    <i class="download-icon">📄</i>
+                    <span>Télécharger le modèle</span>
+                  </button>
+                </div>
+              </div>
+
+              <div *ngIf="!useTemplate" class="file-upload-area">
+                <label for="rapport" class="upload-label">
+                  <input type="file" id="rapport" accept=".pdf" 
+                         (change)="onFileChange($event, 'rapport')" required>
+                  <div class="upload-placeholder">
+                    <i class="upload-icon-large">📁</i>
+                    <p>Glissez-déposez votre fichier PDF ou cliquez pour parcourir</p>
+                  </div>
+                </label>
+                <div *ngIf="selectedFiles.rapport" class="file-selected">
+                  <i class="file-icon">📄</i>
+                  <span>{{ selectedFiles.rapport.name }}</span>
+                </div>
+                <small *ngIf="depotForm.get('rapport')?.invalid && depotForm.get('rapport')?.touched" 
+                       class="error-message">
+                  Veuillez sélectionner un fichier PDF valide.
+                </small>
+              </div>
+
+              <div *ngIf="useTemplate" class="template-download">
+                <a href="/modele_rapport.docx" download class="download-link">
+                  <i class="download-icon-large">⬇️</i>
+                  <span>Télécharger le modèle Word</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="submit-btn" 
+                [disabled]="stageForm.invalid || (!useTemplate && depotForm.invalid)">
+          Ajouter le stage
+        </button>
+      </div>
+    </form>
   </main>
 </div>

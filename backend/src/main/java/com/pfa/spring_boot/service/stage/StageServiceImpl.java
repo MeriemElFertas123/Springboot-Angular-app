@@ -4,7 +4,9 @@ import com.pfa.spring_boot.entities.Stage;
 import com.pfa.spring_boot.repositories.StageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -37,5 +39,24 @@ public class StageServiceImpl implements StageService {
     @Override
     public void deleteStage(Long id) {
         stageRepository.deleteById(id); // Supprime un stage par son ID
+    }
+
+    // Nouvelle méthode pour ajouter un stage avec un fichier rapport
+    public Stage addStageWithReport(Stage stage, MultipartFile rapport) throws IOException {
+        if (rapport != null && !rapport.isEmpty()) {
+            stage.setNomFichierRapport(rapport.getOriginalFilename());
+            stage.setTypeFichierRapport(rapport.getContentType());
+            stage.setContenuRapport(rapport.getBytes());
+        }
+
+        return stageRepository.save(stage);
+    }
+
+    public byte[] getStageReport(Long stageId) {
+        Stage stage = stageRepository.findById(stageId).orElse(null);
+        if (stage != null) {
+            return stage.getContenuRapport();
+        }
+        return null;
     }
 }

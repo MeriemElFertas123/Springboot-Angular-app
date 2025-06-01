@@ -57,5 +57,28 @@ export interface Stage{
     nomEncadrant:string,
     intituleSujet:string,
      descriptionSujet:string,
-    typeStage:TypeStage;
+    typeStage:TypeStage,
+    dateDepot?: string | Date; // au format ISO (ex : 2024-06-01)
+    domaine?: string;
+
+    nomFichierRapport?: string;
+    typeFichierRapport?: string;
+    contenuRapport?: Blob;
 }
+export interface Rapport {
+    id: number;
+    etudiantId: number;  // Référence à l'étudiant
+    stageId: number;     // Référence au stage associé
+    titre: string;
+    tuteur: string;     // Tuteur entreprise
+    dateDepot: Date;
+    etat: 'DEPOSE' | 'VALIDE' | 'NOTE' | 'REJETE';
+    note: number | null;
+    annee: string;
+    cheminFichier: string;
+    nomOriginal: string;
+
+    nomFichierRapport?: string;
+    typeFichierRapport?: string;
+    contenuRapport?: Blob;
+  }

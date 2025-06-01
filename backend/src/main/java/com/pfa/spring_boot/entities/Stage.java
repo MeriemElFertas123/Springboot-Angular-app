@@ -14,10 +14,44 @@ public class Stage {
     private String nomEncadrant;
     private String intituleSujet;
     private String descriptionSujet;
+    private String dateDepot;
+    private String domaine;
 
     @Enumerated(EnumType.STRING)
     private TypeStage typeStage;
 
+    // Ajout des champs pour le rapport
+    private String nomFichierRapport;
+    private String typeFichierRapport;
+
+    // Pour stocker le contenu du fichier
+    @Lob
+    @Column(length = 16777215) // Taille max: environ 16MB
+    private byte[] contenuRapport;
+
+    public String getNomFichierRapport() {
+        return nomFichierRapport;
+    }
+
+    public void setNomFichierRapport(String nomFichierRapport) {
+        this.nomFichierRapport = nomFichierRapport;
+    }
+
+    public String getTypeFichierRapport() {
+        return typeFichierRapport;
+    }
+
+    public void setTypeFichierRapport(String typeFichierRapport) {
+        this.typeFichierRapport = typeFichierRapport;
+    }
+
+    public byte[] getContenuRapport() {
+        return contenuRapport;
+    }
+
+    public void setContenuRapport(byte[] contenuRapport) {
+        this.contenuRapport = contenuRapport;
+    }
     public String getAdresseEntreprise() {
         return adresseEntreprise;
     }
@@ -82,5 +116,19 @@ public class Stage {
         this.typeStage = typeStage;
     }
 
+    public String getDateDepot() {
+        return dateDepot;
+    }
 
+    public void setDateDepot(String dateDepot) {
+        this.dateDepot = dateDepot;
+    }
+
+    public String getDomaine() {
+        return domaine;
+    }
+
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
+    }
 }
