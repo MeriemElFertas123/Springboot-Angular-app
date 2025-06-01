@@ -1,13 +1,59 @@
-.div-container{
+/* RESET COMPLET */
+.admin-container, .admin-sidebar, .admin-content {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* STRUCTURE PRINCIPALE */
+  .admin-container {
     display: flex;
-    height: 100vh;
-}
-main{
-    flex-grow: 1;
-    background-color: #fff;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden; /* Empêche tout débordement */
+  }
+  
+  .admin-sidebar {
+    width: 250px;
+    background: #2c3e50;
+    position: fixed !important; /* Force le positionnement */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+  
+  .admin-content {
+    flex: 1;
+    margin-left: 250px; /* Doit être égal à la sidebar */
     padding: 20px;
-}
-
-.sidebar{
-    background-color: #CEDDDE;
-} 
+    min-height: 100vh;
+    background: #f5f7fa;
+  }
+  
+  /* STYLES DU TABLEAU */
+  .table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .rapports-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .rapports-table th, .rapports-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .rapports-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
