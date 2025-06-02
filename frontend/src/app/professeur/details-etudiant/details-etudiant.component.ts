@@ -4,11 +4,12 @@ import { ServiceService } from '../../service/service.service';
 import { DepotRapportStage, Etudiant } from '../../model/model';
 import { DatePipe, NgStyle } from '@angular/common';
 import { StatutRapport } from '../../model/enums';
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-details-etudiant',
   standalone:true,
-  imports: [NgStyle,DatePipe],
+  imports: [NgStyle, DatePipe, UserProfileMenuComponent],
   templateUrl: './details-etudiant.component.html',
   styleUrl: './details-etudiant.component.css'
 })

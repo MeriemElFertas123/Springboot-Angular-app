@@ -8,6 +8,7 @@ import { FormGroup,FormControl,ReactiveFormsModule, FormsModule } from '@angular
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-rapports-stage',
@@ -17,7 +18,7 @@ import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
     NgStyle,
     ReactiveFormsModule,
     MatRadioModule,
-    FormsModule, SideBarProfComponent],
+    FormsModule, SideBarProfComponent, UserProfileMenuComponent],
   templateUrl: './rapports-stage.component.html',
   styleUrl: './rapports-stage.component.css'
 })

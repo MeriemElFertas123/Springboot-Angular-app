@@ -1,3 +1,4 @@
+<app-user-profile-menu></app-user-profile-menu>
 <div class="conteneur">
   <div class="sidebar">
     <app-side-bar-prof></app-side-bar-prof>
@@ -6,6 +7,52 @@
     <div class="row"> 
       @if(listDepotsRapport.length!=0){
        @for (depotRapport of listDepotsRapport; track $index) {
+         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+         <div class="card h-100 " >
+           <div class="card-body d-flex flex-column">
+             <h5 class="card-title">{{depotRapport.titre}}</h5>
+             <!-- le flex pour que la description s'étire pour remplir l'espace et éviter les décalages -->
+             <p class="card-text flex-grow-1">{{depotRapport.description}}</p>
+             <hr>
+             <div class="icon-container">
+               <i class="fa-solid fa-eye"></i>
+               <i class="fa-solid fa-user" [routerLink]="['/details-etudiant',depotRapport.id]"></i>
+               @if(depotRapport.evaluation==null || depotRapport.evaluation==undefined){
+                <i class="fa-solid fa-plus" (click)="openModalAddEval(depotRapport.id)"></i>
+               }@else {
+                <i class="fa-solid fa-comment" (click)="voirEvaluationOpenModal(depotRapport.id)"></i>
+               }
+               <i class="fa-solid fa-download"></i>
+             </div>
+             <p class="card-text date-soumission mt-auto"><small class="text-muted">Date de soumission: {{depotRapport.submissionDate | date :'dd/MM/yyyy : hh:mm'}}</small></p>
+         
+             @if (idDepotToEditStatut!==depotRapport.id) {
+              <p > <span [ngStyle]="{'backgroundColor' : getColorSelonStatut(depotRapport.statut)}" style="color: #fff;padding: 4px;" class="rounded">{{depotRapport.statut}}</span> <i class="fa-solid fa-pen m-3" (click)="editStatut(depotRapport.id,depotRapport.statut)"></i></p>
+             }@else {
+              <div class="my-3 radioEditStatut d-flex justify-content-start align-items-center">
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="depotRapport.selectedRadio">
+                  <mat-radio-button value="V" id="radioV">Validé</mat-radio-button>
+                  <mat-radio-button value="NV" id="radioNV">Rejeté</mat-radio-button>
+                </mat-radio-group>
+                <div class="icons-radio">
+                  @if (depotRapport.selectedRadio) {
+                    <i class="fa-solid fa-check fa-check-ok"  (click)="saveNewStatus(depotRapport)" ></i>
+                    <i class="fa-solid fa-trash fa-trash-ok" (click)="resetRadioCheck(depotRapport)"></i>
+                  }@else{
+                    <i class="fa-solid fa-check " id="disabled-check"></i>
+                    <i class="fa-solid fa-trash"  id="disabled-trash"></i>
+                  }
+                  
+                  <i class="fa-solid fa-xmark" (click)="idDepotToEditStatut=-1"></i>
+                </div>
+               </div>
+             }
+             
+           </div>
+         </div>
+       </div>
+       }
+        @for (depotRapport of listDepotsRapport; track $index) {
          <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
          <div class="card h-100 " >
            <div class="card-body d-flex flex-column">
@@ -60,6 +107,120 @@
       }
      
      </div>
+
+
+     <div class="dropdowns">
+                  <!-- DropDown pour le type de stage -->
+              <div class="dropdown m-2">                
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Type de Stage
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Initiation</a></li>
+                  <li><a class="dropdown-item" href="#">PFA</a></li>
+                  <li><a class="dropdown-item" href="#">PFE</a></li>
+                </ul>
+              </div>
+
+                <!-- DropDown pour l'année du stage -->
+              <div class="dropdown m-2">                
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Année du Stage
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2025</a></li>
+                  <li><a class="dropdown-item" href="#">2024</a></li>
+                  <li><a class="dropdown-item" href="#">2023</a></li>
+                  <li><a class="dropdown-item" href="#">2022</a></li>
+                  <li><a class="dropdown-item" href="#">2021</a></li>
+                  <li><a class="dropdown-item" href="#">2020</a></li>
+                  <li><a class="dropdown-item" href="#">2019</a></li>
+                </ul>
+              </div>
+
+              </div>
+     <div class="table-div mx-5 my-3" >
+       
+      <table class="table">
+        <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+           <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+           <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>John</td>
+            <td>Doe</td>
+            <td>social</td>
+          </tr>
+        </tbody>
+    </table>
+     </div>
+
   </main>
 </div>
 

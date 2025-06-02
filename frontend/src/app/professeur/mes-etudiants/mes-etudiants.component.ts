@@ -4,11 +4,12 @@ import { ServiceService } from '../../service/service.service';
 import { RouterLink } from '@angular/router';
 import { EtudiantService } from '../../service/etudiant.service';
 import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-mes-etudiants',
   standalone:true,
-  imports: [SideBarProfComponent],
+  imports: [SideBarProfComponent, UserProfileMenuComponent],
   templateUrl: './mes-etudiants.component.html',
   styleUrl: './mes-etudiants.component.css'
 })
