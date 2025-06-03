@@ -7,6 +7,7 @@ import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 import { HttpClient } from '@angular/common/http';
 import { EnseignantService } from '../../service/enseignant.service';
+import { EncadrementService } from '../../service/encadrement.service';
 
 @Component({
   selector: 'app-mes-etudiants',
@@ -18,27 +19,26 @@ import { EnseignantService } from '../../service/enseignant.service';
 export class MesEtudiantsComponent implements OnInit{
 
   connectedUser:any;
+  idEnseignant=-1;
+  mesEtudiants:any[]=[];
+
   enseignantService = inject(EnseignantService);
-  etudiantService = inject(EtudiantService);
+  encadrementService=inject(EncadrementService);
 
   ngOnInit(): void {
     const userData = localStorage.getItem('connectedUser');
     if(userData){
       this.connectedUser=JSON.parse(userData);
-      console.log("==> : "+typeof this.connectedUser.id);
-    }
+      this.idEnseignant=this.connectedUser.id;
 
-
-    this.etudiantService.getStudents().subscribe(
-     (res:Etudiant[])=>{
+      this.encadrementService.getEtudiantsByEnseignantId(this.idEnseignant).subscribe((res:any)=>{
         this.mesEtudiants=res;
-       }
-     );
+      })
+    }
   }
 
 
 
-   mesEtudiants:Etudiant[]=[];
   // constructor(){
   //   
   // }

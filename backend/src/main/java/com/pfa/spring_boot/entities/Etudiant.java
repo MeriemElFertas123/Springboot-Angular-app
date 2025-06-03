@@ -1,5 +1,6 @@
 package com.pfa.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
 import com.pfa.spring_boot.enums.etudiant.Filiere;
@@ -39,6 +40,7 @@ public class Etudiant {
             cascade = CascadeType.ALL,// Opérations propagées aux Encadrements liés
             orphanRemoval = true
     )
+    @JsonIgnore
     private List<Encadrement> encadrements=new ArrayList<>();
 
 
