@@ -1,0 +1,80 @@
+<div class="app-container ">
+  <aside class="sidebar">
+    <h2 class="sidebar-title">GESTION DES STAGES</h2>
+    <nav class="nav-links">
+      <a class="nav-item" routerLink="/espace-etudiant">
+        <i class="icon">🏚️</i>
+        <span class="text">Accueil</span>
+      </a>
+      <a class="nav-item" routerLink="/ajouterStage">
+        <i class="icon">📝</i>
+        <span class="text">Ajouter un stage</span>
+      </a>
+      <a class="nav-item">
+        <i class="icon">📄</i>
+        <span class="text">Votre stage</span>
+      </a>
+      <a class="nav-item" routerLink="/deposerStage">
+        <i class="icon">📥</i>
+        <span class="text">Déposer le rapport</span>
+      </a>
+    </nav>
+  </aside>
+    <main class="m-3">
+      <h1 class="text-center">VOS DOCUMENTS DE STAGE</h1>
+      <div class="row">
+        <div class="depot-container col">
+          <form [formGroup]="depotForm" (ngSubmit)="onSubmit()">
+            <!-- Champ pour le rapport de stage -->
+            <div class="form-group">
+              <label for="rapport">Rapport de stage (PDF uniquement)</label>
+              <input
+                type="file"
+                id="rapport"
+                accept=".pdf"
+                (change)="onFileChange($event, 'rapport')"
+                required
+              />
+              <small *ngIf="depotForm.get('rapport')?.invalid && depotForm.get('rapport')?.touched" class="error-message">
+                Veuillez sélectionner un fichier PDF.
+              </small>
+            </div>
+        
+            <!-- Champ pour l'attestation de stage -->
+            <div class="form-group">
+              <label for="attestation">Attestation de stage (PDF uniquement)</label>
+              <input
+                type="file"
+                id="attestation"
+                accept=".pdf"
+                (change)="onFileChange($event, 'attestation')"
+                required
+              />
+              <small *ngIf="depotForm.get('attestation')?.invalid && depotForm.get('attestation')?.touched" class="error-message">
+                Veuillez sélectionner un fichier PDF.
+              </small>
+            </div>
+        
+            <!-- Champ pour la fiche d'appréciation -->
+            <div class="form-group">
+              <label for="ficheAppreciation">Fiche d'appréciation (PDF uniquement)</label>
+              <input
+                type="file"
+                id="ficheAppreciation"
+                accept=".pdf"
+                (change)="onFileChange($event, 'ficheAppreciation')"
+                required
+              />
+              <small *ngIf="depotForm.get('ficheAppreciation')?.invalid && depotForm.get('ficheAppreciation')?.touched" class="error-message">
+                Veuillez sélectionner un fichier PDF.
+              </small>
+            </div>
+        
+            <!-- Bouton de soumission -->
+            <button type="submit" [disabled]="depotForm.invalid">Déposer les documents</button>
+          </form>
+        </div>
+        
+      </div>
+    </main>
+  </div>
