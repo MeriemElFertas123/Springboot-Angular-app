@@ -1,46 +1,14 @@
 <div class="div-container">
-    <aside class="sidebar"> 
-      <h2 class="sidebar-title">GESTION DES STAGES</h2>
-      <nav class="nav-links">
-        <a class="nav-item" routerLink="/espace-etudiant">
-          <i class="icon">🏚️</i>
-          <span class="text">Accueil</span>
-        </a>
-        <a class="nav-item" routerLink="/dashboard"> 
-          <i class="icon">🏠</i>
-          <span class="text">Dashboard</span>
-        </a>
-        <a class="nav-item" routerLink="/rapports"> 
-          <span class="text">Rapports</span>
-        </a>
-        <a class="nav-item" routerLink="/students/list"> 
-          <span class="text">Gestion des étudiants</span>
-        </a>
-        <a class="nav-item" routerLink="/enseignant-management"> 
-          <i class="icon">👨‍🏫</i>
-          <span class="text">Gestion des enseignants</span>
-        </a>
-        <a class="nav-item" routerLink="/archive"> 
-          <i class="icon">📂</i>
-          <span class="text">Archivage des rapports</span>
-        </a>
-        <a class="nav-item" routerLink="/chat">
-          <i class="icon">💬</i>
-          <span class="text">Chat</span>
-        </a>
-        <a class="nav-item" routerLink="/parametrage"> 
-          <i class="icon">⚙️</i>
-          <span class="text">Paramétrage</span>
-        </a>
-      </nav>
-    </aside>
-  
+  <div class="sidebar">
+    <app-side-bar-admin></app-side-bar-admin>
+  </div> 
+
     <main class="main-content">
+      <h2 class="text-center my-5" >Ajouter un étudiant</h2>
       <div class="add-student-container">
-        <h2>Ajouter un étudiant</h2>
-        <form (ngSubmit)="onSubmit()" #studentForm="ngForm">
-          <div class="form-group">
-            <label for="nom">Nom </label>
+        <form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="row">
+          <div class="form-group col-4 mb-5">
+            <label for="nom" class="form-label">Nom </label>
             <input
               type="text"
               id="nom"
@@ -50,8 +18,8 @@
               class="form-control"
             />
           </div>
-          <div class="form-group">
-            <label for="prenom">Prénom</label>
+          <div class="form-group col-4 mb-5">
+            <label for="prenom"  class="form-label">Prénom</label>
             <input
               type="text"
               id="prenom"
@@ -63,8 +31,8 @@
           </div>
     
       
-          <div class="form-group">
-            <label for="email">Email</label>
+          <div class="form-group col-4 mb-5">
+            <label for="email"  class="form-label">Email</label>
             <input
               type="email"
               id="email"
@@ -75,8 +43,8 @@
             />
           </div>
 
-          <div class="form-group">
-            <label for="pswrd">Mot de passe</label>
+          <div class="form-group col-4 mb-5">
+            <label for="pswrd"  class="form-label">Mot de passe</label>
             <input
               type="password"
               id="pswrd"
@@ -88,8 +56,8 @@
           </div>
 
           
-          <div class="form-group">
-            <label for="phone">Téléphone</label>
+          <div class="form-group col-4 mb-5">
+            <label for="phone"  class="form-label">Téléphone</label>
             <input
               type="text"
               id="phone"
@@ -101,8 +69,8 @@
           </div>
       
  
-          <div class="form-group">
-            <label for="gender">Genre</label>
+          <div class="form-group col-4 mb-5">
+            <label for="gender"  class="form-label">Genre</label>
             <select
               id="gender"
               name="gender"
@@ -115,8 +83,8 @@
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="filiere">Filiere</label>
+          <div class="form-group col-4 mb-5">
+            <label for="filiere"  class="form-label">Filiere</label>
             <select
               id="filiere"
               name="filiere"
@@ -131,11 +99,11 @@
             </select>
           </div>
           
-          <div class="form-group">
-            <label for="filiere">Année Etude</label>
+          <div class="form-group col-4 mb-5">
+            <label for="anneeEtude"  class="form-label">Année Etude</label>
             <select
-              id="filiere"
-              name="filiere"
+              id="anneeEtude"
+              name="anneeEtude"
               [(ngModel)]="etudiant.anneeEtude"
               required
               class="form-control"
@@ -145,20 +113,22 @@
               <option value="TROISIEMEANNEE">Troisième Année Embarqué</option>
             </select>
           </div>
-          
-       <!--
-          <div class="form-group">
-            <label for="imageUrl">URL de l'image</label>
+
+          <div class="form-group col-4 mb-5">
+            <label for="image"  class="form-label">Image</label>
             <input
-              type="text"
-              id="imageUrl"
-              name="imageUrl"
-              [(ngModel)]="student.imageUrl"
+              type="file"
+              id="image"
+              name="image"
+              (change)="onFileSelected($event)"
+              required
               class="form-control"
             />
-          </div>-->
+          </div>
+          
+    
       
-          <button type="submit" class="btn btn-primary" [disabled]="!studentForm.form.valid">
+          <button type="submit" class="btn btn-primary my-4" [disabled]="!studentForm.form.valid || imageFile==null">
             Ajouter
           </button>
       

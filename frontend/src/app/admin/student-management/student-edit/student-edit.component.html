@@ -1,51 +1,21 @@
 <div class="div-container">
-  <aside class="sidebar"> 
-    <h2 class="sidebar-title">GESTION DES STAGES</h2>
-    <nav class="nav-links">
-      <a class="nav-item" routerLink="/espace-etudiant">
-        <i class="icon">🏚️</i>
-        <span class="text">Accueil</span>
-      </a>
-      <a class="nav-item" routerLink="/dashboard"> 
-        <i class="icon">🏠</i>
-        <span class="text">Dashboard</span>
-      </a>
-      <a class="nav-item" routerLink="/rapports"> 
-        <span class="text">Rapports</span>
-      </a>
-      <a class="nav-item" routerLink="/students/list"> 
-        <span class="text">Gestion des étudiants</span>
-      </a>
-      <a class="nav-item" routerLink="/enseignant-management"> 
-        <i class="icon">👨‍🏫</i>
-        <span class="text">Gestion des enseignants</span>
-      </a>
-      <a class="nav-item" routerLink="/archive"> 
-        <i class="icon">📂</i>
-        <span class="text">Archivage des rapports</span>
-      </a>
-      <a class="nav-item" routerLink="/chat">
-        <i class="icon">💬</i>
-        <span class="text">Chat</span>
-      </a>
-      <a class="nav-item" routerLink="/parametrage"> 
-        <i class="icon">⚙️</i>
-        <span class="text">Paramétrage</span>
-      </a>
-    </nav>
-  </aside>
+  <div class="sidebar">
+    <app-side-bar-admin></app-side-bar-admin>
+  </div>  
 
   <main class="main-content">
     <div class="edit-student-container">
       <h2>Modifier l'étudiant</h2>
+      <img *ngIf="etudiant.image" [src]="'data:image/jpeg;base64,' + etudiant.image" alt="Student Image" width="40px">
+
       <form (ngSubmit)="onSubmit()" #studentForm="ngForm">
         <div class="form-group">
-          <label for="nom">Nom </label>
+          <label for="nom">Nom </label> 
           <input
             type="text"
             id="nom"
             name="nom"
-            [(ngModel)]="etudiant.nom"
+            [(ngModel)]="etudiant.nom" 
             required
             class="form-control"
           />
@@ -78,13 +48,18 @@
         <div class="form-group">
           <label for="pswrd">Mot de passe</label>
           <input
-            type="password"
+            [type]="hidePassword ?'password':'text'"
             id="pswrd"
             name="pswrd"
             [(ngModel)]="etudiant.password"
             required
             class="form-control"
           />
+          <span>
+            <i class="fa" aria-hidden="true" type="button" id="eye" (click)="togglePasswordVisibility()"
+               [ngClass]="hidePassword ? 'fa-eye' : 'fa-eye-slash'">
+            </i>
+         </span>
         </div>
 
         
@@ -132,10 +107,10 @@
         </div>
         
         <div class="form-group">
-          <label for="filiere">Année Etude</label>
+          <label for="anneeEtude">Année Etude</label>
           <select
-            id="filiere"
-            name="filiere"
+            id="anneeEtude"
+            name="anneeEtude"
             [(ngModel)]="etudiant.anneeEtude"
             required
             class="form-control"
@@ -146,21 +121,9 @@
           </select>
         </div>
     
-        <!-- 
-        <div class="form-group">
-          <label for="gender">Genre</label>
-          <select
-            id="gender"
-            name="gender"
-            [(ngModel)]="etudiant.gender"
-            required
-            class="form-control"
-          >
-            <option value="HOMME">Masculin</option>
-            <option value="FEMME">Féminin</option>
-          </select>
-        </div>
-        -->
+         
+    
+    
         
      <!--
         <div class="form-group">
@@ -173,7 +136,19 @@
             class="form-control"
           />
         </div>-->
-    
+        <div class="form-group ">
+          <label for="image"  class="form-label">Image</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            (change)="onFileSelected($event)"
+             class="form-control"
+          />
+        </div>
+
+
+
         <button type="submit" class="btn btn-primary" [disabled]="!studentForm.form.valid">
           Enregistrer
         </button>

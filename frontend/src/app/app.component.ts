@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { ListeStageComponent } from "./etudiant/stage-management/liste-stage/liste-stage.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterLink],
+  standalone:true,
+  imports: [RouterOutlet, ListeStageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

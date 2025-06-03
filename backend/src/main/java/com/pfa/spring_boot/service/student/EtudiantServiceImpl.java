@@ -1,19 +1,35 @@
 package com.pfa.spring_boot.service.student;
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Utilisateur;
 import com.pfa.spring_boot.repositories.EtudiantRepository;
+import com.pfa.spring_boot.repositories.UtilisateurRepository;
+import com.pfa.spring_boot.service.admin.AdminService;
+import com.pfa.spring_boot.utilities.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class EtudiantServiceImpl implements EtudiantService{
 
     @Autowired
-    public EtudiantRepository etudiantRepository;
+    private EtudiantRepository etudiantRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private Mapper mapper;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
     @Override
     public List<EtudiantDto> getAllStudents() {
@@ -25,9 +41,10 @@ public class EtudiantServiceImpl implements EtudiantService{
         etudiantDto.setId(etudiant.getId());
         etudiantDto.setNom(etudiant.getNom());
         etudiantDto.setPrenom(etudiant.getPrenom());
+        etudiantDto.setPassword(etudiant.getPassword());
         etudiantDto.setEmail(etudiant.getEmail());
         etudiantDto.setTelephone(etudiant.getTelephone());
-
+        etudiantDto.setImage(etudiant.getImage());
         etudiantDto.setGenre(etudiant.getGenre());
         etudiantDto.setFiliere(etudiant.getFiliere());
         etudiantDto.setAnneeEtude(etudiant.getAnneeEtude());
@@ -38,8 +55,20 @@ public class EtudiantServiceImpl implements EtudiantService{
 
     @Override
     public EtudiantDto createStudent(EtudiantDto payload){
+
+        // Sauvegarder également dans la table utilisateur
+        UtilisateurDto utilisateurDto=new UtilisateurDto();
+        utilisateurDto.setEmail(payload.getEmail());
+        utilisateurDto.setPassword(payload.getPassword());
+        Set<String> roles=new HashSet<>();
+        roles.add("ROLE_STUDENT");
+        utilisateurDto.setRoles(roles);
+        utilisateurRepository.save(this.mapper.toUtilisateurEntity(utilisateurDto));
+
+
         Etudiant etudiant = convertToEntity(payload);
         Etudiant savedEntity = etudiantRepository.save(etudiant);
+
         return convertToDto(savedEntity);
     }
     Etudiant convertToEntity(EtudiantDto dto){
@@ -53,6 +82,7 @@ public class EtudiantServiceImpl implements EtudiantService{
         etudiant.setGenre(dto.getGenre());
         etudiant.setFiliere(dto.getFiliere());
         etudiant.setAnneeEtude(dto.getAnneeEtude());
+        etudiant.setImage(dto.getImage());
         return etudiant;
     }
 
@@ -70,6 +100,13 @@ public class EtudiantServiceImpl implements EtudiantService{
 
         etudiant.setFiliere(payload.getFiliere());
         etudiant.setAnneeEtude(payload.getAnneeEtude());
+        if(payload.getImage()==null){
+            etudiant.setImage(this.etudiantRepository.findById(id).get().getImage());
+        }
+        else{
+            etudiant.setImage(payload.getImage());
+        }
+
 
         Etudiant savedEtudiant = etudiantRepository.save(etudiant);
         return convertToDto(savedEtudiant);
@@ -83,9 +120,30 @@ public class EtudiantServiceImpl implements EtudiantService{
     }
 
     @Override
+    public EtudiantDto getStudentByEmail(String email) {
+        Etudiant etudiant=etudiantRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Étudiant non trouvé avec l'émail : "+email));
+        return convertToDto(etudiant);
+    }
+
+    @Override
     public String deleteStudent(Long id){
         Etudiant student = etudiantRepository.findById(id).orElseThrow( () -> new RuntimeException(" the data with the id : " + id + "not found"));
         etudiantRepository.delete(student);
+
+        Utilisateur userToDelete=this.utilisateurRepository.findByEmail(student.getEmail());
+
+        // 1-> Supprimer l'id de l'utilisateur de la table users_roles
+        userToDelete.getRoles().clear();
+        this.utilisateurRepository.save(userToDelete);
+
+        //2 -> supprimer l'utilisateur
+        this.utilisateurRepository.delete(this.utilisateurRepository.findByEmail(student.getEmail()));
+
+
         return "";
     }
+
+
+
+
 }

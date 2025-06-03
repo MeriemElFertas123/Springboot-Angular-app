@@ -1,45 +1,11 @@
 <div class="dashboard-content">
-     <!-- Sidebar -->
-     <aside class="sidebar ">
-      <h2 class="sidebar-title">GESTION DES STAGES</h2>
-      <nav class="nav-links">
-        <a class="nav-item" routerLink="/admin-home">
-          <i class="icon">🏚️</i>
-          <span class="text">Accueil</span>
-        </a>
-        <a class="nav-item" routerLink="/dashboard"> <!-- Lien vers le Dashboard -->
-          <i class="icon">🏠</i>
-          <span class="text">Dashboard</span>
-        </a>
-        <a class="nav-item" routerLink="/rapports"> <!-- Lien vers les Rapports -->
-          <i class="icon">📊</i>
-          <span class="text">Rapports</span>
-        </a>
-        <a class="nav-item" routerLink="/students/list"> <!-- Lien vers la Gestion des étudiants -->
-          <i class="icon">🎓</i>
-          <span class="text">Gestion des étudiants</span>
-        </a>
-        <a class="nav-item" routerLink="/enseignant-management"> <!-- Lien vers la Gestion des enseignants -->
-          <i class="icon">👨‍🏫</i>
-          <span class="text">Gestion des enseignants</span>
-        </a>
-        <a class="nav-item" routerLink="/archive"> <!-- Lien vers l'Archivage des rapports -->
-          <i class="icon">📂</i>
-          <span class="text">Archivage des rapports</span>
-        </a>
-        <a class="nav-item" routerLink="/chat"> <!-- Lien vers le Chat -->
-          <i class="icon">💬</i>
-          <span class="text">Chat</span>
-        </a>
-        <a class="nav-item" routerLink="/parametrage"> <!-- Lien vers le Paramétrage -->
-          <i class="icon">⚙️</i>
-          <span class="text">Paramétrage</span>
-        </a>
-      </nav>
-      </aside>
+    
+  <div class="sidebar">
+    <app-side-bar-admin></app-side-bar-admin>
+  </div>
    
    
-      <main class="main-content m-3">
+      <main class="main-content">
         <h1 class="dashboard-title">Tableau de Bord</h1>
   
     <div class="stats-container">

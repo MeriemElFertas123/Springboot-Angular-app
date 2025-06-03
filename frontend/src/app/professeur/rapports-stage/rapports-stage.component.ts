@@ -7,15 +7,17 @@ import { StatutRapport } from '../../model/enums';
 import { FormGroup,FormControl,ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioModule} from '@angular/material/radio';
+import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
 
 @Component({
   selector: 'app-rapports-stage',
+  standalone:true,
   imports: [RouterLink,
     DatePipe,
     NgStyle,
     ReactiveFormsModule,
     MatRadioModule,
-    FormsModule],
+    FormsModule, SideBarProfComponent],
   templateUrl: './rapports-stage.component.html',
   styleUrl: './rapports-stage.component.css'
 })
@@ -113,7 +115,7 @@ export class RapportsStageComponent implements OnInit{
     const newEvaluation:Evaluation={
       id:Math.floor(Math.random()*52),
       note: Number(this.formAddEvaluation.value.note) ?? 0 ,
-      comment:this.formAddEvaluation.value.comment ?? ''
+      commentaire:this.formAddEvaluation.value.comment ?? ''
     }
 
     this.service.setEvaluation(this.idDepotRapStageToEvaluate,newEvaluation);

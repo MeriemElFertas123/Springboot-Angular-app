@@ -1,21 +1,7 @@
 <div class="conteneur">
-  <aside class="sidebar">
-    <h2 class="sidebar-title">GESTION DES STAGES</h2>
-    <nav class="nav-links">
-      <a class="nav-item"  routerLink="/espace-professeur">
-        <i class="icon">🏚️</i>
-        <span class="text">Acceuil</span>
-      </a>
-      <a class="nav-item"  routerLink="/rapports-stage">
-        <i class="icon">📄</i>
-        <span class="text">Les rapports de stage</span>
-      </a>
-      <a class="nav-item" routerLink="/mes-etudiants">
-        <i class="icon">🧑🏼‍💻</i>
-        <span class="text" >Etudiants</span>
-      </a>
-    </nav>
-  </aside>
+  <div class="sidebar">
+    <app-side-bar-prof></app-side-bar-prof>
+  </div>
   <main class="m-3">
     <div class="row"> 
       @if(listDepotsRapport.length!=0){
@@ -65,8 +51,12 @@
          </div>
        </div>
        }
-      }@else {
-       <p>Aucun Dépot de Rapports Trouvé</p>
+      }@else {    
+        <div class="d-flex justify-content-center align-items-center">
+          <div class="alert alert-warning text-center w-50 my-5" role="alert">
+            Aucun rapport trouvé !
+          </div>
+        </div>
       }
      
      </div>
@@ -94,7 +84,7 @@
               </tr>
               <tr>
                 <td>Comment</td>
-                <td>{{evaluationDepotSelectionne.comment}}</td>
+                <td>{{evaluationDepotSelectionne.commentaire}}</td>
               </tr>
             </tbody>
           </table>

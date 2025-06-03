@@ -1,0 +1,58 @@
+<div class="app-container">
+  <div class="sidebar">
+      <app-side-bar-etudiant></app-side-bar-etudiant>
+  </div>
+  <main class="pt-4 form-container">
+      <h1>Modifier le Stage</h1>
+
+      <div *ngIf="stage" class="form-wrapper">
+        <form #stageForm="ngForm" (ngSubmit)="updateStage(stageForm)" class="stage-form">
+              <div class="form-columns">
+                  <div class="form-column">
+                      <div class="form-group">
+                          <label for="nomEntreprise">Entreprise</label>
+                          <input type="text" id="nomEntreprise" class="form-control"
+                              [(ngModel)]="stage.nomEntreprise" name="nomEntreprise" required />
+                      </div>
+
+                      <div class="form-group">
+                          <label for="adresseEntreprise">Adresse</label>
+                          <input type="text" id="adresseEntreprise" class="form-control"
+                              [(ngModel)]="stage.adresseEntreprise" name="adresseEntreprise" required />
+                      </div>
+
+                      <div class="form-group">
+                          <label for="nomEncadrant">Encadrant</label>
+                          <input type="text" id="nomEncadrant" class="form-control"
+                              [(ngModel)]="stage.nomEncadrant" name="nomEncadrant" required />
+                      </div>
+                  </div>
+
+                  <div class="form-column">
+                      <div class="form-group">
+                          <label for="intituleSujet">Sujet</label>
+                          <input type="text" id="intituleSujet" class="form-control"
+                              [(ngModel)]="stage.intituleSujet" name="intituleSujet" required />
+                      </div>
+
+                      <div class="form-group">
+                          <label for="descriptionSujet">Description</label>
+                          <textarea id="descriptionSujet" class="form-control"
+                              [(ngModel)]="stage.descriptionSujet" name="descriptionSujet" required></textarea>
+                      </div>
+
+                      <div class="form-group">
+                          <label for="typeStage">Type de stage</label>
+                          <input type="text" id="typeStage" class="form-control"
+                              [(ngModel)]="stage.typeStage" name="typeStage" required />
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" [disabled]="!stageForm.form.valid">Mettre à jour</button>
+              </div>
+          </form>
+      </div>
+  </main>
+</div>

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from '../../../service/student.service';
 
 
 
 
 @Component({
   selector: 'app-student-delete',
+  standalone:true,
   imports: [NgIf],
   templateUrl: './student-delete.component.html',
   styleUrl: './student-delete.component.css'
@@ -16,7 +16,6 @@ export class StudentDeleteComponent {
   studentId: string | null = null; // ID de l'étudiant à supprimer
 
   constructor(
-    private studentService: StudentService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -25,7 +24,7 @@ export class StudentDeleteComponent {
     // Récupérer l'ID de l'étudiant depuis l'URL
     this.studentId = this.route.snapshot.paramMap.get('id');
   }
-
+/*
   // Méthode pour supprimer l'étudiant
   deleteStudent(): void {
     if (this.studentId) {
@@ -44,5 +43,5 @@ export class StudentDeleteComponent {
   // Méthode pour annuler et revenir à la liste des étudiants
   cancel(): void {
     this.router.navigate(['/students']);
-  }
+  }*/
 }

@@ -1,10 +1,12 @@
 import { Component ,HostListener} from '@angular/core';
 import { Router, RouterLink, RouterModule } from '@angular/router';
+import { SideBarEtudiantComponent } from "../side-bar-etudiant/side-bar-etudiant.component";
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-espace-etudiant',
   standalone: true,
-  imports: [RouterModule,RouterLink],
+  imports: [RouterModule, RouterLink, SideBarEtudiantComponent, UserProfileMenuComponent],
   templateUrl: './espace-etudiant.component.html',
   styleUrl: './espace-etudiant.component.css'
 })

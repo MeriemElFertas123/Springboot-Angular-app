@@ -38,7 +38,7 @@
    @for (etud of etudiants; track $index) {
     <div class="card col-lg-3 col-md-4 col-sm-6 studentsDep" >
       <div class="image">
-        <img [src]="etud.imageUrl" class="card-img-top" [alt]="etud.nom" >
+        <img [src]="'data:image/jpeg;base64,'+etud.image" class="card-img-top" [alt]="etud.nom" >
       </div>
         <div class="card-body">
           <h5 class="card-title">{{etud.prenom}} {{etud.nom}}</h5>

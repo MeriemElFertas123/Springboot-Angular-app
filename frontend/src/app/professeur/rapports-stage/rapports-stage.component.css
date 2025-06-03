@@ -1,5 +1,9 @@
 .conteneur{
+    height: 100vh;
+    font-family: Arial, sans-serif;
     display: flex;
+    width: 100vw;
+    overflow-x: hidden;
     height: 100vh;
 }
 main{
@@ -7,59 +11,14 @@ main{
 }
 
 
-
-  
 /* style pour side bar */
-  .sidebar {
-    width:250px;
+.sidebar {
     background-color: #CEDDDE;
-    color: #43A3DB;
-    padding: 20px;
-    width: 250px;
-  }
-  
-  .sidebar-title {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-   
-  
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    text-decoration: none;
-    color: black;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    cursor: pointer;
-  }
-  
-  .nav-item:hover {
-    background-color: #9CD2D5;
-  }
-  
-  .nav-item .icon {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
-  
+}
 
 
-
-
-
-/* styler les cartes */
-.card{
+/* style pour les cartes de dépôt*/
+.card{ 
     box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.11);;
     transition: .20s ease-in;
     position: relative;
@@ -70,6 +29,16 @@ main{
     position: absolute;
     bottom : -10px;
     right: 10px;
+}
+.card .typeStage{
+    position: absolute;
+    bottom : -10px;
+    left:  20px;
+    color: rgb(42, 42, 189);
+   
+    font-family: "Eagle Lake", serif;
+    font-style: normal; 
+    font-size: 15px;
 }
 
 .card:hover{
@@ -170,3 +139,91 @@ i{
 #disabled-trash:hover{
     transform: scale(1);
 }
+
+
+
+.top-btns{
+    display: flex;
+    justify-content: center;
+}
+.top-btns button {
+    background-color: rgb(218, 231, 234) ;   
+}
+.div-rech-par{
+    position: relative;
+}
+.input-search{
+    position: absolute;
+    top:-3px;
+    opacity: 0;
+    transition: all .5s ease;
+    cursor: pointer;
+    outline: none;
+}
+.div-rech-par:hover .input-search{
+    opacity: 1;
+}
+.choice-type-stage{
+    position: relative;
+}
+.select-input{
+    position: absolute;
+    left:10px;
+    opacity:0;
+    cursor: pointer;
+    transition: all .5s ease;
+    left:15px;
+    width: 195px;
+}
+.choice-type-stage button{
+    cursor: pointer;
+}
+.choice-type-stage:hover .select-input{
+    opacity: 1;
+}
+
+@media (max-width:1200px){
+    .card .date-soumission{
+        position: absolute;
+        bottom : -10px;
+        right: 10px;
+        /* background-color: yellow; */
+        padding: 20px;
+    }
+    .card{ 
+        box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.11);;
+        transition: .20s ease-in;
+        position: relative;
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width:795px){
+    .top-btns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .top-btns button {
+        background-color: rgb(218, 231, 234) ;   
+        margin-bottom: 15px;
+    }
+
+     
+}
+
+@media (max-width:1410px){
+    .card .typeStage{
+        position: absolute;
+        bottom : -18px;
+        left:  1px;
+        font-family: "Bungee Shade", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        color: rgb(42, 42, 189); 
+        padding-right: 10px;
+        font-size: 12px;
+        font-family: "Eagle Lake", serif;
+        font-style: normal; 
+    }
+} 

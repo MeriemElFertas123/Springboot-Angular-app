@@ -6,12 +6,18 @@ import com.pfa.spring_boot.enums.etudiant.Filiere;
 import com.pfa.spring_boot.enums.etudiant.Genre;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Entity
 public class Etudiant {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
     private String nom;
     private String prenom;
     private String email;
@@ -23,8 +29,18 @@ public class Etudiant {
 
     @Enumerated(EnumType.STRING)
     private Filiere filiere;
-
+    @Enumerated(EnumType.STRING)
     private AnneeEtude anneeEtude;
+
+
+    // Relation One-to-Many vers la table de jointure Encadrement
+    // Un étudiant peut être encadré par plusieurs enseignants
+    @OneToMany(mappedBy = "etudiant",// Champ dans Encadrement qui référence cet Etudiant
+            cascade = CascadeType.ALL,// Opérations propagées aux Encadrements liés
+            orphanRemoval = true
+    )
+    private List<Encadrement> encadrements=new ArrayList<>();
+
 
 
 
@@ -98,5 +114,32 @@ public class Etudiant {
 
     public void setAnneeEtude(AnneeEtude anneeEtude) {
         this.anneeEtude = anneeEtude;
+    }
+
+    public byte[] getImage() { return image;}
+
+    public void setImage(byte[] image) {this.image = image;}
+
+    public List<Encadrement> getEncadrements() {
+        return encadrements;
+    }
+
+    public void setEncadrements(List<Encadrement> encadrements) {
+        this.encadrements = encadrements;
+    }
+
+    @Override
+    public String toString() {
+        return "Etudiant{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", genre=" + genre +
+                ", filiere=" + filiere +
+                ", anneeEtude=" + anneeEtude +
+                '}';
     }
 }

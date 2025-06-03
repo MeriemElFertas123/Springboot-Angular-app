@@ -4,45 +4,9 @@
     font-family: Arial, sans-serif;
   }
   
-  .sidebar {
-    width: 250px;
+  .sidebar{
     background-color: #CEDDDE;
-    color: #43A3DB;
-    padding: 20px;
-  }
-  
-  .sidebar-title {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    text-decoration: none;
-    color: black;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    cursor: pointer;
-  }
-  
-  .nav-item:hover {
-    background-color: #9CD2D5;
-  }
-  
-  .nav-item .icon {
-    margin-right: 10px;
-    font-size: 1.2rem;
-  }
+  } 
   
   .main-content {
     flex-grow: 1;
@@ -67,7 +31,7 @@
 
 
 
-  
+ 
 .edit-student-container {
   max-width: 600px;
   margin: 20px auto;
@@ -75,6 +39,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+ /*
 
 .form-group {
   margin-bottom: 15px;
@@ -94,3 +59,4 @@ input, select {
 button {
   margin-right: 10px;
 }
+*/

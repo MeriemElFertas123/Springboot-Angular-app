@@ -2,29 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { StudentService } from '../../../service/student.service';
-import { Student } from '../../../model/model'; // Importer le modèle Student
-import { AnneeEtude, FiliereEtude } from '../../../model/enums';
 import { EtudiantService } from '../../../service/etudiant.service';
-
+import { AnneeEtude, Filiere } from '../../../model/enums';
+import { SideBarAdminComponent } from "../../side-bar-admin/side-bar-admin.component";
 
 @Component({
   selector: 'app-student-edit',
-  imports: [CommonModule, FormsModule,RouterLink],
+  standalone: true, 
+  imports: [CommonModule, FormsModule, RouterLink, SideBarAdminComponent],
   templateUrl: './student-edit.component.html',
-  styleUrl: './student-edit.component.css'
+  styleUrls: ['./student-edit.component.css']
 })
-export class StudentEditComponent implements OnInit{
-  etudiant: any = {
+export class StudentEditComponent implements OnInit {
+  etudiant: any = { 
     nom: '',
     prenom: '',
     email: '',
     password: '',
     telephone: '',
-    genre:'',
-    filiere:'',
-    anneeEtude:''
+    genre: '',
+    filiere: '',
+    anneeEtude: '',
+    image: null  
   };
+
+  hidePassword=true;
+
+
+  imageFile: File | null = null; // Pour stocker le fichier image sélectionné
+
+  // Gérer la sélection de fichier
+  onFileSelected(event: any): void {
+    this.imageFile = event.target.files[0] as File;
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -54,7 +64,24 @@ export class StudentEditComponent implements OnInit{
   // Soumettre le formulaire de modification
   onSubmit(): void {
     if (this.etudiant.id) {
-      this.etudiantService.updateStudent(this.etudiant.id, this.etudiant).subscribe({
+      const formData: FormData = new FormData();
+      formData.append('nom', this.etudiant.nom);
+      formData.append('prenom', this.etudiant.prenom);
+      formData.append('email', this.etudiant.email);
+      formData.append('password', this.etudiant.password);
+      formData.append('telephone', this.etudiant.telephone);
+      formData.append('genre', this.etudiant.genre);
+      formData.append('filiere', this.etudiant.filiere);
+      formData.append('anneeEtude', this.etudiant.anneeEtude);
+      
+  
+      if(this.imageFile){
+        formData.append('image',this.imageFile)
+      }
+      else if (this.etudiant.image) {
+        formData.append('image', this.etudiant.image);
+      }
+      this.etudiantService.updateStudent(this.etudiant.id, formData).subscribe({
         next: () => {
           this.router.navigate(['/students/list']); // Rediriger vers la liste après la modification
         },
@@ -63,5 +90,11 @@ export class StudentEditComponent implements OnInit{
         }
       });
     }
+}
+
+ 
+
+  togglePasswordVisibility(){
+    this.hidePassword=!this.hidePassword;
   }
 }
