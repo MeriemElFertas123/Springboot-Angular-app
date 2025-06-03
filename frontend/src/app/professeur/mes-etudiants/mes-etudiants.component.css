@@ -1,0 +1,23 @@
+.conteneur{
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  display: flex;
+  width: 100vw;
+  overflow-x: hidden;
+  height: 100vh;
+}
+.card-img-top {
+    height: 200px;  /* Ajuste selon le besoin */
+    object-fit: cover; /* Recadre sans déformer */
+}
+
+
+
+  
+/* style pour side bar */
+main{
+    flex:1;
+}
+.sidebar{
+  background-color: #CEDDDE;
+}

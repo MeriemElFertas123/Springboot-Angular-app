@@ -1,0 +1,89 @@
+<div class="app-container">
+  <div class="sidebar">
+    <app-side-bar-etudiant></app-side-bar-etudiant>
+  </div>
+
+  <main class="m-3">
+    <h1 class="text-center">VOS DOCUMENTS DE STAGE</h1>
+
+    <div class="option-choice mb-4">
+      <h3>Choisissez une option pour le rapport :</h3>
+      <div class="btn-group">
+        <!-- Bouton pour importer le rapport PDF -->
+        <button type="button" class="btn" 
+                [class.active]="!useTemplate"
+                (click)="toggleTemplateOption(false)">
+          📤 Importer mon rapport (PDF)
+        </button>
+        
+        <!-- Bouton pour télécharger le modèle Word -->
+        <button type="button" class="btn" 
+                [class.active]="useTemplate"
+                (click)="toggleTemplateOption(true)">
+          📄 Télécharger le modèle Word du Rapprt
+        </button>
+      </div>
+    </div>
+
+    <form [formGroup]="depotForm" (ngSubmit)="onSubmit()">
+
+      <!-- Option 1 : Importer un rapport PDF -->
+      <div *ngIf="!useTemplate" class="form-group">
+        <label for="rapport">Rapport de stage (PDF uniquement)</label>
+        <input type="file" id="rapport" accept=".pdf" 
+               (change)="onFileChange($event, 'rapport')" required>
+        <div *ngIf="selectedFiles.rapport">
+          Fichier sélectionné : {{ selectedFiles.rapport.name }}
+        </div>
+        <small *ngIf="depotForm.get('rapport')?.invalid && depotForm.get('rapport')?.touched" 
+               class="error-message">
+          Veuillez sélectionner un fichier PDF valide.
+        </small>
+      </div>
+
+      <!-- Option 2 : Télécharger le modèle Word -->
+      <div *ngIf="useTemplate" class="form-group text-center">
+        <label>Modèle Word à compléter :</label><br>
+        <a href="/modele_rapport.docx" download class="btn-download">
+          ⬇️ Télécharger le modèle Word
+        </a>
+      </div>
+      
+
+      <!-- Attestation -->
+      <div *ngIf="!useTemplate" class="form-group">
+        <label for="attestation">Attestation de stage (PDF uniquement)</label>
+        <input type="file" id="attestation" accept=".pdf" 
+               (change)="onFileChange($event, 'attestation')" required>
+        <div *ngIf="selectedFiles.attestation">
+          Fichier sélectionné : {{ selectedFiles.attestation.name }}
+        </div>
+        <small *ngIf="depotForm.get('attestation')?.invalid && depotForm.get('attestation')?.touched" 
+               class="error-message">
+          Veuillez sélectionner un fichier PDF valide.
+        </small>
+      </div>
+
+      <!-- Fiche d'appréciation -->
+      <div *ngIf="!useTemplate" class="form-group">
+        <label for="ficheAppreciation">Fiche d'appréciation (PDF uniquement)</label>
+        <input type="file" id="ficheAppreciation" accept=".pdf" 
+               (change)="onFileChange($event, 'ficheAppreciation')" required>
+        <div *ngIf="selectedFiles.ficheAppreciation">
+          Fichier sélectionné : {{ selectedFiles.ficheAppreciation.name }}
+        </div>
+        <small *ngIf="depotForm.get('ficheAppreciation')?.invalid && depotForm.get('ficheAppreciation')?.touched" 
+               class="error-message">
+          Veuillez sélectionner un fichier PDF valide.
+        </small>
+      </div>
+
+      <!-- Bouton de soumission -->
+      <div *ngIf="!useTemplate" class="text-center mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="depotForm.invalid || (!useTemplate && !selectedFiles.rapport)">
+          📬 Déposer les documents
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

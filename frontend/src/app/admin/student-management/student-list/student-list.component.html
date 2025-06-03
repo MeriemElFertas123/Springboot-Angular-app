@@ -1,0 +1,49 @@
+<div class="div-container">
+  <div class="sidebar">
+    <app-side-bar-admin></app-side-bar-admin>
+  </div>
+  
+    <main class="main-content">
+        <div class="student-list">
+            <h2>Liste des Étudiants</h2>
+            <table class="table">
+            <thead>
+                <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Genre</th>
+                <th>Filière</th>
+                <th>Année d'étude</th>
+                <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>  
+                <tr *ngFor="let student of students">
+                <td> 
+                    <!-- Afficher l'image à partir du BLOB -->
+                  <img *ngIf="student.image" [src]="'data:image/jpeg;base64,' + student.image" alt="Student Image" width="40px">
+                </td>
+                <td>{{ student.nom }}</td>
+                <td>{{ student.prenom }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.telephone }}</td>
+                <!-- <td><img [src]="student.imageUrl" alt="Student Image" width="50"></td> -->
+                <td>{{student.genre}}</td>
+                <td>{{student.filiere}}</td>
+                <td>{{student.anneeEtude}}</td>
+                <td>
+                    <button *ngIf="student.id !== undefined" (click)="deleteStudent(student.id)">
+                    {{ isDeleting ? 'Suppression en cours...' : 'Supprimer' }}
+                    </button>
+                    <a [routerLink]="['/students/edit-student', student.id]">Modifier</a>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            <a routerLink="/students/add-student">Ajouter un étudiant</a>
+    </div>
+      </main>
+  </div>

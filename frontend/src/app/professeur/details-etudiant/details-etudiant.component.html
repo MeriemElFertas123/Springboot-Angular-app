@@ -1,0 +1,67 @@
+<div class="container">
+  <aside class="sidebar">
+    <nav class="nav-links">
+      <a class="nav-item"  routerLink="/espace-professeur">
+        <i class="icon">🏚️</i>
+        <span class="text">Acceuil</span>
+      </a>
+      <a class="nav-item"  routerLink="/rapports-stage">
+        <i class="icon">📄</i>
+        <span class="text">Les rapports de stage</span>
+      </a>
+      <a class="nav-item" routerLink="/mes-etudiants">
+        <i class="icon">🧑🏼‍💻</i>
+        <span class="text" >Etudiants</span>
+      </a>
+    </nav>
+  </aside>
+<main>
+  <div class="row d-flex justify-content-center align-items-center mb-5 ">
+    <div class="card col-6 mb-5" >
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title my-2 text-center">{{depotRapportStageSelectionne?.titre}}</h5>
+          <!-- le flex pour que la description s'étire pour remplir l'espace et éviter les décalages -->
+          <p class="card-text flex-grow-1 my-2 " >{{depotRapportStageSelectionne?.description}}</p>
+          <hr class="my-5">
+          <div class="icon-container">
+            <i class="fa-solid fa-eye"></i>
+            <i class="fa-solid fa-comment"></i>
+            <i class="fa-solid fa-download "></i>
+          </div>
+          <p class="card-text date-soumission mt-auto"><small class="text-muted">Date de soumission: {{depotRapportStageSelectionne?.submissionDate | date :'dd/MM/yyyy : hh:mm'}}</small></p>
+          <p class="statutRapport">statut du rapport : <span [ngStyle]="{'backgroundColor' : getColorSelonStatut(depotRapportStageSelectionne?.statut)}" style="color: #fff;padding: 4px;" class="rounded">{{depotRapportStageSelectionne?.statut}}</span></p>
+        </div>
+      </div>
+</div>
+<div class="row d-flex justify-content-center align-items-center">
+    <h5 class="text-center">{{ etudiants?.length==1 ? "L'étudiant qui a efféctué ce stage est " : "Les étudiants qui ont efféctué ce stage sont"}}</h5>
+   @for (etud of etudiants; track $index) {
+    <div class="card col-lg-3 col-md-4 col-sm-6 studentsDep" >
+      <div class="image">
+        <img [src]="'data:image/jpeg;base64,'+etud.image" class="card-img-top" [alt]="etud.nom" >
+      </div>
+        <div class="card-body">
+          <h5 class="card-title">{{etud.prenom}} {{etud.nom}}</h5>
+          <table class="table table-bordered">
+           <tbody>
+            <tr>
+                <td>email</td>
+                <td>{{etud.email}}</td>
+            </tr>
+            <tr>
+                <td>filière</td>
+                <td>{{etud.filiere}}</td>
+            </tr>
+            <tr>
+                <td>année d'étude</td>
+                <td>{{etud.anneeEtude}}</td>
+            </tr>
+           </tbody> 
+          </table>
+        </div>
+      </div>
+   }
+</div>
+</main>
+  
+</div>

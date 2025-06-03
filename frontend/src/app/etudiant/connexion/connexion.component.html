@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<div class="login-container">
+  <h3>Sign-in to your account.</h3>
+  <form onsubmit="onSubmit()" class="login-form">
+    <div class="form-group">
+      <label for="username">USERNAME</label>
+      <div class="input-container">
+        <i class="fas fa-envelope"></i>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="username"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">PASSWORD</label>
+      <div class="input-container">
+        <i class="fas fa-lock"></i>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+          placeholder="........."
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Sign-in</button>
+  </form>
+</div>

@@ -1,0 +1,21 @@
+.div-container{
+    display: flex;
+    height: 100vh;
+}
+main{
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+}
+
+.sidebar{
+    background-color: #CEDDDE;
+} 
+.add-student-container {
+    width: 50%;
+    margin: 12px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9a8;
+}

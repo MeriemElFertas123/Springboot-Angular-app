@@ -1,0 +1,33 @@
+<div class="app-container">
+  <div class="sidebar">
+    <app-side-bar-etudiant></app-side-bar-etudiant>
+  </div>
+  <main class="pt-4">
+    <h1>Liste des Stages</h1>
+
+    <div class="stage-list">
+      <div class="stage-row stage-header">
+        <div>Entreprise</div>
+        <div>Adresse</div>
+        <div>Encadrant</div>
+        <div>Sujet</div>
+        <div>Description</div>
+        <div>Type</div>
+        <div>Actions</div>
+      </div>
+
+      <div class="stage-row" *ngFor="let stage of stages">
+        <div>{{ stage.nomEntreprise }}</div>
+        <div>{{ stage.adresseEntreprise }}</div>
+        <div>{{ stage.nomEncadrant }}</div>
+        <div>{{ stage.intituleSujet }}</div>
+        <div>{{ stage.descriptionSujet }}</div>
+        <div>{{ stage.typeStage }}</div>
+        <div class="stage-actions">
+          <button class="btn btn-sm btn-primary" [routerLink]="['/updateStage', stage.id!]">Modifier</button>
+          <button class="btn btn-sm btn-danger" (click)="confirmDelete(stage.id!)">Supprimer</button><!--Le ! après stage.id indique à TypeScript que tu es certain que id ne sera pas undefined à cet endroit-->
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

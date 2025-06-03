@@ -1,0 +1,49 @@
+
+<div class="div-container">
+
+    <div class="sidebar">
+        <app-side-bar-admin></app-side-bar-admin>
+    </div>
+
+    <main>
+        <div class="student-list">
+            <h2>Liste des Enseignants</h2>
+            <table class="table">
+            <thead>
+                <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Genre</th>
+                <th>Specialite</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let enseignant of enseignants">
+                <td>
+                    <!-- Afficher l'image à partir du BLOB -->
+                  <img *ngIf="enseignant.image" [src]="'data:image/jpeg;base64,' + enseignant.image" alt="Enseignant Image" width="40px">
+                </td>
+                <td>{{enseignant.nom }}</td>
+                <td>{{enseignant.prenom }}</td>
+                <td>{{ enseignant.email }}</td>
+                <td>{{ enseignant.telephone }}</td>
+                <!-- <td><img [src]="student.imageUrl" alt="Student Image" width="50"></td> -->
+                <td>{{enseignant.genre}}</td>
+                <td>{{enseignant.specialite}}</td>
+                <td>
+                    <button *ngIf="enseignant.id !== undefined" class="btn btn-sm btn-danger" (click)="deleteEnseignant(enseignant.id)">
+                    {{ isDeleting ? 'Suppression en cours...' : 'Supprimer' }}
+                    </button>
+                    <a [routerLink]="['/enseignants/edit-enseignant', enseignant.id]">Modifier</a>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+            <a routerLink="/enseignants/add-enseignant">Ajouter un enseignant</a>
+        </div>
+    </main>
+</div>

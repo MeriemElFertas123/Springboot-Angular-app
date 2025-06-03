@@ -1,0 +1,13 @@
+<div *ngIf="studentId" class="delete-container">
+    <h2>Confirmer la suppression</h2>
+    <p>Êtes-vous sûr de vouloir supprimer cet étudiant ?</p>
+    <div class="actions">
+     <!-- <button (click)="deleteStudent()" class="delete-button">Oui, supprimer</button>
+      <button (click)="cancel()" class="cancel-button">Annuler</button>
+      -->
+    </div>
+  </div>
+  
+  <div *ngIf="!studentId">
+    <p>ID de l'étudiant manquant. Impossible de procéder à la suppression.</p>
+  </div>

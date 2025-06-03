@@ -1,0 +1,50 @@
+<app-user-profile-menu></app-user-profile-menu>
+<div class="dashboard-container">
+  <div class="sidebar">
+    <app-side-bar-etudiant></app-side-bar-etudiant>
+  </div>
+  
+    <main class="main-content">
+      <header class="top-bar">
+        <div class="search-container">
+          <input type="text" placeholder="Search for datas & reports..." class="search-input">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="user-profile" (click)="toggleDropdown()">
+          <span class="user-name">Salim Alioua</span>
+          <div class="user-avatar">
+            <img [src]="profilePicture" alt="Photo de profil" class="profile-image" />
+          </div>
+        </div>
+        <div class="dropdown-menu" [class.show]="isDropdownOpen">
+          <div class="dropdown-header">
+            <div class="user-avatar-large">
+              <img [src]="profilePicture" class="profile-image" />
+            </div>
+            <div class="user-info">Salim Alioua</div>
+            <div class="user-email">salim.aliouauit.ac.ma</div>
+          </div>
+          <a class="dropdown-item" (click)="triggerFileInput()">
+            <i class="icon">📷</i>
+            <span>Modifier la photo</span>
+          </a>
+          <input type="file" id="fileInput" (change)="updateProfilePicture($event)" accept="image/*" style="display: none;">
+          
+          <a class="dropdown-item" routerLink="/changerPassword">
+            <i class="icon">🔒</i>
+            <span>Changer le mot de passe</span>
+          </a>
+          <a class="dropdown-item" (click)="logout()">
+            <i class="icon">🚪</i>
+            <span>Déconnexion</span>
+          </a>
+        </div>
+      </header>
+  
+      <section class="welcome-section">
+        <div class="welcome-message">Hi Salim ! Welcome Back</div>
+        <button class="add-stage-btn" (click)="navigateToAjouterStage()">+ AJOUTER UN STAGE</button>
+      </section>
+    </main>
+  </div>
+  
