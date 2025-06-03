@@ -1,0 +1,70 @@
+.div-container{
+    display: flex;
+    height: 100vh;
+}
+main{
+    flex-grow: 1;
+    background-color: #fff;
+ 
+}
+
+.sidebar{
+    background-color: #CEDDDE;
+} 
+
+
+
+
+
+
+/* main */
+.main{
+    display: flex;
+    flex-direction: column;
+    margin-left: 35%;
+    margin-top:12%;
+}
+.table 
+.btn{
+    font-size: 22px;
+    padding: 28px;
+    background-color: #f4f9f7;
+    box-shadow: 12px 12px 20px #0000005b;
+
+}
+.dropdown-item{
+    font-size: 18px;
+    padding: 10px;
+}
+.main p{
+    cursor: pointer;
+    transition: all .5s ease;
+}
+.main p:hover{
+    letter-spacing: 2px;
+    padding-left: 25px;
+    color: green;
+    text-decoration: underline;
+}
+.formcheck-input{
+    position: absolute;
+    left: 20px;
+}
+.form-check{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 48px;
+}
+.dropdown-menu{
+    width: 100%;
+}
+.dropdown-menu-prof li{
+    padding-left: 22px;
+}
+.btn-submit{
+    transition: all .5s ease;
+}
+.btn-submit:hover{
+    transform: scale(0.9);
+}

@@ -76,7 +76,7 @@ export class UserProfileMenuComponent implements OnInit {
       // supprimer le contenu du localstorage
       localStorage.clear();
       // redirection vers la page de login
-      this.router.navigate(['/login-form']);
+      this.router.navigate(['/main-home']);
     }
   }
 
