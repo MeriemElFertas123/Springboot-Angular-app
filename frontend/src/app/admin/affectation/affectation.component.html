@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@
       align-items: center;
       padding: 0 30px;
       z-index: 1100;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
     .top-bar h1 {
@@ -44,10 +45,11 @@
     .admin-container {
       display: flex;
       min-height: 100vh;
-      padding-top: 60px; /* Compensation pour la top bar fixe */
+      padding-top: 60px;
+      /* Compensation pour la top bar fixe */
     }
 
-   
+
     .nav-links {
       padding: 20px 0;
     }
@@ -56,14 +58,14 @@
       display: flex;
       align-items: center;
       padding: 14px 30px;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255, 255, 255, 0.9);
       text-decoration: none;
       transition: all 0.3s;
       font-size: 0.95rem;
     }
 
     .nav-item:hover {
-      background-color: rgba(255,255,255,0.1);
+      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .nav-item.active {
@@ -103,7 +105,7 @@
       background-color: white;
       width: 250px;
       font-size: 14px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
     .export-btn {
@@ -135,7 +137,7 @@
     .table-container {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
       overflow-x: auto;
       border: 1px solid #e2e8f0;
     }
@@ -205,6 +207,7 @@
       opacity: 0.9;
       transform: translateY(-1px);
     }
+
     /* NOUVEAU SIDEBAR */
     .sidebar {
       width: 300px;
@@ -215,11 +218,12 @@
       overflow-y: auto;
       z-index: 1000;
       left: 0;
-      top: 60px; /* Pour laisser place à la top bar */
+      top: 60px;
+      /* Pour laisser place à la top bar */
       padding: 20px;
       transition: all 0.3s ease;
     }
-    
+
     .sidebar-title {
       margin-bottom: 20px;
       font-size: 1.4rem;
@@ -227,11 +231,13 @@
       text-align: center;
       color: black;
     }
+
     /* RESPONSIVE */
     @media (max-width: 992px) {
       .sidebar {
         width: 240px;
       }
+
       .admin-content {
         margin-left: 240px;
         padding: 20px;
@@ -245,89 +251,93 @@
         height: auto;
         top: 0;
       }
+
       .admin-content {
         margin-left: 0;
         padding: 15px;
       }
+
       .filters {
         flex-direction: column;
         align-items: flex-start;
       }
-      .form-select, .export-btn {
+
+      .form-select,
+      .export-btn {
         width: 100%;
       }
     }
   </style>
 </head>
+
 <body>
   <!-- Top Bar Fixe -->
   <div class="top-bar">
     <h1>GESTION DES STAGES</h1>
-    
+
   </div>
 
   <div class="admin-container">
     <!-- Sidebar -->
     <div class="sidebar">
-        <app-side-bar-admin></app-side-bar-admin>
-      </div>
-   
-        <div class="main">
-          <div class="table-affectation">
-            <table class="table">
-              <tbody>
-                <tr>
-                  <td>
-                  <div class="btn-group">
-                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                      {{getSelectedEnseignantName()}}
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-prof">
-                      <li *ngFor="let enseignant of listEnseignants"><button class="dropdown-item" type="button" (click)="choisirEnseignant(enseignant.id)">{{enseignant.nom}} {{enseignant.prenom}}</button></li>
-                   
-                    </ul>
-                  </div>
-                  </td>
+      <app-side-bar-admin></app-side-bar-admin>
+    </div>
 
-                  <td>
-                    <div class="btn-group">
-                      <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Les étudiants encadrés
-                      </button>
-                      <ul class="dropdown-menu" (click)="$event.stopPropagation()">
-                        <li *ngFor="let etudiant of listEtudiants"
-                        class="m-1 p-1 ">
-                        <div class="form-check py-1">
-                          <input  class="formcheck-input bg-primary"
-                          type="checkbox"
-                          [checked]="isEtudiantSelected(etudiant.id)"
-                          (click)="toggleEtudiantSelection(etudiant.id) ; $event.stopPropagation()"
-                          >
-                        <label for="form-check-label">
-                          {{etudiant.nom}} {{etudiant.prenom}}
-                        </label>
-                       
-                    </div>
-                    </li>
-                    </ul>
-                    </div>
-                  </td>
+    <div class="main">
 
-                  <td>
-                      <button  class="btn btn-submit" (click)="soumettre()">Affecter</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- à ajouter par la suite -->
-          <!-- <p class="m-4">Voir la liste des affectations</p> -->
+      <div class="table-affectation">
 
-          <div class="alert m-5 text-center p-3" [ngClass]="{'alert-secondary' : clickAffecter===0 , 'alert-info' : clickAffecter===1 , 'alert-danger' : clickAffecter===-1}" role="alert">
-            {{ clickAffecter==1 ? 'Affectation est passée avec succès':clickAffecter==0 ?'Choisir un enseignant et affecter le à des étudiants' : 'On affecte 2 étudiant au maximum'}}
-          </div>
+        <div class="btn-group m-1">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{getSelectedEnseignantName()}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-prof">
+            <li *ngFor="let enseignant of listEnseignants"><button class="dropdown-item" type="button"
+                (click)="choisirEnseignant(enseignant.id)">{{enseignant.nom}} {{enseignant.prenom}}</button></li>
+
+          </ul>
         </div>
+
+
+
+        <div class="btn-group m-1">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Les étudiants encadrés
+          </button>
+          <ul class="dropdown-menu" (click)="$event.stopPropagation()">
+            <li *ngFor="let etudiant of listEtudiants" class="m-1 p-1 ">
+              <div class="form-check py-1">
+                <input class="formcheck-input bg-primary" type="checkbox" [checked]="isEtudiantSelected(etudiant.id)"
+                  (click)="toggleEtudiantSelection(etudiant.id) ; $event.stopPropagation()">
+                <label for="form-check-label">
+                  {{etudiant.nom}} {{etudiant.prenom}}
+                </label>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+
+        <button class="btn btn-submit m-1" (click)="soumettre()">Affecter</button>
+
+
+      </div>
+
+
+      <!-- à ajouter par la suite -->
+      <!-- <p class="m-4">Voir la liste des affectations</p> -->
+
+
+      <div class="alert m-5 text-center p-3"
+        [ngClass]="{'alert-secondary' : clickAffecter===0 , 'alert-info' : clickAffecter===1 , 'alert-danger' : clickAffecter===-1}"
+        role="alert">
+        {{ clickAffecter==1 ? 'Affectation est passée avec succès':clickAffecter==0 ?'Choisir un enseignant et affecter le à des étudiants' : 'On affecte 2 étudiant à un enseignant'}}
+      </div>
+    </div>
 
   </div>
 </body>
+
 </html>

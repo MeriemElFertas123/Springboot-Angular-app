@@ -61,7 +61,7 @@ export class AffectationComponent implements OnInit{
   }
 
   soumettre(){
-    if(this.selectedIdEtudiants.length<=2){
+    if(this.selectedIdEtudiants.length<=2 && this.selectedIdEtudiants.length>0 ){
           const encadrement = {
           enseignantId:this.selectedIdEnseignant,
           etudiantsIds:this.selectedIdEtudiants,

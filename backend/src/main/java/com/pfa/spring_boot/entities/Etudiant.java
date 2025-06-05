@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 @Entity
 public class Etudiant {
     @Id
@@ -40,9 +39,7 @@ public class Etudiant {
             cascade = CascadeType.ALL,// Opérations propagées aux Encadrements liés
             orphanRemoval = true
     )
-    @JsonIgnore
     private List<Encadrement> encadrements=new ArrayList<>();
-
 
 
 
@@ -145,4 +142,9 @@ public class Etudiant {
                 ", anneeEtude=" + anneeEtude +
                 '}';
     }
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stage> stages = new ArrayList<>();
+    // NOUVEAU: Getters et Setters pour la relation Stage
+    public List<Stage> getStages() { return stages; }
+    public void setStages(List<Stage> stages) { this.stages = stages; }
 }
