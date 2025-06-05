@@ -44,19 +44,17 @@
       font-weight: 600;
     }
 
-    /* NOUVEAU SIDEBAR */
+    /* SIDEBAR */
     .sidebar {
-      width: 300px;
-      background-color: #CEDDDE;
-      color: #43A3DB;
-      position: fixed;
-      height: 100vh;
-      overflow-y: auto;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      width: 280px;
+      background-color: #fcfcfc;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
       z-index: 1000;
-      left: 0;
-      top: 60px; /* Pour laisser place à la top bar */
       padding: 20px;
-      transition: all 0.3s ease;
+      overflow-y: hidden;
     }
     
     .sidebar-title {
@@ -105,11 +103,33 @@
     /* CONTENU PRINCIPAL */
     .admin-content {
       flex: 1;
-      margin-left: 300px;
-      margin-top: 60px; /* Pour la top bar */
+      margin-left: 1px;
+      margin-top: 60px;
       padding: 30px;
       min-height: calc(100vh - 60px);
-      background-color: #f8fafc;
+      background: #e9ecf0;
+    }
+
+    /* LOADING SPINNER */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* FILTRES */
@@ -216,29 +236,142 @@
       color: #721c24;
     }
 
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .close-btn:hover {
+      color: #333;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .detail-label {
+      font-weight: 600;
+      color: #4a5568;
+      flex: 0 0 150px;
+    }
+
+    .detail-value {
+      flex: 1;
+      color: #2d3748;
+    }
+
+    .status-actions {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .status-btn {
+      padding: 8px 16px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-approve {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .btn-reject {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .status-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 992px) {
       .sidebar {
         width: 240px;
       }
       .admin-content {
-        margin-left: 240px;
         padding: 20px;
       }
     }
 
     @media (max-width: 768px) {
+      .admin-container {
+        flex-direction: column;
+      }
+      
       .sidebar {
-        width: 100%;
         position: relative;
         top: 0;
-      }
-      .admin-content {
-        margin-left: 0;
+        width: 100%;
+        height: auto;
         padding: 15px;
       }
+      
+      .admin-content {
+        margin-top: 0;
+        padding: 15px;
+      }
+      
       .form-select {
         width: 100%;
+      }
+
+      .modal-content {
+        padding: 20px;
+        margin: 20px;
       }
     }
   </style>
@@ -250,10 +383,10 @@
   </div>
 
   <div class="admin-container">
-    <!-- Nouveau Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar">
-        <app-side-bar-admin></app-side-bar-admin>
-      </div>
+      <app-side-bar-admin></app-side-bar-admin>
+    </div>
     
     <!-- Contenu Principal -->
     <main class="admin-content">
@@ -264,14 +397,21 @@
         </select>
       </div>
       
-      <div class="table-container">
+      <!-- Loading -->
+      <div *ngIf="isLoading" class="loading">
+        <div class="spinner"></div>
+      </div>
+
+      <!-- Tableau -->
+      <div class="table-container" *ngIf="!isLoading">
         <table class="rapports-table">
           <thead>
             <tr>
               <th>Étudiant</th>
-              <th>Titre</th>
+              <th>Entreprise</th>
+              <th>Sujet</th>
               <th>Domaine</th>
-              <th>Date</th>
+              <th>Date Dépôt</th>
               <th>État</th>
               <th>Actions</th>
             </tr>
@@ -279,25 +419,95 @@
           <tbody>
             <tr *ngFor="let r of rapports">
               <td>{{ r.etudiant?.nom }} {{ r.etudiant?.prenom }}</td>
-              <td>{{ r.titre }}</td>
-              <td>{{ r.domaine }}</td>
-              <td>{{ r.dateDepot | date:'dd/MM/yyyy' }}</td>
-              <td [class]="'status-' + r.etat?.toLowerCase()">
-                <span class="status-badge">{{ r.etat }}</span>
+              <td>{{ r.stage?.nomEntreprise }}</td>
+              <td>{{ r.stage?.intituleSujet }}</td>
+              <td>{{ r.stage?.domaine }}</td>
+              <td>{{ formatDate(r.stage.dateDepot)}}</td>
+              <td>
+                <span class="status-badge" [class]="getStatusClass(r.stage.statutRapport)">
+                  {{ r.stage?.statutRapport }}
+                </span>
               </td>
               <td>
                 <button class="action-btn btn-view" (click)="viewReport(r)">
                   <i class="fas fa-eye"></i> Voir
                 </button>
-                <button class="action-btn btn-download" (click)="downloadReport(r)">
+                <button 
+                  class="action-btn btn-download" 
+                  (click)="downloadReport(r)"
+                  [disabled]="!r.stage?.nomFichierRapport">
                   <i class="fas fa-download"></i> Télécharger
                 </button>
+              </td>
+            </tr>
+            <tr *ngIf="rapports.length === 0">
+              <td colspan="7" style="text-align: center; padding: 40px; color: #666;">
+                Aucun rapport trouvé
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </main>
+  </div>
+
+  <!-- Modal de visualisation -->
+  <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Détails du Rapport</h2>
+        <button class="close-btn" (click)="closeModal()">&times;</button>
+      </div>
+      
+      <div *ngIf="selectedRapport">
+        <div class="detail-row">
+          <span class="detail-label">Étudiant:</span>
+          <span class="detail-value">{{ selectedRapport.etudiant?.nom }} {{ selectedRapport.etudiant?.prenom }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">{{ selectedRapport.etudiant?.email }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Entreprise:</span>
+          <span class="detail-value">{{ selectedRapport.stage?.nomEntreprise }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Sujet:</span>
+          <span class="detail-value">{{ selectedRapport.stage?.intituleSujet }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Domaine:</span>
+          <span class="detail-value">{{ selectedRapport.stage?.domaine }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Date Dépôt:</span>
+          <span class="detail-value">{{ formatDate(selectedRapport.stage.dateDepot) }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Fichier:</span>
+          <span class="detail-value">{{ selectedRapport.stage?.nomFichierRapport || 'Aucun fichier' }}</span>
+        </div>
+        
+        <div class="detail-row">
+          <span class="detail-label">Statut:</span>
+          <span class="detail-value">
+            <span class="status-badge" [class]="getStatusClass(selectedRapport.stage.statutRapport)">
+              {{ selectedRapport.stage?.statutRapport }}
+            </span>
+          </span>
+        </div>
+        
+        <!-- Actions pour changer le statut -->
+        <div class="status-actions" *ngIf="selectedRapport.stage?.statutRapport === 'EN_ATTENTE'">
+      </div>
+    </div>
   </div>
 </body>
 </html>

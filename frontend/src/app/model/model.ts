@@ -50,6 +50,9 @@ export interface Evaluation{
 }
 
 export interface Stage{
+etat: any;
+titre: any;
+  etudiant: any;
     id?: number;
     nomEntreprise:string,
     adresseEntreprise:string,

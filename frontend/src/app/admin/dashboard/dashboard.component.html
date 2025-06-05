@@ -1,62 +1,297 @@
 <div class="dashboard-content">
-    
   <div class="sidebar">
     <app-side-bar-admin></app-side-bar-admin>
   </div>
    
-   
-      <main class="main-content">
-        <h1 class="dashboard-title">Tableau de Bord</h1>
-  
+  <main class="main-content">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <div class="header-content">
+        <h1 class="dashboard-title">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="title-gradient">Tableau de Bord</span>
+          <div class="title-underline"></div>
+        </h1>
+        <div class="header-stats">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <i class="fas fa-circle"></i>
+            <span>Données en temps réel</span>
+          </div>
+          <div class="last-update">
+            <i class="far fa-clock"></i>
+            Dernière mise à jour: {{ getCurrentTime() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards Container -->
     <div class="stats-container">
-      <!-- Nombre total des rapports déposés -->
-      <div class="stat-card">
-        <div class="stat-icon">📄</div>
-        <div class="stat-value">{{ totalReports }}</div>
-        <div class="stat-label">Rapports déposés</div>
+      <!-- Card 1 -->
+      <div class="stat-card primary-card" [style.animation-delay]="'0.1s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-file-alt"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+12%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedTotalReports }}</div>
+          <div class="stat-label">Rapports déposés</div>
+          <div class="stat-sublabel">Ce mois-ci</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar" [style.width]="'75%'"></div>
+        </div>
       </div>
-  
-      <!-- Nombre des rapports validés, en attente ou refusés -->
-      <div class="stat-card">
-        <div class="stat-icon">✅</div>
-        <div class="stat-value">{{ validatedReports }}</div>
-        <div class="stat-label">Rapports validés</div>
+
+      <!-- Card 2 -->
+      <div class="stat-card success-card" [style.animation-delay]="'0.2s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-check-circle"></i>
+            <div class="icon-pulse success"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+8%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedValidatedReports }}</div>
+          <div class="stat-label">Rapports validés</div>
+          <div class="stat-sublabel">Taux: {{ getValidationRate() }}%</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar success" [style.width]="getValidationRate() + '%'"></div>
+        </div>
       </div>
-  
-      <div class="stat-card">
-        <div class="stat-icon">⏳</div>
-        <div class="stat-value">{{ pendingReports }}</div>
-        <div class="stat-label">Rapports en attente</div>
+
+      <!-- Card 3 -->
+      <div class="stat-card warning-card" [style.animation-delay]="'0.3s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-clock"></i>
+            <div class="icon-pulse warning"></div>
+          </div>
+          <div class="stat-trend neutral">
+            <i class="fas fa-arrow-right"></i>
+            <span class="trend-value">0%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedPendingReports }}</div>
+          <div class="stat-label">En attente</div>
+          <div class="stat-sublabel">Révision requise</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar warning" [style.width]="'45%'"></div>
+        </div>
       </div>
-  
-      <div class="stat-card">
-        <div class="stat-icon">❌</div>
-        <div class="stat-value">{{ rejectedReports }}</div>
-        <div class="stat-label">Rapports refusés</div>
+
+      <!-- Card 4 -->
+      <div class="stat-card danger-card" [style.animation-delay]="'0.4s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-times-circle"></i>
+            <div class="icon-pulse danger"></div>
+          </div>
+          <div class="stat-trend negative">
+            <i class="fas fa-arrow-down"></i>
+            <span class="trend-value">-3%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedRejectedReports }}</div>
+          <div class="stat-label">Rapports refusés</div>
+          <div class="stat-sublabel">Nécessitent correction</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar danger" [style.width]="'15%'"></div>
+        </div>
       </div>
-  
-      <!-- Nombre d'étudiants/enseignants actifs -->
-      <div class="stat-card">
-        <div class="stat-icon">🎓</div>
-        <div class="stat-value">{{ activeStudents }}</div>
-        <div class="stat-label">Étudiants actifs</div>
+
+      <!-- Card 5 -->
+      <div class="stat-card info-card" [style.animation-delay]="'0.5s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-user-graduate"></i>
+            <div class="icon-pulse info"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+15%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedActiveStudents }}</div>
+          <div class="stat-label">Étudiants</div>
+          <div class="stat-sublabel">Connectés ce mois</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar info" [style.width]="'85%'"></div>
+        </div>
       </div>
-  
-      <div class="stat-card">
-        <div class="stat-icon">👨‍🏫</div>
-        <div class="stat-value">{{ activeTeachers }}</div>
-        <div class="stat-label">Enseignants actifs</div>
+
+      <!-- Card 6 -->
+      <div class="stat-card secondary-card" [style.animation-delay]="'0.6s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-chalkboard-teacher"></i>
+            <div class="icon-pulse secondary"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+5%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ animatedActiveTeachers }}</div>
+          <div class="stat-label">Enseignants</div>
+          <div class="stat-sublabel">En ligne aujourd'hui</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar secondary" [style.width]="'65%'"></div>
+        </div>
       </div>
     </div>
-  
-    <!-- Dates limites de dépôt et alertes -->
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+      <div class="chart-card main-chart">
+        <div class="chart-header">
+          <h3><i class="fas fa-chart-line"></i> Évolution des rapports</h3>
+          <div class="chart-controls">
+            <button class="chart-btn active" (click)="setChartPeriod('week')">
+              <i class="fas fa-calendar-week"></i> 7j
+            </button>
+            <button class="chart-btn" (click)="setChartPeriod('month')">
+              <i class="fas fa-calendar-alt"></i> 30j
+            </button>
+            <button class="chart-btn" (click)="setChartPeriod('year')">
+              <i class="fas fa-calendar"></i> 1an
+            </button>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas #reportsChart width="400" height="200"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card donut-chart">
+        <div class="chart-header">
+          <h3><i class="fas fa-chart-pie"></i> Répartition des statuts</h3>
+        </div>
+        <div class="chart-container">
+          <canvas #statusChart width="300" height="300"></canvas>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item">
+            <span class="legend-color success"></span>
+            <i class="fas fa-check-circle"></i>
+            <span>Validés ({{ validatedReports }})</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color warning"></span>
+            <i class="fas fa-clock"></i>
+            <span>En attente ({{ pendingReports }})</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color danger"></span>
+            <i class="fas fa-times-circle"></i>
+            <span>Refusés ({{ rejectedReports }})</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deadlines Section -->
     <div class="deadline-section">
-      <h2>Dates limites de dépôt</h2>
-      <div class="deadline-card" *ngFor="let deadline of deadlines">
-        <div class="deadline-date">{{ deadline.date }}</div>
-        <div class="deadline-message">{{ deadline.message }}</div>
-        <div class="deadline-alert" *ngIf="deadline.isUrgent">⚠️ Délai critique !</div>
+      <div class="section-header">
+        <h2><i class="fas fa-clock"></i> Dates limites critiques</h2>
+        <button class="add-deadline-btn" (click)="openDeadlineModal()">
+          <i class="fas fa-plus"></i> Ajouter une échéance
+        </button>
+      </div>
+      
+      <div class="deadlines-grid">
+        <div class="deadline-card" *ngFor="let deadline of deadlines; let i = index"
+             [class.urgent]="deadline.isUrgent"
+             [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="deadline-indicator" [class]="deadline.priority"></div>
+          <div class="deadline-content">
+            <div class="deadline-header">
+              <h4><i class="far fa-calendar-alt"></i> {{ deadline.title }}</h4>
+              <span class="deadline-priority" [class]="deadline.priority">
+                <i class="fas fa-exclamation-circle"></i> {{ deadline.priority }}
+              </span>
+            </div>
+            <div class="deadline-date">
+              <span class="date-value">{{ deadline.date | date:'dd/MM/yyyy' }}</span>
+              <span class="days-remaining" [class]="deadline.urgencyClass">
+                <i class="far fa-clock"></i> {{ deadline.daysRemaining }} jours restants
+              </span>
+            </div>
+            <div class="deadline-description">{{ deadline.description }}</div>
+            <div class="deadline-progress">
+              <div class="progress-bar" [style.width]="deadline.progress + '%'"></div>
+              <span class="progress-text">{{ deadline.progress }}% complété</span>
+            </div>
+          </div>
+          <div class="deadline-actions">
+            <button class="action-btn edit" (click)="editDeadline(deadline)">
+              <i class="far fa-edit"></i>
+            </button>
+            <button class="action-btn delete" (click)="deleteDeadline(deadline.id)">
+              <i class="far fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    </main>
-  </div>
+
+    <!-- Activity Section -->
+    <div class="activity-section">
+      <div class="section-header">
+        <h2><i class="fas fa-bell"></i> Activité récente</h2>
+        <button class="view-all-btn">
+          <i class="fas fa-list"></i> Voir tout
+        </button>
+      </div>
+      
+      <div class="activity-feed">
+        <div class="activity-item" *ngFor="let activity of recentActivities; let i = index"
+             [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="activity-avatar" [class]="activity.type">
+            <i ngClass]="{
+              'fas fa-user': activity.type === 'user',
+              'fas fa-file-upload': activity.type === 'upload',
+              'fas fa-check-circle': activity.type === 'validation',
+              'fas fa-comment': activity.type === 'comment'
+            }"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">{{ activity.message }}</div>
+            <div class="activity-time">
+              <i class="far fa-clock"></i> {{ activity.timestamp | date:'short' }}
+            </div>
+          </div>
+          <div class="activity-status" [class]="activity.status">
+            <i *ngIf="activity.status === 'error'" class="fas fa-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

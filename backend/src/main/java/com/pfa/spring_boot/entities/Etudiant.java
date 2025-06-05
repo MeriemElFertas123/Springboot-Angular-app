@@ -142,4 +142,9 @@ public class Etudiant {
                 ", anneeEtude=" + anneeEtude +
                 '}';
     }
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Stage> stages = new ArrayList<>();
+    // NOUVEAU: Getters et Setters pour la relation Stage
+    public List<Stage> getStages() { return stages; }
+    public void setStages(List<Stage> stages) { this.stages = stages; }
 }

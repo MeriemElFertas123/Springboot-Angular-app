@@ -1,3 +1,13 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Occupe toute la hauteur de la vue */
+ 
+  background-color: #fcfcfc;
+  box-shadow: var(--shadow-md); /* Optionnel pour un effet visuel */
+  z-index: 1000; /* Assure que la sidebar reste au-dessus du contenu */
+}
+
 /* RESET COMPLET */
 .admin-container, .admin-sidebar, .admin-content {
     margin: 0;
@@ -21,7 +31,7 @@
     left: 0;
     bottom: 0;
     z-index: 1000;
-    overflow-y: auto;
+    overflow: hidden; /* Empêche tout débordement */
   }
   
   .admin-content {

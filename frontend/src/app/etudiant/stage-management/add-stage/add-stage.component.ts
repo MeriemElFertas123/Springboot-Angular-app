@@ -23,8 +23,11 @@ export class AddStageComponent {
     intituleSujet: '',
     descriptionSujet: '',
     typeStage: TypeStage.PFA,
-    dateDepot: '',      
-    domaine: ''  
+    dateDepot: '',
+    domaine: '',
+    etat: undefined,
+    titre: undefined,
+    etudiant: undefined
   };
 
   useTemplate: boolean = false;

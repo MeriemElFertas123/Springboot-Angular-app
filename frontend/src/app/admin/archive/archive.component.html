@@ -1,25 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archives - Admin</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- archive.component.html -->
+<div class="archive-component">
   <style>
-    /* RESET COMPLET */
-    * {
-      margin: 0;
-      padding: 0;
+    .archive-component * {
       box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
-    /* STRUCTURE PRINCIPALE */
-    body {
-      background-color: #f8fafc;
-    }
-
-    /* TOP BAR */
     .top-bar {
       position: fixed;
       top: 0;
@@ -40,55 +26,29 @@
       font-weight: 600;
     }
 
-    /* ADMIN CONTAINER */
     .admin-container {
       display: flex;
       min-height: 100vh;
-      padding-top: 60px; /* Compensation pour la top bar fixe */
+      padding-top: 60px;
     }
 
-   
-    .nav-links {
-      padding: 20px 0;
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background-color: #fcfcfc;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
     }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      padding: 14px 30px;
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      transition: all 0.3s;
-      font-size: 0.95rem;
-    }
-
-    .nav-item:hover {
-      background-color: rgba(255,255,255,0.1);
-    }
-
-    .nav-item.active {
-      background-color: rgba(52, 152, 219, 0.2);
-      border-left: 4px solid #3498db;
-    }
-
-    .nav-item .icon {
-      font-size: 1.1rem;
-      margin-right: 15px;
-      width: 24px;
-      text-align: center;
-      color: #3498db;
-    }
-
-    /* CONTENU PRINCIPAL */
     .admin-content {
       flex: 1;
-      margin-left: 280px;
+      margin-left: 28px;
       padding: 30px;
       min-height: calc(100vh - 60px);
-      background-color: #f8fafc;
+      background: #e9ecf0;
     }
 
-    /* FILTRES */
     .filters {
       display: flex;
       gap: 15px;
@@ -131,7 +91,6 @@
       transform: none;
     }
 
-    /* TABLEAU */
     .table-container {
       background: white;
       border-radius: 12px;
@@ -173,7 +132,6 @@
       background-color: #f8fafc;
     }
 
-    /* BOUTONS ACTION */
     .action-btn {
       padding: 8px 12px;
       border-radius: 6px;
@@ -205,29 +163,57 @@
       opacity: 0.9;
       transform: translateY(-1px);
     }
-    /* NOUVEAU SIDEBAR */
-    .sidebar {
-      width: 300px;
-      background-color: #CEDDDE;
-      color: #43A3DB;
-      position: fixed;
-      height: 100vh;
-      overflow-y: auto;
-      z-index: 1000;
-      left: 0;
-      top: 60px; /* Pour laisser place à la top bar */
-      padding: 20px;
-      transition: all 0.3s ease;
+
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
     }
-    
-    .sidebar-title {
+
+    .loading-spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      background-color: #fee;
+      color: #c33;
+      padding: 15px;
+      border-radius: 8px;
       margin-bottom: 20px;
-      font-size: 1.4rem;
-      font-weight: bold;
-      text-align: center;
-      color: black;
+      border: 1px solid #fcc;
     }
-    /* RESPONSIVE */
+
+    .no-data {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .note-cell {
+      font-weight: 600;
+    }
+
+    .note-valide {
+      color: #27ae60;
+    }
+
+    .note-non-notee {
+      color: #95a5a6;
+      font-style: italic;
+    }
+
     @media (max-width: 992px) {
       .sidebar {
         width: 240px;
@@ -258,38 +244,43 @@
       }
     }
   </style>
-</head>
-<body>
-  <!-- Top Bar Fixe -->
+
   <div class="top-bar">
-    <h1>GESTION DES STAGES</h1>
-    
+    <h1>GESTION DES STAGES - ARCHIVES VALIDÉES</h1>
   </div>
 
   <div class="admin-container">
-    <!-- Sidebar -->
     <div class="sidebar">
-        <app-side-bar-admin></app-side-bar-admin>
-      </div>
+      <app-side-bar-admin></app-side-bar-admin>
+    </div>
     
-    <!-- Contenu Principal -->
     <main class="admin-content">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
       <div class="filters">
         <select [(ngModel)]="selectedAnnee" (change)="loadArchives()" class="form-select">
           <option [value]="undefined">Toutes les années</option>
           <option *ngFor="let annee of annees" [value]="annee">{{ annee }}</option>
         </select>
         
-        <button class="export-btn" (click)="exportExcel()" [disabled]="!selectedAnnee">
-          <i class="fas fa-file-excel"></i> Exporter Excel
+        <button class="export-btn" (click)="exportExcel()" [disabled]="!selectedAnnee || isLoading">
+          <i class="fas fa-file-excel"></i> 
+          {{ isLoading ? 'Chargement...' : 'Exporter Excel' }}
         </button>
       </div>
       
-      <div class="table-container">
+      <div *ngIf="isLoading" class="loading-container">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <div *ngIf="!isLoading" class="table-container">
         <table class="archives-table">
           <thead>
             <tr>
               <th>Étudiant</th>
+              <th>Email</th>
               <th>Titre</th>
               <th>Tuteur</th>
               <th>Date dépôt</th>
@@ -298,25 +289,45 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let a of archives">
-              <td>{{ a.etudiant?.nom }} {{ a.etudiant?.prenom }}</td>
-              <td>{{ a.titre }}</td>
-              <td>{{ a.tuteur?.nom }}</td>
-              <td>{{ a.dateDepot | date:'dd/MM/yyyy' }}</td>
-              <td>{{ a.note }}/20</td>
+            <tr *ngFor="let archive of archives; trackBy: trackByArchiveId">
               <td>
-                <button class="action-btn btn-view" (click)="viewArchive(a)">
+                <strong>{{ archive.etudiant?.nom }} {{ archive.etudiant?.prenom }}</strong>
+              </td>
+              <td>{{ archive.etudiant?.email }}</td>
+              <td>{{ archive.titre }}</td>
+              <td>{{ archive.tuteur?.nom }}</td>
+              <td>{{ formatDate(archive.dateDepot) }}</td>
+              <td class="note-cell">
+                <span *ngIf="archive.note && archive.note !== null && archive.note !== ''" 
+                      class="note-valide">
+                  {{ archive.note }}/20
+                </span>
+                <span *ngIf="!archive.note || archive.note === null || archive.note === ''" 
+                      class="note-non-notee">
+                  Non noté
+                </span>
+              </td>
+              <td>
+                <button class="action-btn btn-view" 
+                        (click)="viewArchive(archive)"
+                        [disabled]="!archive.nomFichierRapport">
                   <i class="fas fa-eye"></i> Voir
                 </button>
-                <button class="action-btn btn-download" (click)="downloadArchive(a)">
+                <button class="action-btn btn-download" 
+                        (click)="downloadArchive(archive)"
+                        [disabled]="!archive.nomFichierRapport">
                   <i class="fas fa-download"></i> Télécharger
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
+        
+        <div *ngIf="archives.length === 0" class="no-data">
+          <i class="fas fa-inbox" style="font-size: 48px; color: #ccc; margin-bottom: 15px;"></i>
+          <p>Aucune archive validée trouvée pour les critères sélectionnés.</p>
+        </div>
       </div>
     </main>
   </div>
-</body>
-</html>
+</div>

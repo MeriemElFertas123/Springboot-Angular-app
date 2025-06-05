@@ -4,13 +4,19 @@
     font-family: Arial, sans-serif;
   }
   
-  .sidebar{
-    background-color: #CEDDDE;
-  } 
-  
-  .main-content {
+main{
     flex-grow: 1;
-    background-color: #ecf0f1;
+    background: #e9ecf0;
     padding: 20px;
-  }
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh; /* Occupe toute la hauteur de la vue */
+ 
+  background-color: #fcfcfc;
+  box-shadow: var(--shadow-md); /* Optionnel pour un effet visuel */
+  z-index: 1000; /* Assure que la sidebar reste au-dessus du contenu */
+}
 
