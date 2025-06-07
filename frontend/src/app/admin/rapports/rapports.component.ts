@@ -13,6 +13,9 @@ import { RapportService, RapportStageDto } from "../../service/rapport-service.s
   templateUrl: './rapports.component.html'
 })
 export class RapportsComponent implements OnInit {
+changeStatus(arg0: string) {
+throw new Error('Method not implemented.');
+}
   rapports: RapportStageDto[] = [];
   etats = ['EN_ATTENTE', 'VALIDE', 'REJETE'];
   selectedEtat?: string;

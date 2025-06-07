@@ -29,13 +29,12 @@ import { EnseignantDeleteComponent } from './admin/enseignant-management/enseign
 
 
 import { LoginFormComponent } from './login-form/login-form.component';
-import { ChatEtudiantComponent } from './chat-etudiant/chat-etudiant.component';
-import { ChatEtudiantsComponent } from './chat-etudiants/chat-etudiants.component';
 import { ChatEnseignantsComponent } from './chat-enseignants/chat-enseignants.component';
 import { ChatHomeComponent } from './chat-home/chat-home.component';
 import { AddStageComponent } from './etudiant/stage-management/add-stage/add-stage.component';
 import { ListeStageComponent } from './etudiant/stage-management/liste-stage/liste-stage.component';
 import { UpdateStageComponent } from './etudiant/stage-management/update-stage/update-stage.component';
+import { StudentQaComponent } from './etudiant/student-qa/student-qa.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/main-home', pathMatch: 'full' },
@@ -88,8 +87,7 @@ export const routes: Routes = [
   },
 
   // Chat
-  { path: 'chat-etudiant', component: ChatEtudiantComponent },
-  { path: 'chat-etudiants', component: ChatEtudiantsComponent },
+  { path: 'student-qa', component: StudentQaComponent },
   { path: 'chat-enseignants', component: ChatEnseignantsComponent },
   { path: 'chat-home', component: ChatHomeComponent },
 

@@ -310,6 +310,8 @@
       margin-top: 20px;
       padding-top: 20px;
       border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
     }
 
     .status-btn {
@@ -422,7 +424,7 @@
               <td>{{ r.stage?.nomEntreprise }}</td>
               <td>{{ r.stage?.intituleSujet }}</td>
               <td>{{ r.stage?.domaine }}</td>
-              <td>{{ formatDate(r.stage.dateDepot)}}</td>
+              <td>{{ formatDate(r.stage.dateDepot) }}</td>
               <td>
                 <span class="status-badge" [class]="getStatusClass(r.stage.statutRapport)">
                   {{ r.stage?.statutRapport }}
@@ -506,6 +508,13 @@
         
         <!-- Actions pour changer le statut -->
         <div class="status-actions" *ngIf="selectedRapport.stage?.statutRapport === 'EN_ATTENTE'">
+          <button class="status-btn btn-approve" (click)="changeStatus('VALIDE')">
+            <i class="fas fa-check"></i> Valider
+          </button>
+          <button class="status-btn btn-reject" (click)="changeStatus('REFUSE')">
+            <i class="fas fa-times"></i> Refuser
+          </button>
+        </div>
       </div>
     </div>
   </div>
