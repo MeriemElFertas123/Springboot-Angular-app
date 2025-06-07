@@ -3,105 +3,47 @@
   <div class="sidebar">
     <app-side-bar-prof></app-side-bar-prof>
   </div>
-  <main class="m-3">
+  <main class="m-1">
+    <h1>Rapports de stage non encore validés</h1>
     <div class="row"> 
-      @if(listDepotsRapport.length!=0){
-       @for (depotRapport of listDepotsRapport; track $index) {
-         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-         <div class="card h-100 " >
-           <div class="card-body d-flex flex-column">
-             <h5 class="card-title">{{depotRapport.titre}}</h5>
-             <!-- le flex pour que la description s'étire pour remplir l'espace et éviter les décalages -->
-             <p class="card-text flex-grow-1">{{depotRapport.description}}</p>
-             <hr>
-             <div class="icon-container">
-               <i class="fa-solid fa-eye"></i>
-               <i class="fa-solid fa-user" [routerLink]="['/details-etudiant',depotRapport.id]"></i>
-               @if(depotRapport.evaluation==null || depotRapport.evaluation==undefined){
-                <i class="fa-solid fa-plus" (click)="openModalAddEval(depotRapport.id)"></i>
-               }@else {
-                <i class="fa-solid fa-comment" (click)="voirEvaluationOpenModal(depotRapport.id)"></i>
-               }
-               <i class="fa-solid fa-download"></i>
-             </div>
-             <p class="card-text date-soumission mt-auto"><small class="text-muted">Date de soumission: {{depotRapport.submissionDate | date :'dd/MM/yyyy : hh:mm'}}</small></p>
-         
-             @if (idDepotToEditStatut!==depotRapport.id) {
-              <p > <span [ngStyle]="{'backgroundColor' : getColorSelonStatut(depotRapport.statut)}" style="color: #fff;padding: 4px;" class="rounded">{{depotRapport.statut}}</span> <i class="fa-solid fa-pen m-3" (click)="editStatut(depotRapport.id,depotRapport.statut)"></i></p>
-             }@else {
-              <div class="my-3 radioEditStatut d-flex justify-content-start align-items-center">
-                <mat-radio-group aria-label="Select an option" [(ngModel)]="depotRapport.selectedRadio">
-                  <mat-radio-button value="V" id="radioV">Validé</mat-radio-button>
-                  <mat-radio-button value="NV" id="radioNV">Rejeté</mat-radio-button>
-                </mat-radio-group>
-                <div class="icons-radio">
-                  @if (depotRapport.selectedRadio) {
-                    <i class="fa-solid fa-check fa-check-ok"  (click)="saveNewStatus(depotRapport)" ></i>
-                    <i class="fa-solid fa-trash fa-trash-ok" (click)="resetRadioCheck(depotRapport)"></i>
-                  }@else{
-                    <i class="fa-solid fa-check " id="disabled-check"></i>
-                    <i class="fa-solid fa-trash"  id="disabled-trash"></i>
-                  }
-                  
-                  <i class="fa-solid fa-xmark" (click)="idDepotToEditStatut=-1"></i>
+      @if(listStagesNonValide.length!=0){
+       @for (stage of listStagesNonValide; track $index) {
+         <div  class="col-12 m-1 rapport">
+            <div class="card h-100 flex-row align-items-center p-3 ">
+              <!-- Partie gauche : informations du rapport -->
+              <div class="flex-grow-1">
+                <h5 class="card-title">{{ stage.intituleSujet }}</h5>
+                <p class="card-text">{{ stage.descriptionSujet }}</p>
+                <p class="card-text"><small class="text-muted">Date de soumission : {{ stage.dateDepot | date :'dd/MM/yyyy : hh:mm' }}</small></p>
+            
+              </div>
+
+              <!-- Partie droite : actions -->
+               @if (clickStageValideTemp && idStageClick===stage.id) {
+                <div class="text-success">
+                  Stage Validé avec succès
                 </div>
-               </div>
-             }
-             
-           </div>
-         </div>
-       </div>
-       }
-        @for (depotRapport of listDepotsRapport; track $index) {
-         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-         <div class="card h-100 " >
-           <div class="card-body d-flex flex-column">
-             <h5 class="card-title">{{depotRapport.titre}}</h5>
-             <!-- le flex pour que la description s'étire pour remplir l'espace et éviter les décalages -->
-             <p class="card-text flex-grow-1">{{depotRapport.description}}</p>
-             <hr>
-             <div class="icon-container">
-               <i class="fa-solid fa-eye"></i>
-               <i class="fa-solid fa-user" [routerLink]="['/details-etudiant',depotRapport.id]"></i>
-               @if(depotRapport.evaluation==null || depotRapport.evaluation==undefined){
-                <i class="fa-solid fa-plus" (click)="openModalAddEval(depotRapport.id)"></i>
                }@else {
-                <i class="fa-solid fa-comment" (click)="voirEvaluationOpenModal(depotRapport.id)"></i>
+                <div class="d-flex flex-column justify-content-between ms-4">
+                    <button class="btn btn-outline-primary mb-2" (click)="telechargerRapport(stage.id)">
+                      <i class="fa-solid fa-download me-2" ></i>Télécharger rapport
+                    </button>
+                    <button class="btn btn-success" (click)="validerRapport(stage.id)">
+                      <i class="fa-solid fa-check me-2" ></i>Valider rapport
+                    </button>
+                  </div>
+                
                }
-               <i class="fa-solid fa-download"></i>
-             </div>
-             <p class="card-text date-soumission mt-auto"><small class="text-muted">Date de soumission: {{depotRapport.submissionDate | date :'dd/MM/yyyy : hh:mm'}}</small></p>
-         
-             @if (idDepotToEditStatut!==depotRapport.id) {
-              <p > <span [ngStyle]="{'backgroundColor' : getColorSelonStatut(depotRapport.statut)}" style="color: #fff;padding: 4px;" class="rounded">{{depotRapport.statut}}</span> <i class="fa-solid fa-pen m-3" (click)="editStatut(depotRapport.id,depotRapport.statut)"></i></p>
-             }@else {
-              <div class="my-3 radioEditStatut d-flex justify-content-start align-items-center">
-                <mat-radio-group aria-label="Select an option" [(ngModel)]="depotRapport.selectedRadio">
-                  <mat-radio-button value="V" id="radioV">Validé</mat-radio-button>
-                  <mat-radio-button value="NV" id="radioNV">Rejeté</mat-radio-button>
-                </mat-radio-group>
-                <div class="icons-radio">
-                  @if (depotRapport.selectedRadio) {
-                    <i class="fa-solid fa-check fa-check-ok"  (click)="saveNewStatus(depotRapport)" ></i>
-                    <i class="fa-solid fa-trash fa-trash-ok" (click)="resetRadioCheck(depotRapport)"></i>
-                  }@else{
-                    <i class="fa-solid fa-check " id="disabled-check"></i>
-                    <i class="fa-solid fa-trash"  id="disabled-trash"></i>
-                  }
-                  
-                  <i class="fa-solid fa-xmark" (click)="idDepotToEditStatut=-1"></i>
-                </div>
-               </div>
-             }
-             
-           </div>
-         </div>
-       </div>
+           
+            </div>
+        </div>
+
        }
+       
       }@else {    
         <div class="d-flex justify-content-center align-items-center">
           <div class="alert alert-warning text-center w-50 my-5" role="alert">
-            Aucun rapport trouvé !
+            <small >Vous avez validé tous les rapports</small>
           </div>
         </div>
       }
@@ -109,114 +51,71 @@
      </div>
 
 
-     <div class="dropdowns">
+
+     <!-- drop down pour le filtre -->
+     <div class="dropdowns ">
                   <!-- DropDown pour le type de stage -->
               <div class="dropdown m-2">                
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Type de Stage
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Initiation</a></li>
-                  <li><a class="dropdown-item" href="#">PFA</a></li>
-                  <li><a class="dropdown-item" href="#">PFE</a></li>
+                  <li (click)="filtrerRapportsParType('INITIATION')"><a class="dropdown-item">Initiation</a></li>
+                  <li (click)="filtrerRapportsParType('PFA')"><a class="dropdown-item">PFA</a></li>
+                  <li (click)="filtrerRapportsParType('PFE')"><a class="dropdown-item">PFE</a></li>
+                  <li (click)="filtrerRapportsParType('none')"><a class="dropdown-item">none</a></li>
                 </ul>
               </div>
 
                 <!-- DropDown pour l'année du stage -->
               <div class="dropdown m-2">                
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Année du Stage
+                  Année du dépôt
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">2025</a></li>
-                  <li><a class="dropdown-item" href="#">2024</a></li>
-                  <li><a class="dropdown-item" href="#">2023</a></li>
-                  <li><a class="dropdown-item" href="#">2022</a></li>
-                  <li><a class="dropdown-item" href="#">2021</a></li>
-                  <li><a class="dropdown-item" href="#">2020</a></li>
-                  <li><a class="dropdown-item" href="#">2019</a></li>
+                  <li (click)="filtrerParAnneeDepot('2025')"><a class="dropdown-item" >2025</a></li>
+                  <li (click)="filtrerParAnneeDepot('2024')"><a class="dropdown-item" >2024</a></li>
+                  <li (click)="filtrerParAnneeDepot('2023')"><a class="dropdown-item" >2023</a></li>
+                  <li (click)="filtrerParAnneeDepot('2022')"><a class="dropdown-item" >2022</a></li>
+                  <li (click)="filtrerParAnneeDepot('2021')"><a class="dropdown-item" >2021</a></li>
+                  <li (click)="filtrerParAnneeDepot('2020')"><a class="dropdown-item" >2020</a></li>
+                  <li (click)="filtrerParAnneeDepot('none')"><a class="dropdown-item" >none</a></li>
                 </ul>
               </div>
 
               </div>
-     <div class="table-div mx-5 my-3" >
+
+
+
+              <!-- Pour l'historique des stages -->
+     <div class="table-div  mx-5 my-3" >
        
       <table class="table">
         <thead>
           <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col"></th>
+              <th scope="col">Sujet du stage</th>
+              <th scope="col">Type de stage</th>
+              <th scope="col">Date de dépot</th>
+              <th scope="col">Rapport de stage</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-           <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-           <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-            <td>social</td>
-          </tr>
+          @for (stage of listStagesValides; track $index) {
+            <tr>
+                <th scope="row">{{$index+1}}</th>
+                <td>{{stage.intituleSujet}}</td>
+                <td>{{stage.typeStage}}</td>
+                <td>{{stage.dateDepot}}</td>
+                <td>
+                   <button class="btn btn-outline-primary mb-2" (click)="telechargerRapport(stage.id)">
+                      <i class="fa-solid fa-download me-2" ></i>Télécharger
+                    </button>
+                </td>
+              </tr>
+          }
+         
+          
         </tbody>
     </table>
      </div>
@@ -279,7 +178,7 @@
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModalAddEval()">Close</button>
-          <button type="button" class="btn btn-primary" (click)="saveEvaluation()">Add</button>
+          <button type="button" class="btn btn-primary" >Add</button><!-- (click)="saveEvaluation()"-->
       </div>
     </div>
   </div>

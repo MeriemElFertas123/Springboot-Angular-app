@@ -1,6 +1,7 @@
 package com.pfa.spring_boot.controllers;
 
 import com.pfa.spring_boot.dto.EncadrementRequest;
+import com.pfa.spring_boot.entities.Encadrement;
 import com.pfa.spring_boot.entities.Etudiant;
 import com.pfa.spring_boot.service.encadrement.EncadrementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,11 @@ public class EncadrementController {
     @GetMapping("/{idProf}")
     public ResponseEntity<List<Etudiant>> getEtudiantsByProfId(@PathVariable("idProf") Long enseignantId){
         return ResponseEntity.ok(this.encadrementService.getEtudiantsByEnseignantId(enseignantId));
+    }
+
+
+    @GetMapping("/nbTotalEtudiants/{idProf}")
+    public int getNombreEtudiants(@PathVariable("idProf") Long id){
+        return this.encadrementService.getEtudiantsByEnseignantId(id).size();
     }
 }

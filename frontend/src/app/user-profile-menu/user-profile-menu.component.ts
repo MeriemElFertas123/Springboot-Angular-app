@@ -11,6 +11,7 @@ import { EnseignantService } from '../service/enseignant.service';
   styleUrl: './user-profile-menu.component.css'
 })
 export class UserProfileMenuComponent implements OnInit {
+  
 
   constructor(private router:Router,
               private etudiantService:EtudiantService,

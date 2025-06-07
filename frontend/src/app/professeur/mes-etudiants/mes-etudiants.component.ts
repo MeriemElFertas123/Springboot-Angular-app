@@ -21,6 +21,7 @@ export class MesEtudiantsComponent implements OnInit{
   connectedUser:any;
   idEnseignant=-1;
   mesEtudiants:any[]=[];
+  mesEtudiantsFiltered:any[]=[];
 
   enseignantService = inject(EnseignantService);
   encadrementService=inject(EncadrementService);
@@ -35,11 +36,16 @@ export class MesEtudiantsComponent implements OnInit{
         this.mesEtudiants=res;
       })
     }
+    this.mesEtudiantsFiltered=this.mesEtudiants;
   }
 
 
+  filtrerParAnneeEtude(anneeEtude : string){
+    this.mesEtudiantsFiltered=this.mesEtudiants;
+    if(anneeEtude!=='none'){
+      this.mesEtudiantsFiltered=this.mesEtudiants.filter(e => e.anneeEtude===anneeEtude);
+    }
+  }
 
-  // constructor(){
-  //   
-  // }
+  
 }

@@ -73,6 +73,10 @@ public class StageController {
         }
     }
 
-
+    @PutMapping("/validerStage/{idStage}")
+    public ResponseEntity<Void> validerStage(@PathVariable("idStage") Long id){
+        this.stageService.validerRapport(id);
+        return ResponseEntity.ok().build();
+    }
 
 }

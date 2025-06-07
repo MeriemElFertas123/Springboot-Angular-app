@@ -1,5 +1,7 @@
 package com.pfa.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pfa.spring_boot.enums.stage.StatutRapport;
 import com.pfa.spring_boot.enums.stage.TypeStage;
 import jakarta.persistence.*;
@@ -31,9 +33,14 @@ public class Stage {
     private String nomFichierRapport;
     private String typeFichierRapport;
 
+
+
     @Lob
     @Column(length = 16777215)
     private byte[] contenuRapport;
+
+
+
 
     @Enumerated(EnumType.STRING)
     @Column(name = "statut_rapport")
@@ -41,7 +48,10 @@ public class Stage {
 
     @ManyToOne
     @JoinColumn(name = "etudiant_id")
+    @JsonBackReference //côté enfant (retour, souvent @ManyToOne)
     private Etudiant etudiant;
+
+
 
     // Getters et Setters
     public Long getId() { return id; }

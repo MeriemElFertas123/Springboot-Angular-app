@@ -4,6 +4,7 @@ package com.pfa.spring_boot.controllers;
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Stage;
 import com.pfa.spring_boot.entities.Utilisateur;
 import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
 import com.pfa.spring_boot.enums.etudiant.Filiere;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Stack;
 
 @RestController
 @RequestMapping("student")
@@ -155,6 +157,12 @@ public class EtudiantController {
         }
     }
 
+
+
+    @GetMapping("stages/{idEtudiant}")
+    public  ResponseEntity<List<Stage>> getStagesByEtdudiantId(@PathVariable("idEtudiant") Long etudiantId){
+        return ResponseEntity.ok(this.etudiantService.getStagesByEtudiantId(etudiantId));
+    }
 
 
 

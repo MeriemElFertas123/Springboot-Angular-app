@@ -64,6 +64,9 @@ export interface Stage{
     nomFichierRapport?: string;
     typeFichierRapport?: string;
     contenuRapport?: Blob;
+    etudiant :{
+        id:number
+    }
 }
 export interface Rapport {
     id: number;

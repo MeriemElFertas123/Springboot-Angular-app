@@ -3,15 +3,22 @@ package com.pfa.spring_boot.service.student;
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Stage;
 import com.pfa.spring_boot.entities.Utilisateur;
+import com.pfa.spring_boot.enums.stage.StatutRapport;
+import com.pfa.spring_boot.repositories.EnseignantRepository;
 import com.pfa.spring_boot.repositories.EtudiantRepository;
 import com.pfa.spring_boot.repositories.UtilisateurRepository;
 import com.pfa.spring_boot.service.admin.AdminService;
+import com.pfa.spring_boot.service.encadrement.EncadrementService;
+import com.pfa.spring_boot.service.enseignant.EnseignantService;
 import com.pfa.spring_boot.utilities.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +29,9 @@ public class EtudiantServiceImpl implements EtudiantService{
 
     @Autowired
     private EtudiantRepository etudiantRepository;
+
+    @Autowired
+    private EncadrementService encadrementService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -143,7 +153,41 @@ public class EtudiantServiceImpl implements EtudiantService{
         return "";
     }
 
+    @Override
+    public List<Stage> getStagesByEtudiantId(Long etudiantId) {
+        Etudiant etudiant=etudiantRepository.findById(etudiantId).orElseThrow(
+                ()->new RuntimeException("Etudiant avec id "+etudiantId+" non trouvé"));
+        return  etudiant.getStages();
+    }
 
+    public int getNombreRapportsDeposes(Long idProf,int annee){
+        List<Etudiant> etudiants=encadrementService.getEtudiantsByEnseignantId(idProf);
+        int nbrTotalRapport=0;
+        LocalDate dateDepot = LocalDate.of(2024, 1, 1);
+        for(Etudiant etudiant:etudiants){
+            List<Stage> stages=etudiant.getStages();
+            for(Stage stage:stages){
+                if(stage.getDateDepot().isAfter(dateDepot)){
+                    nbrTotalRapport+=1;
+                }
+            }
+        }
+        return nbrTotalRapport;
+    }
 
+    public int getNombreRapportsDeposesValides(Long idProf,int annee){
+        List<Etudiant> etudiants=encadrementService.getEtudiantsByEnseignantId(idProf);
+        int nbrTotalRapport=0;
+        LocalDate dateDepot = LocalDate.of(2024, 1, 1);
+        for(Etudiant etudiant:etudiants){
+            List<Stage> stages=etudiant.getStages();
+            for(Stage stage:stages){
+                if(stage.getDateDepot().isAfter(dateDepot) && stage.getStatutRapport()== StatutRapport.VALIDE){
+                    nbrTotalRapport+=1;
+                }
+            }
+        }
+        return nbrTotalRapport;
+    }
 
 }

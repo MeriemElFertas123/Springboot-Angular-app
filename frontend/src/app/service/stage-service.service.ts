@@ -47,4 +47,14 @@ export class StageServiceService {
       responseType: 'blob'
     });
   }
+
+
+  validerStage(idStage : number){
+    return this.http.put(`${this.apiUrl}/validerStage/${idStage}`,{})
+  }
+
+
+
+
+
 }

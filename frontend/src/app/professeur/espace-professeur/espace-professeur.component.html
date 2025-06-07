@@ -1,99 +1,133 @@
 <app-user-profile-menu></app-user-profile-menu>
-
-<!-- <app-user-profile-menu></app-user-profile-menu> -->
-<div class="dashboard-container">
- <div class="sidebar">
-  <app-side-bar-prof></app-side-bar-prof>
- </div>
-  <main>
-    <!-- <header class="top-bar">
-      <div class="search-container">
-        <input type="text" placeholder="Search for datas & reports..." class="search-input">
-        <button class="search-btn">🔍</button>
-      </div>
-      <div class="user-profile" (click)="toggleDropdown()">
-        <span class="user-name">Asmae Aouassar</span>
-        <div class="user-avatar">
-          <img [src]="profilePicture" alt="Photo de profil" class="profile-image" />
-        </div>
-      </div>
-      <div class="dropdown-menu" [class.show]="isDropdownOpen">
-        <div class="dropdown-header">
-          <div class="user-avatar-large">
-            <img [src]="profilePicture" class="profile-image" />
+<div class="dashboard-content">
+  <div class="sidebar">
+    <app-side-bar-prof></app-side-bar-prof>
+  </div>
+   
+  <main class="main-content ">
+    <!-- Header -->
+    <div class="dashboard-header ">
+      <div class="header-content">
+        <h1 class="dashboard-title">
+          <i class="fas fa-tachometer-alt"></i>
+          <span class="title-gradient m-3 ">Tableau de Bord</span>
+          <div class="title-underline"></div>
+        </h1>
+        <div class="header-stats">
+          <div class="live-indicator">
+            <span class="pulse-dot"></span>
+            <i class="fas fa-circle"></i>
+            <span>Données en temps réel</span>
           </div>
-          <div class="user-info">Asmae Aouassar</div>
-          <div class="user-email">asmae.aouassar.usmba.ac.ma</div>
-        </div>
-        <a class="dropdown-item" (click)="triggerFileInput()">
-          <i class="icon">📷</i>
-          <span>Modifier la photo</span>
-        </a>
-        <input type="file" id="fileInput" (change)="updateProfilePicture($event)" accept="image/*" style="display: none;">
-        
-        <a class="dropdown-item" routerLink="/changerPassword">
-          <i class="icon">🔒</i>
-          <span>Changer le mot de passe</span>
-        </a>
-        <a class="dropdown-item" (click)="logout()">
-          <i class="icon">🚪</i>
-          <span>Déconnexion</span>
-        </a>
-      </div>
-    </header> -->
-
-    <!-- <section class="welcome-section">
-      <div class="welcome-message">Hi Asmae ! Welcome Back</div>
-      <button class="add-stage-btn" (click)="navigateToAjouterStage()">+ AJOUTER UN ETUDIANT</button>
-    </section> -->
-    <h1 class="m-5 text-center">Les rapports de stages <small class="text-danger">(en cours)</small> </h1>
-
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-            <div class="card m-2 bg-warning" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-        </div>
-
-
-        <div class="col">
-           <div class="card m-2 bg-warning" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-        </div>
-
-
-        <div class="col">
-           <div class="card m-2 bg-warning" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
+          <div class="last-update">
+            <i class="far fa-clock"></i>
+            Dernière mise à jour: {{ getCurrentTime() }}
+          </div>
         </div>
       </div>
     </div>
 
-  
+    <!-- Cards Container -->
+    <div class="stats-container">
+      <!-- Card 1 -->
+      <div class="stat-card primary-card" [style.animation-delay]="'0.1s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-file-alt"></i>
+            <div class="icon-pulse"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+12%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ nbrDepots }}</div>
+          <div class="stat-label">Rapports déposés</div>
+          <div class="stat-sublabel">Ce mois-ci</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar" [style.width]="'75%'"></div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="stat-card success-card" [style.animation-delay]="'0.2s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-check-circle"></i>
+            <div class="icon-pulse success"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+8%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ nbrDepotsValide }}</div>
+          <div class="stat-label">Rapports validés</div>
+          <div class="stat-sublabel">Taux: {{ getValidationRate() }}%</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar success" [style.width]="getValidationRate() + '%'"></div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="stat-card warning-card" [style.animation-delay]="'0.3s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-clock"></i>
+            <div class="icon-pulse warning"></div>
+          </div>
+          <div class="stat-trend neutral">
+            <i class="fas fa-arrow-right"></i>
+            <span class="trend-value">0%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ nbrDepots - nbrDepotsValide}}</div>
+          <div class="stat-label">En attente</div>
+          <div class="stat-sublabel">Révision requise</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar warning" [style.width]="'45%'"></div>
+        </div>
+      </div>
+
+     
+
+      <!-- Card 5 -->
+      <div class="stat-card info-card" [style.animation-delay]="'0.5s'">
+        <div class="card-background"></div>
+        <div class="stat-header">
+          <div class="stat-icon-wrapper">
+            <i class="stat-icon fas fa-user-graduate"></i>
+            <div class="icon-pulse info"></div>
+          </div>
+          <div class="stat-trend positive">
+            <i class="fas fa-arrow-up"></i>
+            <span class="trend-value">+15%</span>
+          </div>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ nbrTotalEtudiants }}</div>
+          <div class="stat-label">Étudiants</div>
+          <div class="stat-sublabel">Connectés ce mois</div>
+        </div>
+        <div class="card-progress">
+          <div class="progress-bar info" [style.width]="'85%'"></div>
+        </div>
+      </div>
+
+     
+    </div>
+
     
-  </main>
-
    
-
+   
+  </main>
 </div>

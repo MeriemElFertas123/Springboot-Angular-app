@@ -18,4 +18,13 @@ export class EncadrementService {
   getEtudiantsByEnseignantId(id:number):Observable<any[]>{
     return this.http.get<any[]>(`${this.apiUrl}/${id}`);
   }
+
+
+
+  getNombreTotalEtudiants(idEnseignant : number):Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/nbTotalEtudiants/${idEnseignant}`);
+  }
+
+
+  
 }

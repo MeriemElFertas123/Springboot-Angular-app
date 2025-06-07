@@ -6,12 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:8080/api/dashboard'; // URL de votre API
+  private apiUrl = 'http://localhost:8081/api/dashboard';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  // Méthode pour récupérer les données du dashboard
-  getDashboardData(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getDashboardStats(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/stats`);
+  }
+
+  getReportsEvolution(chartPeriod: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/reports-evolution`);
   }
 }
+

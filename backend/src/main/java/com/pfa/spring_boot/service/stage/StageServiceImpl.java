@@ -1,6 +1,7 @@
 package com.pfa.spring_boot.service.stage;
 
 import com.pfa.spring_boot.entities.Stage;
+import com.pfa.spring_boot.enums.stage.StatutRapport;
 import com.pfa.spring_boot.repositories.StageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,15 @@ public class StageServiceImpl implements StageService {
             return stage.getContenuRapport();
         }
         return null;
+    }
+
+
+    @Override
+    public void validerRapport(Long idRapport) {
+        Stage stage=stageRepository.findById(idRapport).orElseThrow(
+                ()-> new RuntimeException("Stage with id "+idRapport+" nt found")
+        );
+        stage.setStatutRapport(StatutRapport.VALIDE);
+        stageRepository.save(stage);
     }
 }

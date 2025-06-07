@@ -1,6 +1,6 @@
 import { Stage } from './../../../model/model';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SideBarEtudiantComponent } from '../../side-bar-etudiant/side-bar-etudiant.component';
 import { StageServiceService } from '../../../service/stage-service.service';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   templateUrl: './add-stage.component.html',
   styleUrls: ['./add-stage.component.css']
 })
-export class AddStageComponent {
+export class AddStageComponent implements OnInit{
   stage: Stage = {
     nomEntreprise: '',
     adresseEntreprise: '',
@@ -24,7 +24,10 @@ export class AddStageComponent {
     descriptionSujet: '',
     typeStage: TypeStage.PFA,
     dateDepot: '',      
-    domaine: ''  
+    domaine: ''  ,
+    etudiant : {
+      id:-1
+    }
   };
 
   useTemplate: boolean = false;
@@ -42,6 +45,14 @@ export class AddStageComponent {
       rapport: ['', Validators.required]
     });
   }
+  idUserConnect =-1;
+
+  ngOnInit(): void {
+    const connectedUser=localStorage.getItem("connectedUser");
+    if(connectedUser){
+      this.idUserConnect=JSON.parse(connectedUser).id;
+    }
+  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
@@ -52,6 +63,8 @@ export class AddStageComponent {
       if (this.useTemplate || this.depotForm.valid) {
         const formData = new FormData();
         
+        this.stage.etudiant.id=this.idUserConnect;
+
         // Convertir l'objet stage en JSON et l'ajouter au FormData
         formData.append('stage', new Blob([JSON.stringify(this.stage)], { type: 'application/json' }));
         

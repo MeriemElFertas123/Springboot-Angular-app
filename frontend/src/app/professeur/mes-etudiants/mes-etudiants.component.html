@@ -3,32 +3,44 @@
    <div class="sidebar">
     <app-side-bar-prof></app-side-bar-prof>
    </div>
-    <main>
+    <main >
         <div class="row d-flex justify-content-center">
             @if(mesEtudiants.length!=0){
                 @for (etud of mesEtudiants; track $index) {
-                    <div class="card col-lg-3 col-md-4 col-sm-6 m-4 " >
-                        <img [src]="'data:image/jpeg;base64,'+etud.image" class="card-img-top mt-2" [alt]="etud.nom" >
+                    
+                  <div class="col-lg-3 col-md-4 col-sm-6 ">
+                      <div class="card h-100 shadow-sm">
+                        <!-- Image de l'étudiant -->
+                        <img
+                          [src]="'data:image/jpeg;base64,' + etud.image"
+                          class="card-img-top mt-2"
+                          [alt]="etud.nom"
+                          style="height: 200px; object-fit: cover;"
+                        />
+
+                        <!-- Corps de la carte -->
                         <div class="card-body">
-                          <h5 class="card-title">{{etud.prenom}} {{etud.nom}}</h5>
-                          <table class="table table-bordered">
-                           <tbody>
-                            <tr>
-                                <td>email</td>
-                                <td>{{etud.email}}</td>
-                            </tr>
-                            <tr>
-                                <td>filière</td>
-                                <td>{{etud.filiere}}</td>
-                            </tr>
-                            <tr>
-                                <td>année d'étude</td>
-                                <td>{{etud.anneeEtude}}</td>
-                            </tr>
-                           </tbody> 
+                          <h5 class="card-title text-center">{{ etud.prenom }} {{ etud.nom }}</h5>
+
+                          <table class="table table-sm table-borderless mt-3">
+                            <tbody>
+                              <tr>
+                                <th scope="row">Email</th>
+                                <td>{{ etud.email }}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Filière</th>
+                                <td>{{ etud.filiere }}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Année</th>
+                                <td>{{ etud.anneeEtude }}</td>
+                              </tr>
+                            </tbody>
                           </table>
                         </div>
                       </div>
+      </div>
                 }
             }@else {
                 <div class="alert alert-warning w-50 my-5" role="alert">
@@ -36,5 +48,53 @@
                   </div>
             }
         </div>
+
+
+          <!-- drop down pour le filtre -->
+     <div class="dropdowns">
+                  <!-- DropDown pour le type de stage -->
+              <div class="dropdown m-2">                
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filtrer par année d'étude
+                </button>
+                <ul class="dropdown-menu ">
+                  <li (click)="filtrerParAnneeEtude('PREMIEREANNEE')"><a class="dropdown-item"  PREMIEREANNEE>1ère année</a></li>
+                  <li (click)="filtrerParAnneeEtude('DEUXIEMEANNEE')"><a class="dropdown-item"  >2ème année</a></li>
+                  <li (click)="filtrerParAnneeEtude('TROISIEMEANNEE')"><a class="dropdown-item"  >3ème année</a></li>
+                  <li (click)="filtrerParAnneeEtude('none')"><a class="dropdown-item"  >none</a></li>
+                </ul>
+              </div>
+
+              
+
+              </div>
+
+
+
+              <!-- Pour l'historique des stages -->
+     <div class="table-div" >
+       
+      <table class="table">
+        <thead>
+          <tr>
+              <th scope="col"></th>
+              <th scope="col">NOM ET PRENOM</th>
+              <th scope="col">FILIERE</th>
+              <th scope="col">EMAIL</th>
+          </tr>
+        </thead>
+        <tbody>
+         @for(etudiant of mesEtudiantsFiltered;track $index){
+          <tr>
+            <th scope="row">{{$index+1}}</th>
+            <td> {{etudiant.prenom}} {{etudiant.nom}}</td>
+            <td>{{etudiant.filiere}}</td>
+            <td>{{etudiant.email}}</td>
+          </tr>
+         }
+          
+        </tbody>
+    </table>
+     </div>
     </main>
 </div>

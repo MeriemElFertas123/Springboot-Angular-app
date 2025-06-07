@@ -38,4 +38,12 @@ export class EnseignantService {
   deleteEnseignant(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
+
+
+  getNombreDepots(idProf : number) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/nbrDepot/${idProf}`);
+  }
+  getNombreDepotsValide(idProf : number) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/nbrDepotValide/${idProf}`);
+  }
 }

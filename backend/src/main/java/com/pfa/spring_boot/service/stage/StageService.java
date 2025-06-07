@@ -13,4 +13,6 @@ public interface StageService {
     Stage updateStage(Long id, Stage stage);
     void deleteStage(Long id);
     Stage addStageWithReport(Stage stage, MultipartFile rapport) throws IOException;
+
+    void validerRapport(Long idRapport);
 }

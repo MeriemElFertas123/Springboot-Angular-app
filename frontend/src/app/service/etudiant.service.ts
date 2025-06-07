@@ -41,7 +41,9 @@ export class EtudiantService {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 
-  
+  getStagesByEtudiantId(id: number) : Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/stages/${id}`)
+  }
 
   
 }

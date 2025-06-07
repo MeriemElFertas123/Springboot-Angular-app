@@ -27,6 +27,9 @@ public class EnseignantController {
     @Autowired
     private UtilisateurService utilisateurService;
 
+    @Autowired
+    private EtudiantService etudiantService;
+
     @GetMapping
     public ResponseEntity<?> getAllEnseignants(){
         try{
@@ -146,5 +149,15 @@ public class EnseignantController {
         } catch (Exception e) {
             return new ResponseEntity<>("Erreur lors de la récupération de l'étudiant : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @GetMapping("nbrDepot/{idProf}")
+    public int getNbrTotalDepots(@PathVariable("idProf") Long id){
+        return etudiantService.getNombreRapportsDeposes(id,2025);
+    }
+    @GetMapping("nbrDepotValide/{idProf}")
+    public int getNbrTotalDepotsValide(@PathVariable("idProf") Long id){
+        return etudiantService.getNombreRapportsDeposesValides(id,2025);
     }
 }
