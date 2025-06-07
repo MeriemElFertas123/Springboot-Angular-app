@@ -4,11 +4,11 @@
     <app-side-bar-prof></app-side-bar-prof>
   </div>
   <main class="m-1">
-    <h1>Rapports de stage non encore validés</h1>
+    <h3>Rapports de stage non encore validés</h3>
     <div class="row"> 
       @if(listStagesNonValide.length!=0){
        @for (stage of listStagesNonValide; track $index) {
-         <div  class="col-12 m-1 rapport">
+         <div  class="col-12  rapport ">
             <div class="card h-100 flex-row align-items-center p-3 ">
               <!-- Partie gauche : informations du rapport -->
               <div class="flex-grow-1">

@@ -1,16 +1,18 @@
 .app-container {
   display: flex;
-  height: 100vh;
 }
 
 .sidebar {
-  background-color: #CEDDDE;
+  height: calc(100vh - 100px) !important;
 }
 
 main {
   flex-grow: 1;
-  background-color: #ecf0f1;
+  overflow: auto; /* CHANGÉ: auto au lieu de hidden */
   padding: 20px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  margin: 100px 10px 0 250px;
 }
 
 .btn {
@@ -49,7 +51,7 @@ main {
   grid-template-columns: repeat(8, 1fr); /* <-- passer à 9 colonnes */
   align-items: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: #d6dad653;
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -86,25 +88,3 @@ main {
   background-color: #2ecc71;
 }
 
-/* Pour rendre responsive sur les petits écrans */
-@media (max-width: 1200px) {
-  .stage-item-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .stage-row {
-    grid-template-columns: 1fr;
-    grid-gap: 10px;
-  }
-  
-  .stage-header {
-    display: none;
-  }
-  
-  .external-actions {
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 100%;
-  }
-}

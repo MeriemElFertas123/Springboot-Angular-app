@@ -1,13 +1,16 @@
 .user-profile-menu {
   height: 100px;
   cursor: pointer;
-  
+  position: fixed;
+  background-color: #64748b1d;
+
+  width: 100vw;
     .header-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1rem;
-      background-color: #f4f4f4;
+      background-color: #64748b1d;
   
       span {
         font-size: 20px;

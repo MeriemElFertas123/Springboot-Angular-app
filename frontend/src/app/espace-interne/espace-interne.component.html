@@ -1,19 +1,109 @@
-<div class="card-container  pb-5">
-    <div class="card d-flex justify-content-center align-items-center">
-        <img src="img/icon1.jpg" class="icon" alt="Icon">
-        <h3>ESPACE ENSEIGNANTS</h3>
-        <a routerLink="/login-form" class="login">Login</a> 
-    </div>
+<section class="spaces-section ">
+    <div class="container">
+        <header class="section-header">
+            <h2 class="section-title">Accédez à votre espace</h2>
+            <p class="section-subtitle">Choisissez votre profil pour accéder à vos services personnalisés</p>
+        </header>
 
-    <div class="card d-flex justify-content-center align-items-center">
-        <img src="img/icon2.jpg" class="icon" alt="Icon">
-        <h3>ESPACE ÉTUDIANTS</h3>
-        <a routerLink="/login-form" class="login">Login</a>
-    </div>
+        <div class="cards-grid">
+            <!-- Carte Espace Enseignants -->
+            <article class="access-card teachers-card" data-space="teachers">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <i class="fas fa-chalkboard-teacher card-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badge">Enseignants</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3 class="card-title">Espace Enseignants</h3>
+                    <p class="card-description">
+                        Gérez vos cours, consultez vos plannings et suivez la progression de vos étudiants
+                    </p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Gestion des cours</li>
+                        <li><i class="fas fa-check"></i> Planning personnel</li>
+                        <li><i class="fas fa-check"></i> Suivi des étudiants</li>
+                    </ul>
+                </div>
+                
+                <div class="card-footer">
+                    <a routerLink="/login-form" 
+                       class="access-btn btn-teachers"
+                       [queryParams]="{userType: 'teacher'}"
+                       aria-label="Accéder à l'espace enseignants">
+                        <span class="btn-text" routerLink="/login-form">Se connecter</span>
+                        <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                </div>
+            </article>
 
-    <div class="card  d-flex justify-content-center align-items-center">
-        <img src="img/icon3.png" class="icon" alt="Icon">
-        <h3>ESPACE ADMINISTRATION</h3>
-        <a routerLink="/login-form" class="login">Login</a>
+            <!-- Carte Espace Étudiants -->
+            <article class="access-card students-card" data-space="students">
+                <div class="card-header">
+                    <div class="icon-container">
+                        <i class="fas fa-user-graduate card-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badge">Étudiants</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3 class="card-title">Espace Étudiants</h3>
+                    <p class="card-description">
+                        Consultez vos notes, emplois du temps et gérez vos stages et projets académiques
+                    </p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Relevés de notes</li>
+                        <li><i class="fas fa-check"></i> Emploi du temps</li>
+                        <li><i class="fas fa-check"></i> Gestion des stages</li>
+                    </ul>
+                </div>
+                
+                <div class="card-footer">
+                    <a routerLink="/login-form" 
+                       class="access-btn btn-students"
+                       [queryParams]="{userType: 'student'}"
+                       aria-label="Accéder à l'espace étudiants">
+                        <span class="btn-text" routerLink="/login-form">Se connecter</span>
+                        <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Carte Espace Administration -->
+            <article class="access-card  admin-card" data-space="admin">
+                <div class="card-header ">
+                    <div class="icon-container">
+                        <i class="fas fa-cogs card-icon" aria-hidden="true"></i>
+                    </div>
+                    <div class="card-badge">Administration</div>
+                </div>
+                
+                <div class="card-body">
+                    <h3 class="card-title">Espace Administration</h3>
+                    <p class="card-description">
+                        Administrez la plateforme, gérez les utilisateurs et supervisez les activités
+                    </p>
+                    
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> Gestion des utilisateurs</li>
+                        <li><i class="fas fa-check"></i> Statistiques globales</li>
+                        <li><i class="fas fa-check"></i> Configuration système</li>
+                    </ul>
+                </div>
+                
+                <div class="card-footer">
+                    <a routerLink="/login-form" 
+                       class="access-btn btn-admin"
+                       [queryParams]="{userType: 'admin'}"
+                       aria-label="Accéder à l'espace administration">
+                        <span class="btn-text" routerLink="/login-form">Se connecter</span>
+                        <i class="fas fa-arrow-right btn-icon"></i>
+                    </a>
+                </div>
+            </article>
+        </div>
     </div>
-</div>
+</section>

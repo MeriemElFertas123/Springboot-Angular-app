@@ -1,25 +1,19 @@
-<aside class="sidebar">
-    <h2 class="sidebar-title">GESTION DES STAGES</h2>
-    <nav class="nav-links">
-      <a class="nav-item" routerLink="/espace-etudiant">
-        <i class="icon">🏚️</i>
-        <span class="text">Accueil</span>
-      </a>
-      <a class="nav-item" routerLink="/ajoutStage">
-        <i class="icon">📝</i>
-        <span class="text">Ajouter un stage</span>
-      </a>
-      <a class="nav-item">
-        <i class="icon">📄</i>
-        <span class="text" routerLink="/listeStages">Votre stage</span>
-      </a>
-      <a class="nav-item" routerLink="/deposerStage">
-        <i class="icon">📥</i>
-        <span class="text">Déposer le rapport</span>
-      </a>
-      <a class="nav-item" routerLink="/chat-etudiant">
-        <i class="fa-brands fa-rocketchat pe-3" style="color: #00A6ED;"></i>
-        <span class="text">Salle de discussion</span>
-      </a>
-    </nav>
-  </aside>
+<!-- Dans votre index.html -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<div class="sidebar">
+  <!-- Sidebar avec icônes modifiées -->
+<a class="nav-item" routerLink="/espace-etudiant">
+  <i class="icon fas fa-graduation-cap"></i> <!-- Icône diplôme pour l'espace étudiant -->
+  <span class="text">Accueil</span>
+</a>
+<a class="nav-item" routerLink="/ajoutStage">
+  <i class="icon fas fa-plus-circle"></i> <!-- Icône ajout/plus pour ajouter un stage -->
+  <span class="text">Ajouter un stage</span>
+</a>
+<a class="nav-item" routerLink="/listeStages">
+  <i class="icon fas fa-briefcase"></i> <!-- Icône mallette/travail pour les stages -->
+  <span class="text">Votre stage</span>
+</a>
+
+</div>

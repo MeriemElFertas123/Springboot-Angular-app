@@ -6,16 +6,20 @@
 }
 
 .sidebar {
-  background-color: #2c3e50;
+  /* background-color: #2c3e50; */
   width: 250px;
   flex-shrink: 0;
 }
 
 .main-content {
   flex-grow: 1;
-  background-color: #f5f7fa;
+  /* background-color: #f5f7fa; */
+  
   padding: 30px;
   overflow-y: auto;
+  margin-top: 100px;
+
+
 }
 
 .page-title {
@@ -64,7 +68,6 @@
 }
 
 .section-number {
-  background-color: #3498db;
   color: white;
   width: 30px;
   height: 30px;
@@ -74,6 +77,7 @@
   justify-content: center;
   margin-right: 10px;
   font-size: 0.9rem;
+  background-color: #51525375;
 }
 
 /* Éléments de formulaire */
@@ -123,10 +127,35 @@ select.form-control {
   border-top: 1px dashed #e0e6ed;
 }
 
+.upload-header {
+  margin-bottom: 15px;
+}
+
 .upload-title {
   color: #2c3e50;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   font-size: 1.1rem;
+}
+
+/* Avertissement template */
+.template-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background-color: #fff8e6;
+  border: 1px solid #ffd700;
+  border-radius: 6px;
+  color: #5e4b00;
+  font-weight: 500;
+  margin: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.warning-icon {
+  font-size: 1.2rem;
+  color: #ffa500;
+  flex-shrink: 0;
 }
 
 .upload-options {
@@ -145,7 +174,6 @@ select.form-control {
 .option-btn {
   flex: 1;
   padding: 12px;
-  background: #edf2f7;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -159,8 +187,8 @@ select.form-control {
 }
 
 .option-btn.active {
-  background: #3498db;
   color: white;
+  background-color: #243c5d65;
 }
 
 .option-btn i {
@@ -273,10 +301,6 @@ select.form-control {
   cursor: not-allowed;
 }
 
-.submit-icon {
-  font-size: 1.2rem;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .app-container {
@@ -290,8 +314,22 @@ select.form-control {
   .btn-group {
     flex-direction: column;
   }
+  .importer{
+      background-color: #64748b1d;
+
+  }
   
   .form-sections-container {
     grid-template-columns: 1fr;
+  }
+
+  .template-warning {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .warning-icon {
+    align-self: center;
   }
 }

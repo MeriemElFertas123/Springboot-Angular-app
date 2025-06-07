@@ -6,11 +6,12 @@ import { SideBarEtudiantComponent } from '../../side-bar-etudiant/side-bar-etudi
 import { StageServiceService } from '../../../service/stage-service.service';
 import { TypeStage } from '../../../model/enums';
 import { Router } from '@angular/router';
+import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-add-stage',
   standalone: true,
-  imports: [FormsModule, CommonModule, SideBarEtudiantComponent, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, SideBarEtudiantComponent, ReactiveFormsModule, UserProfileMenuComponent],
   templateUrl: './add-stage.component.html',
   styleUrls: ['./add-stage.component.css']
 })

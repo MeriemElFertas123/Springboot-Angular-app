@@ -4,11 +4,12 @@ import { StageServiceService } from '../../../service/stage-service.service';
 import { SideBarEtudiantComponent } from "../../side-bar-etudiant/side-bar-etudiant.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-liste-stage',
   standalone: true, // Ajouté pour correspondre au style du composant AddStageComponent
-  imports: [SideBarEtudiantComponent, CommonModule, RouterLink],
+  imports: [SideBarEtudiantComponent, CommonModule, RouterLink, UserProfileMenuComponent],
   templateUrl: './liste-stage.component.html',
   styleUrl: './liste-stage.component.css'
 })

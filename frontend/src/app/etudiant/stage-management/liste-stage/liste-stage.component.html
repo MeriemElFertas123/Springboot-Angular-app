@@ -1,8 +1,9 @@
+<app-user-profile-menu></app-user-profile-menu>
 <div class="app-container">
   <div class="sidebar">
     <app-side-bar-etudiant></app-side-bar-etudiant>
   </div>
-  <main class="pt-4">
+  <main >
     <h1>Liste des Stages</h1>
 
     <div class="stages-container">
@@ -21,7 +22,7 @@
         </div>
 
         <div class="stage-item-container" *ngFor="let stage of stages">
-          <div class="stage-row">
+          <div class="stage-row " >
             <div>{{ stage.nomEntreprise }}</div>
             <div>{{ stage.adresseEntreprise }}</div>
             <div>{{ stage.nomEncadrant }}</div>

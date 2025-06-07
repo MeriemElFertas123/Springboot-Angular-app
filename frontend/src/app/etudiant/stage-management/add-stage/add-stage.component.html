@@ -1,3 +1,4 @@
+<app-user-profile-menu></app-user-profile-menu>
 <div class="app-container">
   <div class="sidebar">
     <app-side-bar-etudiant></app-side-bar-etudiant>
@@ -94,7 +95,13 @@
 
           <!-- Section Rapport intégrée -->
           <div class="document-upload-section">
-            <h3 class="upload-title">Rapport de stage</h3>
+            <div class="upload-header">
+              <h3 class="upload-title">Rapport de stage</h3>
+              <div class="template-warning">
+                <i class="warning-icon">!</i>
+                <span>Votre rapport doit respecter scrupuleusement la structure du modèle fourni</span>
+              </div>
+            </div>
             
             <div class="upload-options">
               <div class="option-choice">
@@ -103,7 +110,7 @@
                           [class.active]="!useTemplate"
                           (click)="toggleTemplateOption(false)">
                     <i class="upload-icon">📤</i>
-                    <span>Importer mon rapport (PDF)</span>
+                    <span >Importer mon rapport (PDF)</span>
                   </button>
                   
                   <button type="button" class="option-btn" 

@@ -156,11 +156,12 @@ button i {
 /* Assurez-vous que le conteneur parent a une hauteur définie */
 .dashboard-content {
   display: flex;
-  background: #e9ecf0;
-  overflow: hidden;
-    background-color:red;
-
+  /* background: #177cff; */
+  /* overflow: hidden; */
+  margin-left: 250px;
+  height: 100vh;
 }
+
 
 /* Sidebar - Modifications */
 
@@ -182,8 +183,8 @@ button i {
   background: var(--light-color);
   overflow-y: hidden;
   position: relative;
-  max-height:75vh;
   padding-top: 5rem;
+  margin-top: 100px;
 }
 
 /* Header du dashboard */
@@ -197,7 +198,7 @@ button i {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  background: white;
+  background:  #64748b1d;
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
   position: relative;
@@ -275,7 +276,7 @@ button i {
 
 /* Cards statistiques */
 .stat-card {
-  background: white;
+  background: #64748b1d;;
   border-radius: 20px;
   padding: 2rem;
   position: relative;

@@ -12,9 +12,10 @@ main{
 
 
 .row{
-    max-height: 65%;
+    max-height: 55%;
     overflow: auto;
     scrollbar-width: none;  /* Pour Firefox */
+    width: 100vw;
 }
 
 /* Pour Chrome, Edge, Safari */
@@ -227,7 +228,8 @@ i{
             border-radius: 20px;
             box-shadow: var(--shadow-medium);
             padding: 1rem;
-            margin: 0.5rem !important;
+            margin-left: 250px !important;
+            margin-top: 100px !important;
         }
 
         /* === CARTES DE STAGES === */
@@ -492,30 +494,7 @@ i{
         }
 
         /* === RESPONSIVE === */
-        @media (max-width: 768px) {
-            .flex-row {
-                flex-direction: column !important;
-            }
-
-            .ms-4 {
-                margin-left: 0 !important;
-                margin-top: 1rem;
-            }
-
-            .d-flex.flex-column {
-                flex-direction: row !important;
-                gap: 0.5rem;
-            }
-
-            .w-50 {
-                width: 90% !important;
-            }
-
-            .mx-5 {
-                margin-left: 1rem !important;
-                margin-right: 1rem !important;
-            }
-        }
+       
 
         /* === ANIMATIONS === */
         @keyframes slideInUp {
@@ -547,5 +526,14 @@ i{
         }
         
         .rapport{
-            background-color:rgb(232, 249, 238);
+            background-color:#0000003c;
+            margin:30px;
+            width: 80%;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        main h3{
+            padding: 10px;
+            text-shadow: 5px 5px 5px #00000078;
         }

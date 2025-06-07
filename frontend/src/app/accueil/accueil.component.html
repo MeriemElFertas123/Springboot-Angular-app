@@ -2,43 +2,73 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap" rel="stylesheet">
 <div class="accueil">
-    <div class="accueil">
-        <header class="header">
-            <div class="logo">EnSa FèS</div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="ensa">ENSA</a></li>
-                    <li><a href="#">FORMATIONS</a></li>
-                    <li><a href="#">VIE ETUDIANTS</a></li>
-                    <li><a href="#">INTERNATIONAL</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                </ul>
-            </nav>
-            <!-- "Espaces dédiés" et l'icône de menu déplacés ici -->
-            <div class="dropdown-container">
-                <a href="#" class="espace">ESPACES INTERNES</a>
-                <span class="menu-icon">&#9776;</span>
-                <div class="dropdown">
-                    <ul class="submenu">
-                        <li><a href="#">Espace Étudiants</a></li>
-                        <li><a href="#">Espace Professeurs</a></li>
-                        <li><a href="#">Espace Administration</a></li>
-                    </ul>
+     <header class="header">
+        <!-- Logo -->
+        <div class="logo">
+            <h1>StageTrack </h1>
+        </div>
+        
+        <!-- Navbar -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#acceuil" class="nav-link active">ENSA</a></li>
+                <li class="nav-item"><a href="#espaceinterne" class="nav-link">espaces internes</a></li>
+                <li class="nav-item"><a href="#apropos" class="nav-link">à propos</a></li>
+                <li class="nav-item"><a href="#engagement" class="nav-link">notre engagement</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section hero -->
+    <section id="acceuil" class="hero-section">
+        <div class="hero-image-container">
+            <img src="img/accueil.jpeg" alt="Campus ENSA Fès" class="hero-image" loading="lazy">
+            
+            <!-- Overlay pour améliorer la lisibilité -->
+            <div class="hero-overlay"></div>
+            
+            <!-- Contenu principal du hero -->
+            <div class="hero-content">
+                <h2 class="hero-title">Bienvenue dans votre espace numérique de suivi et de valorisation des stages.</h2>
+                <p class="hero-subtitle">Excellence académique et innovation technologique</p>
+                
+                <div class="hero-actions">
+                   Simplifiez le dépôt, le suivi et la validation de vos rapports en quelques clics.
                 </div>
             </div>
-        </header>
-    
-        <!-- Section de l'image avec les boutons -->
-        <div class="image-container">
-            <img src="img/accueil.jpeg" class="image">
-            
-            <div class="buttons">
-                <button class="btn">EMPLOIS DU TEMPS</button>
-                <button class="btn">CONTACTER NOUS</button>
-            </div>
         </div>
-
+        
+        <!-- Indicateurs de contenu -->
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down animate-bounce"></i>
+        </div>
+    </section>
+    
+      
+    <section id="espaceinterne">
         <app-espace-interne></app-espace-interne>
-        <app-button-chat></app-button-chat>
+    </section>
+        
+
+
+    <section id="apropos">
+        <app-apropos></app-apropos>
+    </section>
+
+
+         
+
+    <div id="engagement">
+         <h3>Notre Engagement</h3>
+
+        <div class="engagement-section">
+        <div >
+            <p class="intro-text fade-in">Nous nous engageons à fournir une solution qui transforme véritablement l'expérience de gestion des rapports de stage, en créant un environnement collaboratif où chaque acteur dispose des outils nécessaires pour réussir. Notre plateforme évolutive s'adapte aux besoins spécifiques de votre établissement tout en maintenant la simplicité d'utilisation au cœur de son design.</p>
+        </div>
+        <div class="right">
+            <img src="img/engagement.jpg" alt="engagement" class="image-engagement">
+        </div>
     </div>
+    </div>
+</div>
     

@@ -12,6 +12,8 @@
 /* style pour side bar */
 main{
     flex:1;
+    margin-top: 100px;
+    margin-left: 250px;
 }
 .sidebar{
   background-color: #CEDDDE;
