@@ -1,17 +1,7 @@
-/* RESET COMPLET */
-.admin-container, .admin-sidebar, .admin-content {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* STRUCTURE PRINCIPALE */
-  .admin-container {
-    display: flex;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden; /* Empêche tout débordement */
-  }
+
+
+
+ 
   
   .admin-sidebar {
     width: 250px;
@@ -21,16 +11,10 @@
     left: 0;
     bottom: 0;
     z-index: 1000;
-    overflow-y: auto;
+    overflow: hidden; /* Empêche tout débordement */
   }
   
-  .admin-content {
-    flex: 1;
-    margin-left: 250px; /* Doit être égal à la sidebar */
-    padding: 20px;
-    min-height: 100vh;
-    background: #f5f7fa;
-  }
+
   
   /* STYLES DU TABLEAU */
   .table-container {

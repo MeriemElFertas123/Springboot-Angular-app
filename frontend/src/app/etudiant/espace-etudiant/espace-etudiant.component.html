@@ -4,13 +4,189 @@
     <app-side-bar-etudiant></app-side-bar-etudiant>
   </div>
   
-    <main class="main-content">
-    
-  
-      <!-- <section class="welcome-section">
-        <div class="welcome-message">Hi Salim ! Welcome Back</div>
-        <button class="add-stage-btn" (click)="navigateToAjouterStage()">+ AJOUTER UN STAGE</button>
-      </section> -->
+    <main class="main-content ">
+          
+              <div class="qa-container ">
+          <!-- <div class="sidebar">
+          <app-side-bar-etudiant></app-side-bar-etudiant>
+        </div>-->
+        <div class="qa-card">
+          <!-- Header -->
+          <div class="qa-header">
+            <div class="header-top">
+              <h1 class="qa-title">Questions / Réponses</h1>
+              <button 
+                class="btn-primary"
+                (click)="showNewQuestionForm = !showNewQuestionForm">
+                <i class="icon-plus"></i>
+                Poser une question
+              </button>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-filter-container">
+              <div class="search-wrapper">
+                <!-- <i class="icon-search"></i> -->
+                <input
+                  type="text"
+                  placeholder="Rechercher une question..."
+                  [(ngModel)]="searchTerm"
+                  class="search-input"
+                />
+              </div>
+              <div class="filter-wrapper">
+                <!-- <i class="icon-filter"></i> -->
+                <select
+                  [(ngModel)]="filterCategory"
+                  class="filter-select"
+                >
+                  <option *ngFor="let category of categories" [value]="category.value">
+                    {{ category.label }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Question Form -->
+          <div *ngIf="showNewQuestionForm" class="new-question-form">
+            <div class="form-group">
+              <label class="form-label">Titre de votre question</label>
+              <input
+                type="text"
+                [(ngModel)]="newQuestion.title"
+                placeholder="Résumez votre question en quelques mots..."
+                class="form-input"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description détaillée</label>
+              <textarea
+                [(ngModel)]="newQuestion.content"
+                placeholder="Décrivez votre question en détail..."
+                rows="4"
+                class="form-textarea"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Catégorie</label>
+              <select
+                [(ngModel)]="newQuestion.category"
+                class="form-select"
+              >
+                <option *ngFor="let category of categories.slice(1)" [value]="category.value">
+                  {{ category.label }}
+                </option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button
+                (click)="handleSubmitQuestion()"
+                class="btn-primary"
+              >
+                Publier la question
+              </button>
+              <button
+                (click)="showNewQuestionForm = false"
+                class="btn-secondary"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+
+          <!-- Questions List -->
+          <div class="questions-list">
+            <div *ngIf="filteredQuestions.length === 0" class="empty-state">
+              <i class="icon-message-circle empty-icon"></i>
+              <p class="empty-title">Aucune question trouvée</p>
+              <p class="empty-subtitle">Soyez le premier à poser une question !</p>
+            </div>
+
+            <div *ngFor="let question of filteredQuestions" class="question-item">
+              <!-- Question Header -->
+              <div class="question-header">
+                <div class="question-meta">
+                  <span class="category-badge" [ngClass]="getCategoryColor(question.category)">
+                    {{ getCategoryLabel(question.category) }}
+                  </span>
+                  <span class="question-date">
+                    <i class="icon-clock"></i>
+                    {{ formatDate(question.createdAt) }}
+                  </span>
+                </div>
+                <h3 class="question-title">{{ question.title }}</h3>
+                <p class="question-content">{{ question.content }}</p>
+                <div class="question-author">
+                  <i class="icon-user"></i>
+                  <span>{{ question.author }}</span>
+                </div>
+              </div>
+
+              <!-- Question Actions -->
+              <div class="question-actions">
+                <button
+                  (click)="handleLikeQuestion(question.id)"
+                  class="action-btn"
+                  [ngClass]="{ 'liked': question.isLiked }"
+                >
+                  <i class="icon-heart" [ngClass]="{ 'filled': question.isLiked }"></i>
+                  <span>{{ question.likes }}</span>
+                </button>
+                <button
+                  (click)="toggleExpanded(question.id)"
+                  class="action-btn"
+                >
+                  <i class="icon-message-circle"></i>
+                  <span>{{ question.replies?.length || 0 }} réponse{{ (question.replies?.length || 0) !== 1 ? 's' : '' }}</span>
+                  <i class="icon-chevron" [ngClass]="{ 'expanded': isExpanded(question.id) }"></i>
+                </button>
+              </div>
+
+              <!-- Replies Section -->
+              <div *ngIf="isExpanded(question.id)" class="replies-section">
+                <!-- Existing Replies -->
+                <div *ngFor="let reply of question.replies" class="reply-item">
+                  <p class="reply-content">{{ reply.content }}</p>
+                  <div class="reply-footer">
+                    <div class="reply-author">
+                      <i class="icon-user"></i>
+                      <span>{{ reply.author }}</span>
+                      <span class="separator">•</span>
+                      <span>{{ formatDate(reply.createdAt) }}</span>
+                    </div>
+                    <button
+                      (click)="handleLikeReply(question.id, reply.id)"
+                      class="reply-like-btn"
+                      [ngClass]="{ 'liked': reply.isLiked }"
+                    >
+                      <i class="icon-heart" [ngClass]="{ 'filled': reply.isLiked }"></i>
+                      <span>{{ reply.likes }}</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Reply Input -->
+                <div class="reply-input-container">
+                  <input
+                    type="text"
+                    [(ngModel)]="replyInputs[question.id]"
+                    placeholder="Répondre à cette question..."
+                    class="reply-input"
+                    (keypress)="onEnterKey($event, question.id)"
+                  />
+                  <button
+                    (click)="handleSubmitReply(question.id)"
+                    class="reply-submit-btn"
+                  >
+                    <i class="icon-send"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
   

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pfa.spring_boot.enums.stage.StatutRapport;
 import com.pfa.spring_boot.enums.stage.TypeStage;
+import com.pfa.spring_boot.enums.stage.StatutRapport;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 import java.time.LocalDate;
 
@@ -34,10 +36,10 @@ public class Stage {
     private String typeFichierRapport;
 
 
-
     @Lob
     @Column(length = 16777215)
     private byte[] contenuRapport;
+
 
 
 
@@ -50,6 +52,7 @@ public class Stage {
     @JoinColumn(name = "etudiant_id")
     @JsonBackReference //côté enfant (retour, souvent @ManyToOne)
     private Etudiant etudiant;
+
 
 
 
@@ -86,4 +89,8 @@ public class Stage {
     public void setStatutRapport(StatutRapport statutRapport) { this.statutRapport = statutRapport; }
     public Etudiant getEtudiant() { return etudiant; }
     public void setEtudiant(Etudiant etudiant) { this.etudiant = etudiant; }
+
+
+
 }
+

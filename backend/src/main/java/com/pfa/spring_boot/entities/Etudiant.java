@@ -152,6 +152,8 @@ public class Etudiant {
                 '}';
     }
 
+
+
     // NOUVEAU: Getters et Setters pour la relation Stage
     public List<Stage> getStages() { return stages; }
     public void setStages(List<Stage> stages) { this.stages = stages; }

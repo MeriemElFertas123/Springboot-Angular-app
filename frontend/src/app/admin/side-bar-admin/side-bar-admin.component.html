@@ -1,33 +1,24 @@
-<aside class="sidebar"> 
-    <nav class="nav-links">
-      <a class="nav-item" routerLink="/admin-home">
-        <i class="icon">🏚️</i>
-        <span class="text">Accueil</span>
-      </a>
-      <a class="nav-item" routerLink="/dashboard"> 
-        <i class="icon">🏠</i>
-        <span class="text">Dashboard</span>
-      </a>
-      <a class="nav-item" routerLink="/rapports"> 
-        <i class="icon">📊</i>
-        <span class="text">Rapports</span>
-      </a>
-      <a class="nav-item" routerLink="/students/list"> 
-        <i class="icon">🎓</i>
-        <span class="text">Gestion des étudiants</span>
-      </a>
-      <a class="nav-item" routerLink="/enseignants/list"> 
-        <i class="icon">👨‍🏫</i>
-        <span class="text">Gestion des enseignants</span>
-      </a>
-      <a class="nav-item" routerLink="/archive"> 
-        <i class="icon">📂</i>
-        <span class="text">Archivage des rapports</span>
-      </a>
-      <a class="nav-item" routerLink="/affectation"> 
-        <i class="icon">⚙️</i>
-        <span class="text">Affectation</span>
-      </a>
-    </nav>
-  </aside>
-  
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Modifiez votre sidebar comme ceci : -->
+<a class="nav-item" routerLink="/dashboard">
+  <i class="icon fas fa-home"></i> <!-- "fas" pour style solide -->
+  <span class="text">Dashboard</span>
+</a>
+<a class="nav-item" routerLink="/rapports">
+  <i class="icon fas fa-chart-bar"></i>
+  <span class="text">Rapports</span>
+</a>
+<a class="nav-item" routerLink="/students/list">
+  <i class="icon fas fa-user-graduate"></i>
+  <span class="text">Gestion des étudiants</span>
+</a>
+<a class="nav-item" routerLink="/enseignants/list">
+  <i class="icon fas fa-chalkboard-teacher"></i>
+  <span class="text">Gestion des enseignants</span>
+</a>
+<a class="nav-item" routerLink="/archive">
+  <i class="icon fas fa-archive"></i>
+  <span class="text">Archivage</span>
+</a>

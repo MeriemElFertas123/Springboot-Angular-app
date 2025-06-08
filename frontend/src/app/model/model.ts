@@ -50,6 +50,9 @@ export interface Evaluation{
 }
 
 export interface Stage{
+etat: any;
+titre: any;
+  etudiant: any;
     id?: number;
     nomEntreprise:string,
     adresseEntreprise:string,
@@ -64,9 +67,6 @@ export interface Stage{
     nomFichierRapport?: string;
     typeFichierRapport?: string;
     contenuRapport?: Blob;
-    etudiant :{
-        id:number
-    }
 }
 export interface Rapport {
     id: number;

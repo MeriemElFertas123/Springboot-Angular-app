@@ -24,11 +24,15 @@ export class AddStageComponent implements OnInit{
     intituleSujet: '',
     descriptionSujet: '',
     typeStage: TypeStage.PFA,
-    dateDepot: '',      
-    domaine: ''  ,
-    etudiant : {
-      id:-1
-    }
+    // etudiant : {
+    //   id:-1
+    // }
+
+    dateDepot: '',
+    domaine: '',
+    etat: undefined,
+    titre: undefined,
+    etudiant: undefined
   };
 
   useTemplate: boolean = false;

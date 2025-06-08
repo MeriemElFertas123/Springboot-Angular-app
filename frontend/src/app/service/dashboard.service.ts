@@ -12,10 +12,17 @@ export class DashboardService {
 
   getDashboardStats(): Observable<any> {
     return this.http.get(`${this.apiUrl}/stats`);
+
   }
 
   getReportsEvolution(chartPeriod: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/reports-evolution`);
   }
+
+  
+
+  // getReportsEvolution(chartPeriod: string): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}/reports-evolution`);
+  // }
 }
 

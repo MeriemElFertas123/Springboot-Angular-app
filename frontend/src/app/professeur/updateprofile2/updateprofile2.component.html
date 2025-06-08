@@ -1,0 +1,197 @@
+<app-user-profile-menu></app-user-profile-menu>
+<div class="dashboard-container">
+  <div >
+    <app-side-bar-prof></app-side-bar-prof>
+  </div>
+  
+    <main class="main-content">
+          
+          <div class="profile-container">
+                <div class="profile-header">
+                    <!-- <i class="fas fa-user-edit"></i> -->
+                    <h2> Mon Profil</h2>
+                </div>
+
+                <div class="profile-content" *ngIf="!loading">
+                    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                    
+                    <!-- Photo de profil -->
+                    <div class="profile-image-section">
+                        <div class="image-container">
+                        <img [src]="imagePreview || '/assets/default-avatar.png'" 
+                            alt="Photo de profil" 
+                            class="profile-image">
+                        <div class="image-overlay" *ngIf="isEditing">
+                            <label for="imageInput" class="image-upload-btn">
+                            <i class="fas fa-camera"></i>
+                            <input type="file" 
+                                    id="imageInput" 
+                                    accept="image/*" 
+                                    (change)="onFileSelected($event)"
+                                    style="display: none;">
+                            </label>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Informations personnelles -->
+                    <div class="info-grid">
+                        
+                        <!-- Nom -->
+                        <div class="form-group">
+                        <label for="nom">
+                            <i class="fas fa-user"></i> Nom
+                        </label>
+                        <input type="text" 
+                                id="nom"
+                                formControlName="nom"
+                                [readonly]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                        <div class="error-message" 
+                            *ngIf="profileForm.get('nom')?.invalid && profileForm.get('nom')?.touched">
+                            Le nom est requis (minimum 2 caractères)
+                        </div>
+                        </div>
+
+                        <!-- Prénom -->
+                        <div class="form-group">
+                        <label for="prenom">
+                            <i class="fas fa-user"></i> Prénom
+                        </label>
+                        <input type="text" 
+                                id="prenom"
+                                formControlName="prenom"
+                                [readonly]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                        <div class="error-message" 
+                            *ngIf="profileForm.get('prenom')?.invalid && profileForm.get('prenom')?.touched">
+                            Le prénom est requis (minimum 2 caractères)
+                        </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" 
+                                id="email"
+                                formControlName="email"
+                                [readonly]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                        <div class="error-message" 
+                            *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                            Veuillez entrer un email valide
+                        </div>
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div class="form-group">
+                        <label for="telephone">
+                            <i class="fas fa-phone"></i> Téléphone
+                        </label>
+                        <input type="tel" 
+                                id="telephone"
+                                formControlName="telephone"
+                                [readonly]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                        <div class="error-message" 
+                            *ngIf="profileForm.get('telephone')?.invalid && profileForm.get('telephone')?.touched">
+                            Le téléphone doit contenir 10 chiffres
+                        </div>
+                        </div>
+
+                        <!-- Genre -->
+                        <div class="form-group">
+                        <label for="genre">
+                            <i class="fas fa-venus-mars"></i> Genre
+                        </label>
+                        <select id="genre"
+                                formControlName="genre"
+                                [disabled]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                            <option value="">Sélectionner un genre</option>
+                            <option *ngFor="let genre of genres" [value]="genre">
+                            {{formatGenre(genre)}}
+                            </option>
+                        </select>
+                        </div>
+
+                        <!-- Filière -->
+                        <div class="form-group">
+                        <label for="filiere">
+                            <i class="fas fa-graduation-cap"></i> Filière
+                        </label>
+                        <select id="filiere"
+                                formControlName="filiere"
+                                [disabled]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                            <option value="">Sélectionner une filière</option>
+                            <option *ngFor="let filiere of filieres" [value]="filiere">
+                            {{formatFiliere(filiere)}}
+                            </option>
+                        </select>
+                        </div>
+
+                        <!-- Année d'étude -->
+                        <div class="form-group">
+                        <label for="anneeEtude">
+                            <i class="fas fa-calendar-alt"></i> Année d'étude
+                        </label>
+                        <select id="anneeEtude"
+                                formControlName="anneeEtude"
+                                [disabled]="!isEditing"
+                                class="form-control"
+                                [class.readonly]="!isEditing">
+                            <option value="">Sélectionner une année</option>
+                            <option *ngFor="let annee of anneesEtude" [value]="annee">
+                            {{formatAnneeEtude(annee)}}
+                            </option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="action-buttons">
+                        <button type="button" 
+                                class="btn btn-secondary"
+                                (click)="toggleEdit()"
+                                *ngIf="!isEditing">
+                        <!-- <i class="fas fa-edit"></i> -->
+                         Modifier
+                        </button>
+                        
+                        <div *ngIf="isEditing" class="edit-buttons">
+                        <button type="submit" 
+                                class="btn btn-primary"
+                                [disabled]="!profileForm.valid || loading">
+                            <i class="fas fa-save"></i> 
+                            <span *ngIf="!loading">Sauvegarder</span>
+                            <span *ngIf="loading">Sauvegarde...</span>
+                        </button>
+                        
+                        <button type="button" 
+                                class="btn btn-secondary"
+                                (click)="toggleEdit()">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+                <!-- Loading spinner -->
+                <div *ngIf="loading" class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Chargement...</p>
+                </div>
+                </div>
+    </main>
+  </div>
+  
