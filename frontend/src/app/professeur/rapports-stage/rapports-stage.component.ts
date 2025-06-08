@@ -1,4 +1,18 @@
+
 import { DatePipe, NgClass, NgIf, NgStyle } from '@angular/common';
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-rapports-stage',
+  imports: [],
+  templateUrl: './rapports-stage.component.html',
+  styleUrl: './rapports-stage.component.css'
+})
+export class RapportsStageComponent {
+import { DatePipe, NgClass, NgStyle } from '@angular/common';
+
 import { Component ,ElementRef,inject,OnInit,ViewChild} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DepotRapportStage, Evaluation } from '../../model/model';
@@ -182,6 +196,7 @@ export class RapportsStageComponent implements OnInit{
       this.fetchRappStageAddSelectedProp();
     }
    
+
   }*/
 
 
@@ -228,5 +243,8 @@ export class RapportsStageComponent implements OnInit{
       this.listStagesValides=this.listStagesValides.filter(s => s.dateDepot.slice(0,4)===annee);
     }
    }
+
+  }
+
 
 }

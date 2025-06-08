@@ -3,6 +3,8 @@ package com.pfa.spring_boot.entities;
 import com.pfa.spring_boot.enums.stage.StatutRapport;
 import jakarta.persistence.*;
 
+// L'entité rapport peut être éliminée et remplacée par l'entité stage qui peut être suffisante (à discuter)
+
 @Entity
 public class Rapport {
     @Id
