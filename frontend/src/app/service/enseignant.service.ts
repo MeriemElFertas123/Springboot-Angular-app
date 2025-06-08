@@ -31,6 +31,9 @@ export class EnseignantService {
   }
 
   updateEnseignant(id: number, enseignant: FormData): Observable<any> {
+    enseignant.forEach((c,v) =>{
+      console.log(c + ' : ' + v + '\n')
+    })
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, enseignant);
   }
 

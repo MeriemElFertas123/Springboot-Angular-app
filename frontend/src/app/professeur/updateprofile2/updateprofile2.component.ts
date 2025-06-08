@@ -1,16 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EtudiantService } from '../../service/etudiant.service';
-import { NgIf } from '@angular/common';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EnseignantService } from '../../service/enseignant.service';
+import { NgFor, NgIf } from '@angular/common';
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
-import { SideBarProfComponent } from "../side-bar-prof/side-bar-prof.component";
+import { SideBarProfComponent } from '../side-bar-prof/side-bar-prof.component';
 
 
 
-
-
-export interface Etudiant {
+export interface Enseignant {
   id?: number;
   image?: string;
   nom: string;
@@ -18,66 +16,60 @@ export interface Etudiant {
   email: string;
   password?: string;
   telephone: string;
-  genre: Genre;
-  filiere: Filiere;
-  anneeEtude: AnneeEtude;
+  specialite:string;
+  genre:Genre
+}
+export enum Genre{
+    Homme='Homme',
+    Femme='Femme'
 }
 
-export enum Genre {
-  HOMME = 'HOMME',
-  FEMME = 'FEMME'
-}
 
-export enum Filiere {
-  INFORMATIQUE = 'INFORMATIQUE',
-  MATHEMATIQUES = 'MATHEMATIQUES',
-  PHYSIQUE = 'PHYSIQUE',
-  CHIMIE = 'CHIMIE',
-  BIOLOGIE = 'BIOLOGIE'
-}
-
-export enum AnneeEtude {
-  PREMIERE_ANNEE = 'PREMIERE_ANNEE',
-  DEUXIEME_ANNEE = 'DEUXIEME_ANNEE',
-  TROISIEME_ANNEE = 'TROISIEME_ANNEE',
-  QUATRIEME_ANNEE = 'QUATRIEME_ANNEE',
-  CINQUIEME_ANNEE = 'CINQUIEME_ANNEE'
-}
 
 
 
 @Component({
   selector: 'app-updateprofile2',
-  imports: [NgIf, UserProfileMenuComponent, SideBarProfComponent,ReactiveFormsModule],
+  imports: [NgIf,NgFor, ReactiveFormsModule,SideBarProfComponent, UserProfileMenuComponent],
   templateUrl: './updateprofile2.component.html',
   styleUrl: './updateprofile2.component.css'
 })
 export class Updateprofile2Component {
 profileForm: FormGroup;
-  etudiant: Etudiant | null = null;
+  enseignant: Enseignant | null = null;
   isEditing = false;
   selectedFile: File | null = null;
   imagePreview: string | null = null;
   loading = false;
-  
-  // Énumérations pour les templates
-  genres = Object.values(Genre);
-  filieres = Object.values(Filiere);
-  anneesEtude = Object.values(AnneeEtude);
+
+
+  // pour la modification du mot de passe
+  showPasswordSection = false;
+  passwordForm!: FormGroup;
+
+
 
   constructor(
     private fb: FormBuilder,
-    private etudiantService: EtudiantService
+    private enseignantService: EnseignantService
   ) {
     this.profileForm = this.fb.group({
       nom: ['', [Validators.required, Validators.minLength(2)]],
       prenom: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
-      genre: ['', Validators.required],
-      filiere: ['', Validators.required],
-      anneeEtude: ['', Validators.required]
+      genre: [''],
+      specialite: ['', Validators.required],
+      password: [''],
     });
+
+
+    // pour le changement du mot de passe
+    this.passwordForm = this.fb.group({
+    currentPassword: ['', Validators.required],
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', Validators.required]
+  }, { validators: this.passwordMatchValidator });
   }
 
   ngOnInit(): void {
@@ -85,37 +77,40 @@ profileForm: FormGroup;
   }
 
   loadProfile(): void {
-    // this.loading = true;
-    // // Supposons que l'ID de l'étudiant connecté est stocké dans le localStorage
-    // const etudiantId = localStorage.getItem('etudiantId');
+     this.loading = true;
+     // l'ID de l'étudiant connecté est stocké dans le localStorage
+     const connectedEnseignant = localStorage.getItem('connectedUser');
     
-    // if (etudiantId) {
-    //   this.etudiantService.getEtudiant(+etudiantId).subscribe({
-    //     next: (etudiant) => {
-    //       this.etudiant = etudiant;
-    //       this.populateForm(etudiant);
-    //       if (etudiant.image) {
-    //         this.imagePreview = `data:image/jpeg;base64,${etudiant.image}`;
-    //       }
-    //       this.loading = false;
-    //     },
-    //     error: (error) => {
-    //       console.error('Erreur lors du chargement du profil:', error);
-    //       this.loading = false;
-    //     }
-    //   });
-    // }
+    if (connectedEnseignant) {
+      const idConnectedEnseignant=JSON.parse(connectedEnseignant).id;
+      this.enseignantService.getEnseignantById(idConnectedEnseignant).subscribe({
+        
+        next: (enseignant) => {
+          this.enseignant = enseignant;
+          this.populateForm(enseignant);
+          if (enseignant.image) {
+            this.imagePreview = `data:image/jpeg;base64,${enseignant.image}`;
+          }
+          this.loading = false;
+          console.log(enseignant)
+        },
+        error: (error) => {
+          console.error('Erreur lors du chargement du profil:', error);
+          this.loading = false;
+        }
+      });
+    }
   }
 
-  populateForm(etudiant: Etudiant): void {
+  populateForm(enseignant: Enseignant): void {
     this.profileForm.patchValue({
-      nom: etudiant.nom,
-      prenom: etudiant.prenom,
-      email: etudiant.email,
-      telephone: etudiant.telephone,
-      genre: etudiant.genre,
-      filiere: etudiant.filiere,
-      anneeEtude: etudiant.anneeEtude
+      nom: enseignant.nom,
+      prenom: enseignant.prenom,
+      email: enseignant.email,
+      telephone: enseignant.telephone,
+      specialite: enseignant.specialite,
+      password : enseignant.password,
+      genre : enseignant.genre
     });
   }
 
@@ -123,8 +118,8 @@ profileForm: FormGroup;
     this.isEditing = !this.isEditing;
     if (!this.isEditing) {
       // Annuler les modifications
-      if (this.etudiant) {
-        this.populateForm(this.etudiant);
+      if (this.enseignant) {
+        this.populateForm(this.enseignant);
       }
       this.selectedFile = null;
     }
@@ -145,7 +140,7 @@ profileForm: FormGroup;
   }
 
   onSubmit(): void {
-    if (this.profileForm.valid && this.etudiant) {
+    if ( this.enseignant) {
       this.loading = true;
       
       const formData = new FormData();
@@ -161,42 +156,69 @@ profileForm: FormGroup;
         formData.append('image', this.selectedFile);
       }
       
-      formData.append('id', this.etudiant.id!.toString());
+      formData.append('id', this.enseignant.id!.toString());
 
-      // this.etudiantService.updateEtudiant(this.etudiant.id!, formData).subscribe({
-      //   next: (updatedEtudiant) => {
-      //     this.etudiant = updatedEtudiant;
-      //     this.isEditing = false;
-      //     this.selectedFile = null;
-      //     this.loading = false;
-      //     alert('Profil mis à jour avec succès!');
-      //   },
-      //   error: (error) => {
-      //     console.error('Erreur lors de la mise à jour:', error);
-      //     this.loading = false;
-      //     alert('Erreur lors de la mise à jour du profil');
-      //   }
-      // });
+      this.enseignantService.updateEnseignant(this.enseignant.id!, formData).subscribe({
+        next: (updatedEnseignant) => {
+          this.enseignant = updatedEnseignant;
+          this.isEditing = false;
+          this.selectedFile = null;
+          this.loading = false;
+          alert('Profil mis à jour avec succès!');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour:', error);
+          this.loading = false;
+          alert('Erreur lors de la mise à jour du profil');
+        }
+      });
     }
+    console.log(this.enseignant)
+    this.isEditing=false;
   }
 
-  // Méthodes utilitaires pour formater les énumérations
-  formatGenre(genre: string): string {
-    return genre.charAt(0) + genre.slice(1).toLowerCase();
-  }
+ 
 
-  formatFiliere(filiere: string): string {
-    return filiere.charAt(0) + filiere.slice(1).toLowerCase().replace('_', ' ');
-  }
 
-  formatAnneeEtude(annee: string): string {
-    const mapping: { [key: string]: string } = {
-      'PREMIERE_ANNEE': '1ère année',
-      'DEUXIEME_ANNEE': '2ème année',
-      'TROISIEME_ANNEE': '3ème année',
-      'QUATRIEME_ANNEE': '4ème année',
-      'CINQUIEME_ANNEE': '5ème année'
+  // les méthodes suivantes pour la modification du mot de passe
+  passwordMatchValidator(form: AbstractControl) {
+  const newPassword = form.get('newPassword');
+  const confirmPassword = form.get('confirmPassword');
+  if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
+    confirmPassword.setErrors({ passwordMismatch: true });
+    return { passwordMismatch: true };
+  }
+  return null;
+}
+
+togglePasswordSection() {
+  this.showPasswordSection = !this.showPasswordSection;
+  if (!this.showPasswordSection) {
+    this.passwordForm.reset();
+  }
+}
+
+onPasswordSubmit() {
+  if (this.passwordForm.valid) {
+    const passwordData = {
+      currentPassword: this.passwordForm.value.currentPassword,
+      newPassword: this.passwordForm.value.newPassword
     };
-    return mapping[annee] || annee;
+    
+    // this.enseignantService.updateEnseignant(this.enseignant!.id!, passwordData).subscribe({
+    //   next: () => {
+    //     alert('Mot de passe mis à jour avec succès!');
+    //     this.showPasswordSection = false;
+    //     this.passwordForm.reset();
+    //   },
+    //   error: (error) => {
+    //     if (error.status === 400) {
+    //       alert('Mot de passe actuel incorrect');
+    //     } else {
+    //       alert('Erreur lors de la mise à jour du mot de passe');
+    //     }
+    //   }
+    // });
   }
+}
 }

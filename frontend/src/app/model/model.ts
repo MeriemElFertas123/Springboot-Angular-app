@@ -85,3 +85,9 @@ export interface Rapport {
     typeFichierRapport?: string;
     contenuRapport?: Blob;
   }
+
+
+  export interface PasswordUpdateRequest {
+  currentPassword: string;
+  newPassword: string;
+}

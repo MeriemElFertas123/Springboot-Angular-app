@@ -1,6 +1,7 @@
 package com.pfa.spring_boot.service.student;
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.PasswordUpdateRequest;
 import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
 import com.pfa.spring_boot.entities.Stage;
@@ -40,6 +41,8 @@ public class EtudiantServiceImpl implements EtudiantService{
     private Mapper mapper;
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+
 
     @Override
     public List<EtudiantDto> getAllStudents() {
@@ -188,6 +191,24 @@ public class EtudiantServiceImpl implements EtudiantService{
             }
         }
         return nbrTotalRapport;
+    }
+
+
+    public void updatePassword(Long etudiantId, PasswordUpdateRequest request) {
+        // 1. Récupérer l'étudiant
+        Etudiant etudiant = etudiantRepository.findById(etudiantId)
+                .orElseThrow(() -> new RuntimeException("Étudiant non trouvé avec l'ID: " + etudiantId));
+
+        // 2. Vérifier le mot de passe actuel
+        if (!passwordEncoder.matches(request.getCurrentPassword(), etudiant.getPassword())) {
+            throw new IllegalArgumentException("Mot de passe actuel incorrect");
+        }
+
+        // 3. Encoder et sauvegarder le nouveau mot de passe
+        String encodedNewPassword = passwordEncoder.encode(request.getNewPassword());
+        etudiant.setPassword(encodedNewPassword);
+
+        etudiantRepository.save(etudiant);
     }
 
 }

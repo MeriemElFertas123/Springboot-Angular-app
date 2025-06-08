@@ -2,6 +2,7 @@ package com.pfa.spring_boot.controllers;
 
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.PasswordUpdateRequest;
 import com.pfa.spring_boot.dto.UtilisateurDto;
 import com.pfa.spring_boot.entities.Etudiant;
 import com.pfa.spring_boot.entities.Stage;
@@ -165,7 +166,30 @@ public class EtudiantController {
     }
 
 
+    @PutMapping("/{id}/password")
+    public ResponseEntity<?> updatePassword(
+            @PathVariable Long id,
+             @RequestBody PasswordUpdateRequest request) {
 
+        try {
+            etudiantService.updatePassword(id, request);
+            return ResponseEntity.ok().build();
+
+        } catch (IllegalArgumentException e) {
+            // Mot de passe actuel incorrect
+            return ResponseEntity.badRequest()
+                    .body("Mot de passe actuel incorrect");
+
+        } catch (RuntimeException e) {
+            // Étudiant non trouvé
+            return ResponseEntity.notFound().build();
+
+        } catch (Exception e) {
+            // Erreur serveur
+            return ResponseEntity.internalServerError()
+                    .body("Erreur lors de la mise à jour du mot de passe");
+        }
+    }
 
 
 }

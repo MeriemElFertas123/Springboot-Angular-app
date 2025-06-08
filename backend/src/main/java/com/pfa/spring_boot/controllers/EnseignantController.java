@@ -65,7 +65,7 @@ public class EnseignantController {
             enseignantDto.setSpecialite(Specialite.valueOf(specialite));
             enseignantDto.setImage(imageBytes);
 
-
+            System.out.println("===>  "+enseignantDto);
             EnseignantDto createdEnseignant = enseignantService.createEnseignant(enseignantDto);
             return new ResponseEntity<>(createdEnseignant, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {

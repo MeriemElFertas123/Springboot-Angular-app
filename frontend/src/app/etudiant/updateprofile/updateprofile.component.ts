@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EtudiantService } from '../../service/etudiant.service';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { SideBarEtudiantComponent } from "../side-bar-etudiant/side-bar-etudiant.component";
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
@@ -46,7 +46,7 @@ export enum AnneeEtude {
 
 @Component({
   selector: 'app-updateprofile',
-  imports: [NgIf, ReactiveFormsModule, SideBarEtudiantComponent, UserProfileMenuComponent],
+  imports: [NgIf,NgFor, ReactiveFormsModule, SideBarEtudiantComponent, UserProfileMenuComponent],
   templateUrl: './updateprofile.component.html',
   styleUrl: './updateprofile.component.css'
 })
@@ -57,6 +57,13 @@ export class UpdateprofileComponent {
   selectedFile: File | null = null;
   imagePreview: string | null = null;
   loading = false;
+
+
+  // pour la modification du mot de passe
+  showPasswordSection = false;
+  passwordForm!: FormGroup;
+
+
   
   // Énumérations pour les templates
   genres = Object.values(Genre);
@@ -74,8 +81,17 @@ export class UpdateprofileComponent {
       telephone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       genre: ['', Validators.required],
       filiere: ['', Validators.required],
-      anneeEtude: ['', Validators.required]
+      anneeEtude: ['', Validators.required],
+      password: ['', Validators.required],
     });
+
+
+    // pour le changement du mot de passe
+    this.passwordForm = this.fb.group({
+    currentPassword: ['', Validators.required],
+    newPassword: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', Validators.required]
+  }, { validators: this.passwordMatchValidator });
   }
 
   ngOnInit(): void {
@@ -83,26 +99,29 @@ export class UpdateprofileComponent {
   }
 
   loadProfile(): void {
-    // this.loading = true;
-    // // Supposons que l'ID de l'étudiant connecté est stocké dans le localStorage
-    // const etudiantId = localStorage.getItem('etudiantId');
+     this.loading = true;
+     // l'ID de l'étudiant connecté est stocké dans le localStorage
+     const connectedEtudiant = localStorage.getItem('connectedUser');
     
-    // if (etudiantId) {
-    //   this.etudiantService.getEtudiant(+etudiantId).subscribe({
-    //     next: (etudiant) => {
-    //       this.etudiant = etudiant;
-    //       this.populateForm(etudiant);
-    //       if (etudiant.image) {
-    //         this.imagePreview = `data:image/jpeg;base64,${etudiant.image}`;
-    //       }
-    //       this.loading = false;
-    //     },
-    //     error: (error) => {
-    //       console.error('Erreur lors du chargement du profil:', error);
-    //       this.loading = false;
-    //     }
-    //   });
-    // }
+    if (connectedEtudiant) {
+      const idConnectedEtudiant=JSON.parse(connectedEtudiant).id;
+      this.etudiantService.getStudentById(idConnectedEtudiant).subscribe({
+        
+        next: (etudiant) => {
+          this.etudiant = etudiant;
+          this.populateForm(etudiant);
+          if (etudiant.image) {
+            this.imagePreview = `data:image/jpeg;base64,${etudiant.image}`;
+          }
+          this.loading = false;
+          console.log(etudiant)
+        },
+        error: (error) => {
+          console.error('Erreur lors du chargement du profil:', error);
+          this.loading = false;
+        }
+      });
+    }
   }
 
   populateForm(etudiant: Etudiant): void {
@@ -113,7 +132,8 @@ export class UpdateprofileComponent {
       telephone: etudiant.telephone,
       genre: etudiant.genre,
       filiere: etudiant.filiere,
-      anneeEtude: etudiant.anneeEtude
+      anneeEtude: etudiant.anneeEtude,
+      password : etudiant.password
     });
   }
 
@@ -161,20 +181,20 @@ export class UpdateprofileComponent {
       
       formData.append('id', this.etudiant.id!.toString());
 
-      // this.etudiantService.updateEtudiant(this.etudiant.id!, formData).subscribe({
-      //   next: (updatedEtudiant) => {
-      //     this.etudiant = updatedEtudiant;
-      //     this.isEditing = false;
-      //     this.selectedFile = null;
-      //     this.loading = false;
-      //     alert('Profil mis à jour avec succès!');
-      //   },
-      //   error: (error) => {
-      //     console.error('Erreur lors de la mise à jour:', error);
-      //     this.loading = false;
-      //     alert('Erreur lors de la mise à jour du profil');
-      //   }
-      // });
+      this.etudiantService.updateStudent(this.etudiant.id!, formData).subscribe({
+        next: (updatedEtudiant) => {
+          this.etudiant = updatedEtudiant;
+          this.isEditing = false;
+          this.selectedFile = null;
+          this.loading = false;
+          alert('Profil mis à jour avec succès!');
+        },
+        error: (error) => {
+          console.error('Erreur lors de la mise à jour:', error);
+          this.loading = false;
+          alert('Erreur lors de la mise à jour du profil');
+        }
+      });
     }
   }
 
@@ -197,4 +217,50 @@ export class UpdateprofileComponent {
     };
     return mapping[annee] || annee;
   }
+
+
+
+
+
+  // les méthodes suivantes pour la modification du mot de passe
+  passwordMatchValidator(form: AbstractControl) {
+  const newPassword = form.get('newPassword');
+  const confirmPassword = form.get('confirmPassword');
+  if (newPassword && confirmPassword && newPassword.value !== confirmPassword.value) {
+    confirmPassword.setErrors({ passwordMismatch: true });
+    return { passwordMismatch: true };
+  }
+  return null;
+}
+
+togglePasswordSection() {
+  this.showPasswordSection = !this.showPasswordSection;
+  if (!this.showPasswordSection) {
+    this.passwordForm.reset();
+  }
+}
+
+onPasswordSubmit() {
+  if (this.passwordForm.valid) {
+    const passwordData = {
+      currentPassword: this.passwordForm.value.currentPassword,
+      newPassword: this.passwordForm.value.newPassword
+    };
+    
+    this.etudiantService.updatePassword(this.etudiant!.id!, passwordData).subscribe({
+      next: () => {
+        alert('Mot de passe mis à jour avec succès!');
+        this.showPasswordSection = false;
+        this.passwordForm.reset();
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          alert('Mot de passe actuel incorrect');
+        } else {
+          alert('Erreur lors de la mise à jour du mot de passe');
+        }
+      }
+    });
+  }
+}
 }
