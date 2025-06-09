@@ -3,7 +3,7 @@ import { SideBarAdminComponent } from "../side-bar-admin/side-bar-admin.componen
 import { ArchivesService, ArchiveDto } from "../../service/archives-service.service";
 import { FormsModule } from "@angular/forms";
 import { CommonModule, DatePipe } from "@angular/common";
-import { RouterLink, RouterModule } from "@angular/router";
+import { Router, RouterLink, RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-admin-archives',
@@ -21,12 +21,18 @@ export class ArchivesComponent implements OnInit {
 
   constructor(
     private archivesService: ArchivesService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
     this.loadAvailableYears();
     this.loadArchives();
+  }
+  logout() {
+    console.log("Déconnexion en cours...");
+    // Implémente ici la logique de déconnexion, par ex. suppression du token, redirection
+    this.router.navigate(['/login']);
   }
 
   /**

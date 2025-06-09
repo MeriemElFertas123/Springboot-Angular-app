@@ -17,6 +17,21 @@ main{
   box-shadow: var(--shadow-md); /* Optionnel pour un effet visuel */
   z-index: 1000; /* Assure que la sidebar reste au-dessus du contenu */
 }
+.btn-logout {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* .fas{
+      font-size: 2rem;
+      font-weight: 800;
+      padding-top: 18px;
+      padding-right: 20px;
+      color: #fff;
+    } */
 /* sidebar.component.css */
 
 /* Reset et base */

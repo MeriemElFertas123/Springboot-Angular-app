@@ -7,6 +7,7 @@ import Chart from 'chart.js/auto';
 import { DashboardService } from '../../service/dashboard.service';
 import { NgModule } from '@angular/core';
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
+import { LoginFormComponent } from "../../login-form/login-form.component";
 
 // Interfaces
 interface Deadline {
@@ -38,7 +39,7 @@ interface ChartDataPoint {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink, SideBarAdminComponent, DatePipe, UserProfileMenuComponent],
+  imports: [NgFor, NgIf, RouterLink, SideBarAdminComponent, DatePipe, UserProfileMenuComponent, LoginFormComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
