@@ -84,30 +84,25 @@ header p {
 .input-item {
     background: #f8fafc;
     color: #374151;
-    padding: 14.5px 0px 15px 9px;
-    border-radius: 8px 0px 0px 8px;
-    border: 1px solid rgba(100, 116, 139, 0.2);
     border-right: none;
     transition: all 0.3s ease;
+    border: none;
+    padding-right: 1rem;
+    width: 100%;
 }
 
 /* Show/hide password Font Icon */
 #eye {
     background: #f8fafc;
     color: #64748b;
-    margin: 5.9px 0 0 0;
-    margin-left: -20px;
-    padding: 15px 9px 19px 0px;
-    border-radius: 0px 8px 8px 0px;
-    border: 1px solid rgba(100, 116, 139, 0.2);
     border-left: none;
     float: right;
     position: relative;
-    right: 1%;
-    top: -.2%;
     z-index: 5;
     cursor: pointer;
     transition: all 0.3s ease;
+    top:23px;
+    right: 28px;
 }
 
 #eye:hover {
@@ -124,35 +119,30 @@ header p {
     font-size: 16px;
     font-family: 'Abel', sans-serif;
     color: #374151;
-    background: #f8fafc;
     outline: none;
     border: 1px solid rgba(100, 116, 139, 0.2);
-    border-left: none;
-    border-radius: 0px 8px 8px 0px;
     transition: all 0.3s ease;
 }
 
 input[id="txt-input"] {
-    width: 250px;
-    border-radius: 8px;
     border: 1px solid rgba(100, 116, 139, 0.2);
 }
+
 
 /* focus */
 input:focus {
     transform: translateX(-2px);
-    border-radius: 8px;
     border-color: #64748b;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
 }
 
 /* Effet focus sur input-item */
-.form-input:focus + .input-item,
+/* .form-input:focus + .input-item,
 .form-input:focus ~ .input-item {
     border-color: #64748b;
     background: #ffffff;
-}
+} */
 
 /* //////////////////////////////////////////// */
 /* //////////////////////////////////////////// */
@@ -270,3 +260,4 @@ button:hover {
         width: 250px;
     }
 }
+
