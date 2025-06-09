@@ -10,7 +10,6 @@
     flex-grow: 1;
     padding: 20px;
   }
-  
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -176,7 +175,6 @@
   margin-top: 90px;
   margin-left: 240px;
   padding: 1.5rem;
-  border : 10px solid  #E2E8F0;
   
 }
 
@@ -315,7 +313,7 @@
 .new-question-form {
   padding: 1.5rem;
   border-bottom: 1px solid #e5e7eb;
-  background-color: #f9fafb;
+  /* background-color: #f9fafb; */
 }
 
 .form-group {

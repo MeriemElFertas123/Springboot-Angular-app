@@ -3,6 +3,7 @@
   cursor: pointer;
   position: fixed;
   background-color: #64748b1d;
+  padding: 0 20px;
 
   width: 100vw;
     .header-top {
@@ -10,90 +11,43 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem;
-      background-color: #64748b1d;
-  
-      span {
-        font-size: 20px;
-        font-weight: bold;
-      }
+
   
       .profile-picture {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
         img {
           width: 60px;
           height: 60px;
           border-radius: 50%;
         }
-      }
-
-    }
-  
-
-    .profile-details {
-      padding: 1rem;
-      background-color: #f4f4f4;
-      position: absolute;
-      right: 0;
-      z-index: 100;
-      opacity:0;
-      transform: translateY(-80px);
-      transition: opacity 1s ease, transform 1s ease;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      box-shadow: 10px 10px 20px #0000001b;
-
-      .profile-info {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 1rem;
-  
-        .profile-picture {
-          img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-          }
+        .details{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding-left: 50px;
         }
-  
-        .profile-name {
-          font-size: 16px;
+        .info-perso{
+          font-size: 20px;
           font-weight: bold;
         }
-  
-        .user-email {
-          font-size: 14px;
-          color: #777;
+        .user-email{
+          font-size: 17px;
+
         }
       }
 
-      .details{
-        padding: 1rem;
-        line-height: 2rem;
-      }
-  
-      a {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: #000;
-        margin-bottom: 1rem;
-        cursor: pointer;
-        padding: 10px;
-        .icon {
-          margin-right: 10px;
-        }
-  
-        &:hover {
-          color: #007bff; 
-        }
-      }
-  
-      input[type="file"] {
-        display: none;
-      }
     }
+    .fas{
+      font-size: 2.5rem;
+      font-weight: 800;
+      padding-top: 12px;
+    }
+  
   }
-  .user-profile-menu:hover .profile-details {
+  /* .user-profile-menu:hover .profile-details {
     opacity:1;
     transform: translateY(0);
-  }
+  } */

@@ -1,32 +1,17 @@
 <header class="user-profile-menu ">
-  <div class="header-top">
-    <span>{{connectedUser.prenom}} {{connectedUser.nom}}</span>
-    <div class="profile-picture">
-      <img [src]="'data:image/jpeg;base64,'+imageUser" alt="Profile Picture" />
-    </div>
-  </div>
-
-  <div class="profile-details px-5">
-    <div class="profile-info">
-
-      <div class="profile-picture">
-        <img *ngIf="imageUser" 
-            [src]="'data:image/jpeg;base64,'+imageUser" 
-            alt="Profile Picture" 
-            width="40px" />
-      </div>
-
-      <div class="details">
-        <div class="profile-name">{{connectedUser.nom}} {{connectedUser.prenom}}</div>
-        <div class="user-email">{{emailUser}}</div>
-      </div>
-    </div>
-
-
-   
-
-    <a class="dropdown-item" (click)="logout()" >
-      <span>Déconnexion</span>
-    </a>
-  </div>
+  <div class="header-top ">
+        <div class="profile-picture">
+            <img *ngIf="imageUser" 
+                [src]="'data:image/jpeg;base64,'+imageUser" 
+                alt="Profile Picture" 
+                width="40px" />
+            <div class="details">
+                <span class="info-perso">{{connectedUser.prenom}} {{connectedUser.nom}}</span>
+                <span class="user-email">{{emailUser}}</span>
+            </div>
+          </div>
+        <div>
+          <i class="fas fa-power-off" (click)="logout()"></i>
+        </div>
+    </div>    
 </header>
