@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Stage } from '../../../model/model';
 import { StageServiceService } from '../../../service/stage-service.service';
 import { SideBarEtudiantComponent } from "../../side-bar-etudiant/side-bar-etudiant.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profile-menu.component";
+import { EtudiantService } from '../../../service/etudiant.service';
 
 @Component({
   selector: 'app-liste-stage',
@@ -16,15 +17,22 @@ import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profil
 export class ListeStageComponent {
   stages: Stage[] = [];
   isDownloading: boolean = false;
+  idEtudiant=-1;
 
-  constructor(private stageService: StageServiceService) {}
+  constructor(private stageService: StageServiceService ) {
+    const connectedUser=localStorage.getItem('connectedUser');
+    if(connectedUser){
+      this.idEtudiant=JSON.parse(connectedUser).id;
+    }
+  }
 
   ngOnInit(): void {
     this.loadStages();
   }
 
+  etudiantService = inject(EtudiantService);
   loadStages(): void {
-    this.stageService.getAllStage().subscribe({
+    this.etudiantService.getStagesByEtudiantId(this.idEtudiant).subscribe({
       next: (data) => {
         this.stages = data;
       },

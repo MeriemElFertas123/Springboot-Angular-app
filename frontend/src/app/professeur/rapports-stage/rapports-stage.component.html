@@ -1,13 +1,13 @@
 
 <app-user-profile-menu></app-user-profile-menu>
 
-<div class="conteneur">
+<div class="conteneur ">
   <div class="sidebar">
     <app-side-bar-prof></app-side-bar-prof>
   </div>
-  <main class="m-1">
+  <main class="m-1 ">
     <h3>Rapports de stage non encore validés</h3>
-    <div class="row"> 
+    <div class="row "> 
       @if(listStagesNonValide.length!=0){
        @for (stage of listStagesNonValide; track $index) {
          <div  class="col-12  rapport ">
@@ -90,16 +90,16 @@
 
 
               <!-- Pour l'historique des stages -->
-     <div class="table-div  mx-5 my-3" >
+     <div class="table-div" >
        
       <table class="table">
         <thead>
           <tr>
-              <th scope="col"></th>
-              <th scope="col">Sujet du stage</th>
-              <th scope="col">Type de stage</th>
-              <th scope="col">Date de dépot</th>
-              <th scope="col">Rapport de stage</th>
+              <th></th>
+              <th>Sujet du stage</th>
+              <th>Type de stage</th>
+              <th>Date de dépot</th>
+              <th>Rapport de stage</th>
           </tr>
         </thead>
         <tbody>

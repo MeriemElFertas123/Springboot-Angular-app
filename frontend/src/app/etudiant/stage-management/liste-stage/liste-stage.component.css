@@ -31,13 +31,16 @@ main {
 
 .stage-header {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   align-items: center;
   background-color: #dfe6e9;
   padding: 10px;
   font-weight: bold;
   border-bottom: 2px solid #b2bec3;
   border-radius: 6px 6px 0 0;
+  div{
+    margin: 5px 20px;
+  }
 }
 
 .stage-item-container {
@@ -55,7 +58,7 @@ main {
   border: 1px solid #ddd;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  }
 
 .external-actions {
   display: flex;

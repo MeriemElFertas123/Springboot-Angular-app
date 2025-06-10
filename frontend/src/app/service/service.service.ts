@@ -86,7 +86,7 @@ export class ServiceService {
     description:"Dans ce stage j'ai développé une application pour un service hospitalier  ....",
     etudiants:[this.etudiant1,this.etudiant2],
     evaluation:this.evaluation1,
-    statut:StatutRapport.V,
+    statut:StatutRapport.VALIDE,
     submissionDate:new Date(2024,5,3,14,30)
   }
   depotRapport2:DepotRapportStage={
@@ -95,7 +95,7 @@ export class ServiceService {
     description:"Dans ce stage on a fait une étude de satisfaction au système d'information ...",
     etudiants:[this.etudiant3],
     evaluation:this.evaluation2,
-    statut:StatutRapport.V,
+    statut:StatutRapport.VALIDE,
     submissionDate:new Date(2025,0,2,10,5)
   }
   depotRapport3:DepotRapportStage={
@@ -104,7 +104,7 @@ export class ServiceService {
     description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aperiam nam corrupti, voluptatem quos tempore a iusto reprehenderit veniam voluptate!.",
     etudiants:[this.etudiant4],
     evaluation:null,
-    statut:StatutRapport.N,
+    statut:StatutRapport.REFUSE,
     submissionDate:new Date(2024,8,25,12,45)
   }
 
@@ -158,9 +158,9 @@ export class ServiceService {
   for(let depot of this.depotsRapports){
     if(depot.id===id){
       if(statut==='V'){
-        depot.statut=StatutRapport.V;
+        depot.statut=StatutRapport.VALIDE;
       }else{
-        depot.statut=StatutRapport.NV;
+        depot.statut=StatutRapport.REFUSE;
       }
     }
   }

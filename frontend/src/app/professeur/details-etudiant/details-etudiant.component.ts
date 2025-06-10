@@ -38,9 +38,9 @@ export class DetailsEtudiantComponent implements OnInit{
 
   getColorSelonStatut(statut:StatutRapport | undefined){
     switch(statut){
-      case StatutRapport.V:
+      case StatutRapport.VALIDE:
         return 'rgb(68, 193, 68)';
-      case StatutRapport.NV:
+      case StatutRapport.REFUSE:
         return 'rgb(255, 70, 70)';
       default:
         return 'rgb(255, 70, 70)';

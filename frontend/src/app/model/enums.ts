@@ -1,10 +1,5 @@
 
 
-export enum StatutRapport{
-    V='Validé',
-    NV='Rejeté',
-    N='En cours'
-}
 
 //************************************ */
 export enum Genre{
@@ -28,4 +23,10 @@ export enum AnneeEtude {
     INITIATION = 'INITIATION',
     PFA = 'PFA',
     PFE= 'PFE'
+  }
+
+   export enum StatutRapport {
+        EN_ATTENTE='EN_ATTENTE',
+        VALIDE='VALIDE',
+        REFUSE='REFUSE'
   }

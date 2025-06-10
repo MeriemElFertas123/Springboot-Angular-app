@@ -1,7 +1,6 @@
 import { TypeStage } from "../type-stage.enum";
-import { Filiere, Genre } from "./enums"
+import { Filiere, Genre, StatutRapport } from "./enums"
 import { AnneeEtude} from "./enums"
-import { StatutRapport } from "./enums"
 
 export interface Etudiant{
     id:number,
@@ -63,7 +62,7 @@ titre: any;
     typeStage:TypeStage,
     dateDepot?: string | Date; // au format ISO (ex : 2024-06-01)
     domaine?: string;
-
+    statutRapport:StatutRapport;
     nomFichierRapport?: string;
     typeFichierRapport?: string;
     contenuRapport?: Blob;

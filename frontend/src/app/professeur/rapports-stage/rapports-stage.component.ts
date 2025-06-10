@@ -118,9 +118,9 @@ export class RapportsStageComponent implements OnInit{
 
   getColorSelonStatut(statut:StatutRapport | null){
     switch(statut){
-      case StatutRapport.V:
+      case StatutRapport.VALIDE:
         return 'rgb(68, 193, 68)';
-      case StatutRapport.NV:
+      case StatutRapport.REFUSE:
         return 'rgb(255, 70, 70)';
       default:
         return 'grey';

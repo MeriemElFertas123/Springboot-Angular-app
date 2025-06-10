@@ -8,7 +8,7 @@ import { Stage } from '../model/model';
 })
 export class StageServiceService {
   //les requêtes HTTP seront envoyées à cette URL.//stages :c'est dans le controlleur dans spring
-  private apiUrl = 'http://localhost:8081/api/stages';
+  private apiUrl = 'http://localhost:8080/api/stages';
 
   constructor(private http:HttpClient) { }
   

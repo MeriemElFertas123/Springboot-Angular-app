@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SideBarEtudiantComponent } from '../../side-bar-etudiant/side-bar-etudiant.component';
 import { StageServiceService } from '../../../service/stage-service.service';
-import { TypeStage } from '../../../model/enums';
+import { StatutRapport, TypeStage } from '../../../model/enums';
 import { Router } from '@angular/router';
 import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profile-menu.component";
 
@@ -24,6 +24,7 @@ export class AddStageComponent implements OnInit{
     intituleSujet: '',
     descriptionSujet: '',
     typeStage: TypeStage.PFA,
+    statutRapport:StatutRapport.EN_ATTENTE,
     // etudiant : {
     //   id:-1
     // }

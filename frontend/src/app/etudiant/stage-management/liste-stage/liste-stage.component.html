@@ -11,14 +11,14 @@
         <div class="stage-row stage-header">
           <div>Entreprise</div>
           <div>Adresse</div>
-          <div>Encadrant</div>
+          <div >Encadrant</div>
           <div>Sujet</div>
           <!--
           <div>Description</div> -->
           <div>Type</div>
-          <div>Date dépot</div> 
+          <div>Etat</div> 
           <div>Rapport</div>
-          <div>Actions</div>
+          <div></div>
         </div>
 
         <div class="stage-item-container" *ngFor="let stage of stages">
@@ -30,7 +30,7 @@
             <!--
             <div>{{ stage.descriptionSujet }}</div>-->
             <div>{{ stage.typeStage }}</div>
-            <div>{{ stage.dateDepot }}</div>
+            <div>{{ stage.statutRapport }}</div>
 
             <!-- Colonne rapport -->
             <div class="rapport-actions">
@@ -42,8 +42,10 @@
 
             <!-- Colonne actions -->
             <div class="external-actions">
-              <button class="btn btn-sm btn-primary" [routerLink]="['/updateStage', stage.id!]">Modifier</button>
-              <button class="btn btn-sm btn-danger" (click)="confirmDelete(stage.id!)">Supprimer</button>
+                @if (stage.statutRapport!=="VALIDE") {
+                  <button class="btn btn-sm btn-primary" [routerLink]="['/updateStage', stage.id!]">Modifier</button>
+                  <button class="btn btn-sm btn-danger" (click)="confirmDelete(stage.id!)">Supprimer</button>
+                }
             </div>
           </div>
         </div>
