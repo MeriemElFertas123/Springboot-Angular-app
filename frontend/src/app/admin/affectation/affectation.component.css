@@ -163,6 +163,7 @@
   padding: 0.5rem;
   border-radius: 8px;
   transition: var(--transition);
+  position: relative;
 }
 
 .form-check:hover {
@@ -173,6 +174,12 @@
   border-radius: 6px;
   border: 2px solid var(--primary-solid);
   transition: var(--transition);
+  position: absolute;
+  top: 30%;
+  left: 0;
+}
+ul label{
+  margin-left: 15px;
 }
 
 .formcheck-input:checked {
@@ -196,12 +203,14 @@
   -webkit-backdrop-filter: blur(10px);
   box-shadow: var(--shadow-soft);
   transition: var(--transition);
+  z-index: -1;
 }
 
 .alert-secondary {
   background: rgba(148, 163, 184, 0.15);
   color: #475569;
   border-left: 4px solid #94a3b8;
+  margin-top: 12rem;
 }
 
 .alert-info {
