@@ -1,27 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Stage } from '../../../model/model';
 import { StageServiceService } from '../../../service/stage-service.service';
 import { SideBarEtudiantComponent } from "../../side-bar-etudiant/side-bar-etudiant.component";
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { UserProfileMenuComponent } from "../../../user-profile-menu/user-profile-menu.component";
+import { EtudiantService } from '../../../service/etudiant.service';
 
 @Component({
   selector: 'app-liste-stage',
-  imports: [SideBarEtudiantComponent,CommonModule,RouterLink],
+  standalone: true, // Ajouté pour correspondre au style du composant AddStageComponent
+  imports: [SideBarEtudiantComponent, CommonModule, RouterLink, UserProfileMenuComponent],
   templateUrl: './liste-stage.component.html',
   styleUrl: './liste-stage.component.css'
 })
 export class ListeStageComponent {
   stages: Stage[] = [];
+  isDownloading: boolean = false;
+  idEtudiant=-1;
 
-  constructor(private stageService: StageServiceService) {}
+  constructor(private stageService: StageServiceService ) {
+    const connectedUser=localStorage.getItem('connectedUser');
+    if(connectedUser){
+      this.idEtudiant=JSON.parse(connectedUser).id;
+    }
+  }
 
   ngOnInit(): void {
     this.loadStages();
   }
 
+  etudiantService = inject(EtudiantService);
   loadStages(): void {
-    this.stageService.getAllStage().subscribe({
+    this.etudiantService.getStagesByEtudiantId(this.idEtudiant).subscribe({
       next: (data) => {
         this.stages = data;
       },
@@ -51,7 +62,38 @@ export class ListeStageComponent {
     });
   }
   
-  
-  
-
+  // Nouvelle méthode pour télécharger le rapport
+  downloadRapport(stageId: number): void {
+    this.isDownloading = true;
+    
+    this.stageService.downloadStageReport(stageId).subscribe({
+      next: (blob: Blob) => {
+        // Trouver le stage correspondant
+        const stage = this.stages.find(s => s.id === stageId);
+        
+        if (stage && stage.nomFichierRapport) {
+          // Créer un objet URL pour le blob
+          const url = window.URL.createObjectURL(blob);
+          
+          // Créer un élément a temporaire pour déclencher le téléchargement
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = stage.nomFichierRapport;
+          document.body.appendChild(a);
+          a.click();
+          
+          // Nettoyer
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+        }
+        
+        this.isDownloading = false;
+      },
+      error: (err) => {
+        console.error('Erreur lors du téléchargement du rapport:', err);
+        alert('Impossible de télécharger le rapport.');
+        this.isDownloading = false;
+      }
+    });
+  }
 }

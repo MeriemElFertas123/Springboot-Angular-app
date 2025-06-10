@@ -5,19 +5,22 @@
 
 .main-content{
     flex-grow: 1;
-    background-color: #fff;
+    background: #e9ecf0;
     padding: 20px;
+    margin-top: 60px;
+    max-height: calc(100vh - 60px);
+    margin-left: 250px;
 }
 
-.sidebar{
-    background-color: #CEDDDE;
-} 
-
-
-
-
-
-
+.sidebar {
+  position: fixed;
+  margin-top: 60px;
+  height: 100vh; /* Occupe toute la hauteur de la vue */
+ 
+  background-color: #fcfcfc;
+  box-shadow: var(--shadow-md); /* Optionnel pour un effet visuel */
+  z-index: 1000; /* Assure que la sidebar reste au-dessus du contenu */
+}
 
   .student-list {
     margin: 20px;
@@ -63,3 +66,23 @@
   a:hover {
     text-decoration: underline;
   }
+
+   .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #2c3e50;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .top-bar h1 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }

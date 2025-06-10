@@ -4,11 +4,12 @@ import { ServiceService } from '../../service/service.service';
 import { DepotRapportStage, Etudiant } from '../../model/model';
 import { DatePipe, NgStyle } from '@angular/common';
 import { StatutRapport } from '../../model/enums';
+import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
 @Component({
   selector: 'app-details-etudiant',
   standalone:true,
-  imports: [NgStyle,DatePipe],
+  imports: [NgStyle, DatePipe, UserProfileMenuComponent],
   templateUrl: './details-etudiant.component.html',
   styleUrl: './details-etudiant.component.css'
 })
@@ -37,9 +38,9 @@ export class DetailsEtudiantComponent implements OnInit{
 
   getColorSelonStatut(statut:StatutRapport | undefined){
     switch(statut){
-      case StatutRapport.V:
+      case StatutRapport.VALIDE:
         return 'rgb(68, 193, 68)';
-      case StatutRapport.NV:
+      case StatutRapport.REFUSE:
         return 'rgb(255, 70, 70)';
       default:
         return 'rgb(255, 70, 70)';

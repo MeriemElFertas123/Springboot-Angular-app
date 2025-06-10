@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { PasswordUpdateRequest } from '../model/model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +42,20 @@ export class EtudiantService {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
 
-  
+  getStagesByEtudiantId(id: number) : Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}/stages/${id}`)
+  }
 
+  updatePassword(etudiantId: number, passwordData: PasswordUpdateRequest): Observable<void> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<void>(
+      `${this.apiUrl}/${etudiantId}/password`, 
+      passwordData, 
+      { headers }
+    );
+  }
   
 }

@@ -1,46 +1,301 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* sidebar.component.css - VERSION CORRIGÉE */
+
+/* Reset et base */
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* Conteneur principal - CORRIGÉ pour s'adapter au contenu */
 .sidebar {
-    width: 300px;
-    background-color: #CEDDDE;
-    color: #43A3DB;
-    padding: 20px;
-  }
-   
-  .sidebar-title {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
+  width: 250px;
+  min-height: 200vh; /* CHANGÉ: min-height au lieu de height */
+  position: sticky;
+  left: 0;
+  top: 0;
+  background-color: #CEDDDE;
+  border-right: 1px solid #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  transition: width 0.3s ease;
+  
+  /* Permettre le scroll si nécessaire */
+  overflow: auto; /* CHANGÉ: auto au lieu de hidden */
+  scrollbar-width: thin; /* CHANGÉ: thin au lieu de none */
+  scrollbar-color: #cbd5e1 transparent; /* Couleur subtile */
+}
+
+/* Scrollbar personnalisée pour WebKit */
+.sidebar::-webkit-scrollbar {
+  width: 6px; /* CHANGÉ: largeur visible mais discrète */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+/* Navigation - CORRIGÉ pour s'adapter */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  /* SUPPRIMÉ: height fixe qui causait le problème */
+  min-height: calc(100vh - 2rem); /* Hauteur minimale seulement */
+}
+
+/* Items de navigation */
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  margin: 0.25rem 0.5rem;
+  color: #475569;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* États interactifs */
+.nav-item:hover {
+  background-color: #f1f5f9;
+  color: #2563eb;
+}
+
+.nav-item.active {
+  background-color: #eff6ff;
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* Icônes */
+.icon {
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  width: 24px;
+  text-align: center;
+  color: #64748b;
+  transition: color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.nav-item.active .icon,
+.nav-item:hover .icon {
+  color: #2563eb;
+}
+
+/* Texte */
+.text {
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Indicateur d'item actif */
+.nav-item.active {
+  position: relative;
+}
+
+.nav-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #2563eb;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Responsive - Version mobile CORRIGÉE */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 72px;
+    min-height: 100vh; /* CHANGÉ: min-height */
+    overflow: auto; /* CHANGÉ: permettre le scroll si nécessaire */
   }
   
-  .nav-links {
-    display: flex;
-    flex-direction: column;
+  .text {
+    display: none;
   }
   
   .nav-item {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    margin: 5px 0;
-    text-decoration: none;
-    color: black;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    cursor: pointer;
+    justify-content: center;
+    padding: 1rem 0;
+    margin: 0.25rem 0;
   }
   
-  .nav-item:hover {
-    background-color: #9CD2D5;
+  .icon {
+    margin-right: 0;
+    font-size: 1.5rem;
   }
   
-  .nav-item .icon {
-    margin-right: 10px;
-    font-size: 1.2rem;
+  .nav-item.active::after {
+    width: 4px;
   }
-  nav{
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
+  
+  .nav-links {
+    min-height: calc(100vh - 2rem); /* CHANGÉ: min-height */
+    padding-bottom: 2rem; /* Espace en bas pour le contenu long */
   }
+}
+
+/* Animation du menu - INCHANGÉ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.nav-item {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Délai d'animation pour chaque item */
+.nav-item:nth-child(1) { animation-delay: 0.1s; }
+.nav-item:nth-child(2) { animation-delay: 0.2s; }
+.nav-item:nth-child(3) { animation-delay: 0.3s; }
+.nav-item:nth-child(4) { animation-delay: 0.4s; }
+.nav-item:nth-child(5) { animation-delay: 0.5s; }
+.nav-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* AJOUT: Support pour les pages très longues */
+.sidebar.extended {
+  min-height: 100%;
+}
+
+/* AJOUT: Classe utilitaire pour forcer l'extension */
+.sidebar.full-height {
+  height: 100%;
+  min-height: 100vh;
+}
+/* CSS Principal de la page - VERSION CORRIGÉE */
+
+.div-container {
+  display: flex;
+  min-height: 200vh; /* CHANGÉ: min-height au lieu de height */
+  font-family: Arial, sans-serif;
+  align-items: stretch; /* AJOUTÉ: Force les enfants à avoir la même hauteur */
+}
+
+.sidebar {
+  /* Ces styles sont maintenant dans sidebar.component.css */
+  flex-shrink: 0; /* AJOUTÉ: Empêche la sidebar de rétrécir */
+}
+
+.main-content {
+  flex-grow: 1;
+  background: #e9ecf0;
+  padding: 20px;
+  min-height: 200vh; /* CHANGÉ: min-height au lieu de height */
+  /* AJOUTÉ: Support pour le contenu qui déborde */
+  overflow-x: hidden; /* Évite le scroll horizontal */
+  word-wrap: break-word; /* Gère les longs mots */
+}
+
+.add-student-container {
+  width: 85%;
+  margin: 5px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9a8;
+  /* AJOUTÉ: Assure que le container s'adapte */
+  min-height: fit-content;
+}
+
+/* AJOUTÉ: Styles pour gérer les pages très longues */
+.main-content.extended {
+  min-height: calc(100vh + var(--extra-height, 0px));
+}
+
+/* AJOUTÉ: Support pour les écrans très larges */
+@media (min-width: 1200px) {
+  .add-student-container {
+    max-width: 1100px;
+  }
+}
+
+/* AJOUTÉ: Support mobile amélioré */
+@media (max-width: 768px) {
+  .div-container {
+    flex-direction: column;
+  }
+  
+  .main-content {
+    min-height: calc(100vh - 60px); /* Ajuste pour l'header mobile */
+  }
+  
+  .add-student-container {
+    width: 95%;
+    padding: 15px;
+  }
+}
+
+/* Styles existants - INCHANGÉS */
+.bg-pink {
+  background-color: #e91e63 !important;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.btn {
+  border-radius: 0.375rem;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.alert {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}

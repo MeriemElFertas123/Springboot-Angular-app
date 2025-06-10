@@ -11,6 +11,7 @@ import { EnseignantService } from '../service/enseignant.service';
   styleUrl: './user-profile-menu.component.css'
 })
 export class UserProfileMenuComponent implements OnInit {
+  
 
   constructor(private router:Router,
               private etudiantService:EtudiantService,
@@ -76,7 +77,7 @@ export class UserProfileMenuComponent implements OnInit {
       // supprimer le contenu du localstorage
       localStorage.clear();
       // redirection vers la page de login
-      this.router.navigate(['/login-form']);
+      this.router.navigate(['/main-home']);
     }
   }
 

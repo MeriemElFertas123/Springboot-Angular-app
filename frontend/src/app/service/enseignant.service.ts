@@ -31,11 +31,22 @@ export class EnseignantService {
   }
 
   updateEnseignant(id: number, enseignant: FormData): Observable<any> {
+    enseignant.forEach((c,v) =>{
+      console.log(c + ' : ' + v + '\n')
+    })
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, enseignant);
   }
 
  
   deleteEnseignant(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+
+
+  getNombreDepots(idProf : number) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/nbrDepot/${idProf}`);
+  }
+  getNombreDepotsValide(idProf : number) : Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}/nbrDepotValide/${idProf}`);
   }
 }

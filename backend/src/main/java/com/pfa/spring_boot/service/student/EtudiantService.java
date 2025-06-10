@@ -1,7 +1,9 @@
 package com.pfa.spring_boot.service.student;
 
 import com.pfa.spring_boot.dto.EtudiantDto;
+import com.pfa.spring_boot.dto.PasswordUpdateRequest;
 import com.pfa.spring_boot.entities.Etudiant;
+import com.pfa.spring_boot.entities.Stage;
 
 import java.util.List;
 
@@ -13,4 +15,11 @@ public interface EtudiantService {
     EtudiantDto getStudentByEmail(String email);
 
     public String deleteStudent(Long id);
+
+    List<Stage> getStagesByEtudiantId(Long etudiantId);
+
+    int getNombreRapportsDeposes(Long idProf,int annee);
+    int getNombreRapportsDeposesValides(Long idProf,int annnee);
+
+    void updatePassword(Long etudiantId, PasswordUpdateRequest passwordUpdateRequest);
 }

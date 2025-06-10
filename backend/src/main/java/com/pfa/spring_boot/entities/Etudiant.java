@@ -1,5 +1,8 @@
 package com.pfa.spring_boot.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.pfa.spring_boot.dto.EtudiantDto;
 import com.pfa.spring_boot.enums.etudiant.AnneeEtude;
 import com.pfa.spring_boot.enums.etudiant.Filiere;
@@ -9,7 +12,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 @Entity
 public class Etudiant {
     @Id
@@ -39,9 +41,16 @@ public class Etudiant {
             cascade = CascadeType.ALL,// Opérations propagées aux Encadrements liés
             orphanRemoval = true
     )
+    @JsonIgnore
     private List<Encadrement> encadrements=new ArrayList<>();
 
 
+    @OneToMany(mappedBy = "etudiant", // relation gérée côté Stage ( dans l'entité Stage, il y a une propriété "etudiant")
+            cascade = CascadeType.ALL, // Toutes les opérations sur l'Etudiant se propagent automatiquement aux Stages (sauvegarde, suppression, mise à jour..)
+            orphanRemoval = true // Si un Stage est retiré de la liste d'un Etudiant, il sera automatiquement supprimé de la base de données
+    )
+    @JsonManagedReference //  côté parent (départ de la relation, souvent @OneToMany)
+    private List<Stage> stages = new ArrayList<>();
 
 
     public Long getId() {
@@ -142,4 +151,11 @@ public class Etudiant {
                 ", anneeEtude=" + anneeEtude +
                 '}';
     }
+
+
+
+    // NOUVEAU: Getters et Setters pour la relation Stage
+    public List<Stage> getStages() { return stages; }
+    public void setStages(List<Stage> stages) { this.stages = stages; }
 }
+

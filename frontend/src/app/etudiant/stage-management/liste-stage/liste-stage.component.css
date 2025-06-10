@@ -1,101 +1,93 @@
 .app-container {
   display: flex;
-  height: 100vh;
 }
 
 .sidebar {
-  background-color: #CEDDDE;
+  height: calc(100vh - 100px) !important;
 }
 
 main {
   flex-grow: 1;
-  background-color: #ecf0f1;
+  overflow: auto; /* CHANGÉ: auto au lieu de hidden */
   padding: 20px;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  margin: 100px 10px 0 250px;
 }
 
 .btn {
   margin-right: 5px;
 }
 
-/* STAGES FLEX STYLE */
+.stages-container {
+  width: 100%;
+}
+
 .stage-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 
 .stage-header {
-  display: flex;
-  justify-content: space-between;
-  background-color: #f2f2f2;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-items: center;
+  background-color: #dfe6e9;
   padding: 10px;
   font-weight: bold;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #b2bec3;
+  border-radius: 6px 6px 0 0;
+  div{
+    margin: 5px 20px;
+  }
 }
 
-.stage-header > div {
-  flex: 1;
-  text-align: left;
-}
-
-.stage-item {
-  display: flex;
+.stage-item-container {
+  flex-direction: row;
   justify-content: space-between;
-  background-color: #fff;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
   align-items: center;
-}
-
-.stage-info {
-  display: flex;
-  flex: 1;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.stage-info > div {
-  flex: 1;
-  min-width: 100px;
-}
-
-.stage-actions {
-  display: flex;
-  gap: 10px;
-  min-width: 150px;
-  justify-content: flex-end;
-}
-
-
-.stage-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
 .stage-row {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr); /* <-- passer à 9 colonnes */
   align-items: center;
   padding: 10px;
-  background-color: #fff;
+  background-color: #d6dad653;
   border: 1px solid #ddd;
   border-radius: 6px;
-}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-.stage-header {
-  background-color: #dfe6e9;
-  font-weight: bold;
-  border-bottom: 2px solid #b2bec3;
-}
-
-.stage-row:not(.stage-header):hover {
-  background-color: #f7f7f7;
-}
-
-.stage-actions {
+.external-actions {
   display: flex;
-  gap: 8px;
-  justify-content: flex-end;
+  gap: 10px;
+  justify-content: center;
 }
+
+
+
+.rapport-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.no-rapport {
+  color: #777;
+  font-style: italic;
+}
+
+.btn-success {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+}
+.btn-success i {
+  margin-right: 5px;
+}
+
+.btn-success:hover {
+  background-color: #2ecc71;
+}
+

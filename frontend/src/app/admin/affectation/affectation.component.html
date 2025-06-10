@@ -1,0 +1,63 @@
+
+  <!-- Top Bar Fixe -->
+  <div class="top-bar">
+    <h1>GESTION DES STAGES</h1>
+
+  </div>
+
+  <div class="admin-container ">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <app-side-bar-admin></app-side-bar-admin>
+    </div>
+
+    <div class="main ">
+
+      <div class="table-affectation ">
+
+        <div class="m-1">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            {{getSelectedEnseignantName()}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-prof">
+            <li *ngFor="let enseignant of listEnseignants"><button class="dropdown-item" type="button"
+                (click)="choisirEnseignant(enseignant.id)">{{enseignant.nom}} {{enseignant.prenom}}</button></li>
+
+          </ul>
+        </div>
+
+        <div class="m-1">
+          <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Les étudiants encadrés
+          </button>
+          <ul class="dropdown-menu" (click)="$event.stopPropagation()">
+            <li *ngFor="let etudiant of listEtudiants" class="m-1 p-1 ">
+              <div class="form-check py-1">
+                <input class="formcheck-input bg-primary" type="checkbox" [checked]="isEtudiantSelected(etudiant.id)"
+                  (click)="toggleEtudiantSelection(etudiant.id) ; $event.stopPropagation()">
+                <label for="form-check-label">
+                  {{etudiant.nom}} {{etudiant.prenom}}
+                </label>
+
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <button class="btn btn-submit m-1" (click)="soumettre()">Affecter</button>
+
+      </div>
+
+
+      <!-- à ajouter par la suite -->
+      <!-- <p class="m-4">Voir la liste des affectations</p> -->
+
+
+      <div class="alert text-center p-3"
+        [ngClass]="{'alert-secondary' : clickAffecter===0 , 'alert-info' : clickAffecter===1 , 'alert-danger' : clickAffecter===-1}"
+        role="alert">
+        {{ clickAffecter==1 ? 'Affectation est passée avec succès':'ERREUR  s\'est produite lors de l\'affectation  (Choisir un enseignant et affecter le à un ou deux étudiants)'}}
+      </div>
+    </div>
+
+  </div>

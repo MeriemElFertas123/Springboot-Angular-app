@@ -80,7 +80,7 @@ export class LoginFormComponent {
     const password=this.userLogin.get('password')?.value;
 //***************************************************** */
     if(email=='test' && password=='test'){
-      this.router.navigate(['/admin-home'])
+      this.router.navigate(['/dashboard'])
       return;
     }
 //***************************************************** */

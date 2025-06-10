@@ -11,6 +11,7 @@ public class Encadrement {
     @GeneratedValue
     private Long id;
 
+    // Plusieurs encadrements peuvent être liés à un seul professeur
     // Un enseignant peut encadrer plusieurs étudiants,
     // mais un encadrement est lié à un seul enseignant
     @ManyToOne
@@ -18,6 +19,7 @@ public class Encadrement {
     private Enseignant enseignant;// Référence à l'enseignant
 
 
+    // Plusieurs encadrements peuvent être liés à un seul étudiant
     // Un étudiant peut être encadré par plusieurs enseignants,
     // mais un encadrement est lié à un seul étudiant
     @ManyToOne
