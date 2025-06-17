@@ -1,13 +1,9 @@
 import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { SideBarAdminComponent } from "../side-bar-admin/side-bar-admin.component";
 import Chart from 'chart.js/auto';
 import { DashboardService } from '../../service/dashboard.service';
-import { NgModule } from '@angular/core';
-import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
-import { LoginFormComponent } from "../../login-form/login-form.component";
 
 // Interfaces
 interface Deadline {
@@ -39,7 +35,7 @@ interface ChartDataPoint {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NgFor, NgIf, RouterLink, SideBarAdminComponent, DatePipe, UserProfileMenuComponent, LoginFormComponent],
+  imports: [NgFor, NgIf, SideBarAdminComponent, DatePipe],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

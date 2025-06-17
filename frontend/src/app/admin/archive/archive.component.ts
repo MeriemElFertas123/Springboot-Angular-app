@@ -8,7 +8,7 @@ import { Router, RouterLink, RouterModule } from "@angular/router";
 @Component({
   selector: 'app-admin-archives',
   standalone: true,
-  imports: [SideBarAdminComponent, FormsModule, CommonModule, RouterLink, RouterModule],
+  imports: [SideBarAdminComponent, FormsModule, CommonModule, RouterModule],
   templateUrl: './archive.component.html',
   providers: [ArchivesService, DatePipe]
 })

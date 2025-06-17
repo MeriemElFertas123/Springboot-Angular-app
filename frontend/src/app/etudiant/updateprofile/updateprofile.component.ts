@@ -1,8 +1,8 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EtudiantService } from '../../service/etudiant.service';
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { SideBarEtudiantComponent } from "../side-bar-etudiant/side-bar-etudiant.component";
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
@@ -46,7 +46,7 @@ export enum AnneeEtude {
 
 @Component({
   selector: 'app-updateprofile',
-  imports: [NgIf,NgFor, ReactiveFormsModule, SideBarEtudiantComponent, UserProfileMenuComponent],
+  imports: [NgIf, ReactiveFormsModule, SideBarEtudiantComponent, UserProfileMenuComponent],
   templateUrl: './updateprofile.component.html',
   styleUrl: './updateprofile.component.css'
 })

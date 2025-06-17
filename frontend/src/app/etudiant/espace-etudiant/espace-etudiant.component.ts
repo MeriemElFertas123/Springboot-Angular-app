@@ -1,5 +1,5 @@
 import { Component ,HostListener, OnInit} from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { SideBarEtudiantComponent } from "../side-bar-etudiant/side-bar-etudiant.component";
 import { UserProfileMenuComponent } from "../../user-profile-menu/user-profile-menu.component";
 
@@ -49,7 +49,7 @@ interface Category {
 @Component({
   selector: 'app-espace-etudiant',
   standalone: true,
-  imports: [RouterModule, RouterLink, SideBarEtudiantComponent, UserProfileMenuComponent,
+  imports: [RouterModule, SideBarEtudiantComponent, UserProfileMenuComponent,
     CommonModule, FormsModule, ReactiveFormsModule, SideBarEtudiantComponent
   ],
   templateUrl: './espace-etudiant.component.html',

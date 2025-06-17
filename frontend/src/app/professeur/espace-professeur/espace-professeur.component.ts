@@ -1,14 +1,9 @@
-import { NgFor, NgIf, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { DashboardService } from '../../service/dashboard.service';
-import { NgModule } from '@angular/core';
 import { SideBarProfComponent } from '../side-bar-prof/side-bar-prof.component';
 import { UserProfileMenuComponent } from '../../user-profile-menu/user-profile-menu.component';
 import Chart from 'chart.js/auto';
-import { SideBarAdminComponent } from "../../admin/side-bar-admin/side-bar-admin.component";
-import { SideBarEtudiantComponent } from "../../etudiant/side-bar-etudiant/side-bar-etudiant.component";
 import { EncadrementService } from '../../service/encadrement.service';
 import { EnseignantService } from '../../service/enseignant.service';
 
@@ -43,7 +38,7 @@ interface ChartDataPoint {
 @Component({
   selector: 'app-espace-professeur',
   standalone: true,
-  imports: [NgFor, NgIf, SideBarAdminComponent, DatePipe, SideBarEtudiantComponent, SideBarProfComponent, UserProfileMenuComponent],
+  imports: [SideBarProfComponent, UserProfileMenuComponent],
   templateUrl: './espace-professeur.component.html',
   styleUrl: './espace-professeur.component.css'
 })

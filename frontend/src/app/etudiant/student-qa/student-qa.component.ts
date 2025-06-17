@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SideBarEtudiantComponent } from '../side-bar-etudiant/side-bar-etudiant.component';
 import { QaService } from '../../service/qa-service.service'; // <-- Import du service
 
 interface Reply {
@@ -40,7 +39,7 @@ interface Category {
 @Component({
   selector: 'app-student-qa',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SideBarEtudiantComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './student-qa.component.html',
   styleUrls: ['./student-qa.component.css']
 })

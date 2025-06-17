@@ -4,7 +4,6 @@ import { DatePipe, NgClass, NgIf, NgStyle } from '@angular/common';
 import { Component ,ElementRef,inject,OnInit,ViewChild} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DepotRapportStage, Evaluation } from '../../model/model';
-import { ServiceService } from '../../service/service.service';
 import { StatutRapport } from '../../model/enums';
 import { FormGroup,FormControl,ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,9 +17,8 @@ import { StageServiceService } from '../../service/stage-service.service';
 @Component({
   selector: 'app-rapports-stage',
   standalone:true,
-  imports: [RouterLink,NgIf,
+  imports: [
     DatePipe,
-    NgStyle,
     ReactiveFormsModule,
     MatRadioModule,
     FormsModule, SideBarProfComponent, UserProfileMenuComponent],

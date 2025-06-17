@@ -1,6 +1,6 @@
 // rapports.component.ts
 import { Component, OnInit } from "@angular/core";
-import { RouterLink, RouterModule } from "@angular/router";
+import {  RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { SideBarAdminComponent } from "../side-bar-admin/side-bar-admin.component";
 import { CommonModule } from "@angular/common";
@@ -9,7 +9,7 @@ import { RapportService, RapportStageDto } from "../../service/rapport-service.s
 @Component({
   selector: 'app-admin-rapports',
   standalone: true,
-  imports: [SideBarAdminComponent, FormsModule, CommonModule, RouterLink, RouterModule],
+  imports: [SideBarAdminComponent, FormsModule, CommonModule, RouterModule],
   templateUrl: './rapports.component.html'
 })
 export class RapportsComponent implements OnInit {
